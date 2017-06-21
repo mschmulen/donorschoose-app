@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PARTNER_EMAIL</key>
+	<string>matt@jumptack.com</string>
+	<key>PARTNER_ID</key>
+	<string>20785042</string>
+	<key>API_KEY</key>
+	<string>DONORSCHOOSE</string>
+	<key>GIVING_PAGE_ID</key>
+	<string>20785042</string>
+</dict>
+</plist>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="SchoolHeaderView" customModule="DonorsChooseCommon" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="555" height="345"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="classPicture" translatesAutoresizingMaskIntoConstraints="NO" id="3t3-ej-LTi"/>
+                <view opaque="NO" alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mE8-CU-mOG" userLabel="viewContainer">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="School Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qUt-cA-VtZ">
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dallas, TX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdP-uA-ysd">
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.18297281430000001" green="0.18297281430000001" blue="0.18297281430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="qUt-cA-VtZ" firstAttribute="leading" secondItem="mE8-CU-mOG" secondAttribute="leading" constant="8" id="9xD-Cx-mmU"/>
+                        <constraint firstItem="sdP-uA-ysd" firstAttribute="top" secondItem="mE8-CU-mOG" secondAttribute="top" constant="6" id="XV2-Zs-MQs"/>
+                        <constraint firstItem="qUt-cA-VtZ" firstAttribute="top" secondItem="mE8-CU-mOG" secondAttribute="top" constant="6" id="b3X-yj-s7w"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="bUV-sd-p7N"/>
+                        <constraint firstAttribute="height" constant="30" id="o49-1C-2mz"/>
+                        <constraint firstAttribute="trailing" secondItem="sdP-uA-ysd" secondAttribute="trailing" constant="8" id="wB7-Gs-mND"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="bUV-sd-p7N"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="mE8-CU-mOG" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="4" id="Ayk-si-gRO"/>
+                <constraint firstItem="3t3-ej-LTi" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="M8d-8k-bSI"/>
+                <constraint firstItem="3t3-ej-LTi" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="Oei-iH-5bR"/>
+                <constraint firstAttribute="trailing" secondItem="mE8-CU-mOG" secondAttribute="trailing" constant="4" id="RfK-jF-eQP"/>
+                <constraint firstAttribute="bottom" secondItem="mE8-CU-mOG" secondAttribute="bottom" constant="4" id="X6f-G9-C99"/>
+                <constraint firstAttribute="trailing" secondItem="3t3-ej-LTi" secondAttribute="trailing" id="lW6-AT-pnR"/>
+                <constraint firstAttribute="bottom" secondItem="3t3-ej-LTi" secondAttribute="bottom" id="mXB-BW-mLv"/>
+            </constraints>
+            <connections>
+                <outlet property="backgroundImage" destination="3t3-ej-LTi" id="AIU-DS-7wB"/>
+                <outlet property="labelCity" destination="sdP-uA-ysd" id="hGn-YF-CGr"/>
+                <outlet property="labelName" destination="qUt-cA-VtZ" id="3Qv-xj-OPB"/>
+            </connections>
+            <point key="canvasLocation" x="269.5" y="216.5"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="classPicture" width="240" height="179"/>
+    </resources>
+</document>
