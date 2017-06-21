@@ -5,7 +5,7 @@ iOS Project finder app for [donorsChoose.org](http://donorsChoose.org)
 
 Available on iTunes app store! [DonorsChoose Project Finder App](https://itunes.apple.com/us/app/donors-choose-project-finder/id1074056163?mt=8) 
 
-![Tour One](resources/screenshots/InNeed.png | width=100)
+![Tour One](https://raw.githubusercontent.com/mschmulen/donorschoose-app/master/resources/screenshots/CustomSearch.png | width=100)
 ![Tour Two](resources/screenshots/ProjectDetail.png | width=100)
 ![Tour Three](resources/screenshots/CustomSearch.png | width=100)
 ![Tour Four](resources/screenshots/NearMe.png | width=100)
