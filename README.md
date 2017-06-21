@@ -8,7 +8,8 @@ Available on iTunes app store! [DonorsChoose Project Finder App](https://itunes.
 ![Tour One](resources/screenshots/InNeed.png)
 ![Tour Two](resources/screenshots/ProjectDetail.png)
 ![Tour Three](resources/screenshots/CustomSearch.png)
-![Tour Four](resources/screenshots/NearMe.png) ![Tour Five](resources/screenshots/Favorites.png)
+![Tour Four](resources/screenshots/NearMe.png)
+![Tour Five](resources/screenshots/Favorites.png)
 
 ##Features
 
