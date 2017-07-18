@@ -30,9 +30,19 @@ open class ProposalDetailViewController: UIViewController {
   @IBAction func actionDismiss(_ sender: AnyObject) {
     self.dismiss(animated: true) { }
   }
-    
+
   // MARK: - Outlets and Actions
-  @IBOutlet weak var collectionView: UICollectionView!
+  @IBOutlet weak var collectionView: UICollectionView! {
+    didSet {
+
+      collectionView.register(DescriptionViewCell.nib, forCellWithReuseIdentifier: DescriptionViewCell.reuseIdentifier)
+      collectionView.register(ProposalHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: ProposalHeaderView.reuseIdentifier)
+      collectionView.register(ProposalFooterView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: ProposalFooterView.reuseIdentifier)
+
+      collectionView.dataSource = self
+      collectionView.delegate = self
+    }
+  }
   
   @IBOutlet weak var buttonGive: UIButton! {
     didSet {
@@ -278,11 +288,6 @@ open class ProposalDetailViewController: UIViewController {
 
     dataAPI = ProposalDataAPI(config: apiConfig,user: "matt", delegate: self)
 
-    // Register cell and header nibs
-    self.collectionView.register(DescriptionViewCell.nib, forCellWithReuseIdentifier: DescriptionViewCell.reuseIdentifier)
-    self.collectionView.register(ProposalHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: ProposalHeaderView.reuseIdentifier)
-    self.collectionView.register(ProposalFooterView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: ProposalFooterView.reuseIdentifier)
-    
     let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProposalDetailViewController.actionShare(_:)))
     self.navigationItem.rightBarButtonItem = buttonShare
 

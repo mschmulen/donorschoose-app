@@ -12,9 +12,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     WatchList.registerNotificationSettings( application )
 
-    topNav = TopNavViewController(userIDString: "1111", activity: nil)
-    window?.rootViewController = topNav
-
+//    let firstRun = true
+//    if firstRun == true {
+//      let vc = IntroWelcomePageViewController()
+//      //      vc.delegate = self
+////      self.show(vc, sender: nil)
+//      window?.rootViewController = vc
+//    }
+//    else {
+      topNav = TopNavViewController(userIDString: "1111", activity: nil)
+      window?.rootViewController = topNav
+//    }
     return true
   }
   

@@ -7,7 +7,16 @@ typealias StatType = (Name:String, Value:String)
 
 open class TeacherDetailVC: UIViewController {
     
-  @IBOutlet weak var collectionView: UICollectionView!
+  @IBOutlet weak var collectionView: UICollectionView! {
+    didSet {
+      collectionView.register(StatViewCell.nib, forCellWithReuseIdentifier: StatViewCell.reuseIdentifier)
+      collectionView.register(LoadingCollectionViewCell.nib, forCellWithReuseIdentifier: LoadingCollectionViewCell.reuseIdentifier )
+      collectionView.register(TeacherHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TeacherHeaderView.reuseIdentifier)
+
+      collectionView.dataSource = self
+      collectionView.delegate = self
+    }
+  }
     
     
   @IBAction func actionShare( _ sender:AnyObject ) {
@@ -126,10 +135,6 @@ open class TeacherDetailVC: UIViewController {
   override open func viewDidLoad() {
     super.viewDidLoad()
 
-    self.collectionView.register(StatViewCell.nib, forCellWithReuseIdentifier: StatViewCell.reuseIdentifier)
-    self.collectionView.register(LoadingCollectionViewCell.nib, forCellWithReuseIdentifier: LoadingCollectionViewCell.reuseIdentifier )
-    self.collectionView.register(TeacherHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TeacherHeaderView.reuseIdentifier)
-    
     let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(TeacherDetailVC.actionShare(_:)))
     self.navigationItem.rightBarButtonItem = buttonShare
     

@@ -108,6 +108,10 @@
 		C91744BC1EF8B1D600C5AB30 /* ModelIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91744BA1EF8B1D600C5AB30 /* ModelIdentifiable.swift */; };
 		C91744CB1EF8B5B600C5AB30 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91744CA1EF8B5B600C5AB30 /* CardView.swift */; };
 		C91744EE1EF8BDF100C5AB30 /* apiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C91744ED1EF8BDF100C5AB30 /* apiKeys.plist */; };
+		C9A686F91F049EEA00A6E4FF /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9A686F51F049EEA00A6E4FF /* Intro.storyboard */; };
+		C9A686FA1F049EEA00A6E4FF /* Intro.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9A686F61F049EEA00A6E4FF /* Intro.xcassets */; };
+		C9A686FB1F049EEA00A6E4FF /* IntroWelcomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A686F71F049EEA00A6E4FF /* IntroWelcomePageViewController.swift */; };
+		C9A686FC1F049EEA00A6E4FF /* IntroWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A686F81F049EEA00A6E4FF /* IntroWelcomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -524,6 +528,10 @@
 		C91744BA1EF8B1D600C5AB30 /* ModelIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelIdentifiable.swift; sourceTree = "<group>"; };
 		C91744CA1EF8B5B600C5AB30 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C91744ED1EF8BDF100C5AB30 /* apiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = apiKeys.plist; sourceTree = "<group>"; };
+		C9A686F51F049EEA00A6E4FF /* Intro.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
+		C9A686F61F049EEA00A6E4FF /* Intro.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Intro.xcassets; sourceTree = "<group>"; };
+		C9A686F71F049EEA00A6E4FF /* IntroWelcomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroWelcomePageViewController.swift; sourceTree = "<group>"; };
+		C9A686F81F049EEA00A6E4FF /* IntroWelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroWelcomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -578,6 +586,7 @@
 		C91741E41EF8561C00C5AB30 /* donorsChoose */ = {
 			isa = PBXGroup;
 			children = (
+				C9A686F41F049EEA00A6E4FF /* IntroStory */,
 				C917444F1EF8774700C5AB30 /* Views */,
 				C91743FF1EF8747300C5AB30 /* Icons */,
 				C91743F71EF8745B00C5AB30 /* WatchList */,
@@ -1024,6 +1033,18 @@
 			path = NotificationProjectViewController;
 			sourceTree = "<group>";
 		};
+		C9A686F41F049EEA00A6E4FF /* IntroStory */ = {
+			isa = PBXGroup;
+			children = (
+				C9A686F51F049EEA00A6E4FF /* Intro.storyboard */,
+				C9A686F61F049EEA00A6E4FF /* Intro.xcassets */,
+				C9A686F71F049EEA00A6E4FF /* IntroWelcomePageViewController.swift */,
+				C9A686F81F049EEA00A6E4FF /* IntroWelcomeViewController.swift */,
+			);
+			name = IntroStory;
+			path = Intro;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1423,6 +1444,7 @@
 				C91741ED1EF8561C00C5AB30 /* Assets.xcassets in Resources */,
 				C91744071EF8747300C5AB30 /* GMDIcons.ttf in Resources */,
 				C917442E1EF8757800C5AB30 /* NotificationViewController.xib in Resources */,
+				C9A686F91F049EEA00A6E4FF /* Intro.storyboard in Resources */,
 				C917444C1EF875E800C5AB30 /* ProposalHeaderView.xib in Resources */,
 				C91744751EF877CA00C5AB30 /* LoadingCollectionViewCell.xib in Resources */,
 				C91744691EF8779A00C5AB30 /* SchoolHeaderView.xib in Resources */,
@@ -1437,6 +1459,7 @@
 				C91744331EF8759100C5AB30 /* ProjectSearchViewController.xib in Resources */,
 				C91744A31EF87B9E00C5AB30 /* userCustomSearchModel.plist in Resources */,
 				C917446B1EF8779A00C5AB30 /* StatViewCell.xib in Resources */,
+				C9A686FA1F049EEA00A6E4FF /* Intro.xcassets in Resources */,
 				C91744421EF875E800C5AB30 /* DescriptionViewCell.xib in Resources */,
 				C91744EE1EF8BDF100C5AB30 /* apiKeys.plist in Resources */,
 				C917448D1EF878B000C5AB30 /* AboutViewController.xib in Resources */,
@@ -1498,6 +1521,7 @@
 				C91744451EF875E800C5AB30 /* ProposalDetailViewController+ProjectDataAPIDelegate.swift in Sources */,
 				C91744231EF8751E00C5AB30 /* SplashViewController.swift in Sources */,
 				C91744411EF875E800C5AB30 /* DescriptionViewCell.swift in Sources */,
+				C9A686FB1F049EEA00A6E4FF /* IntroWelcomePageViewController.swift in Sources */,
 				C91744B71EF8B1D000C5AB30 /* TeacherDataModel.swift in Sources */,
 				C91744931EF8794500C5AB30 /* StringExtension.swift in Sources */,
 				C91744B61EF8B1D000C5AB30 /* SearchDataModel.swift in Sources */,
@@ -1513,6 +1537,7 @@
 				C91744211EF8751E00C5AB30 /* ProposalTableViewCell.swift in Sources */,
 				C91743F41EF873D600C5AB30 /* TeacherDataAPIDelegate.swift in Sources */,
 				C91741E61EF8561C00C5AB30 /* AppDelegate.swift in Sources */,
+				C9A686FC1F049EEA00A6E4FF /* IntroWelcomeViewController.swift in Sources */,
 				C91744661EF8779A00C5AB30 /* SchoolDetailViewController.swift in Sources */,
 				C91744651EF8779A00C5AB30 /* SchoolDetailFlowLayout.swift in Sources */,
 				C91744B81EF8B1D000C5AB30 /* UserDataModel.swift in Sources */,

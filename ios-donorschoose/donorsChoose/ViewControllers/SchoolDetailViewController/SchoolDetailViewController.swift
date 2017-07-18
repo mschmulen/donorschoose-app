@@ -29,7 +29,16 @@ open class SchoolDetailViewController: UIViewController {
   }
 
   /// Mark: - Outlets
-  @IBOutlet weak var collectionView: UICollectionView!
+  @IBOutlet weak var collectionView: UICollectionView! {
+    didSet {
+      collectionView.register(StatViewCell.nib, forCellWithReuseIdentifier: StatViewCell.reuseIdentifier)
+      collectionView.register(LoadingCollectionViewCell.nib, forCellWithReuseIdentifier: LoadingCollectionViewCell.reuseIdentifier )
+      collectionView.register(SchoolHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: SchoolHeaderView.reuseIdentifier)
+
+      collectionView.delegate = self
+      collectionView.dataSource = self
+    }
+  }
 
   @IBAction func actionShare( _ sender:AnyObject ) {
     if self.model != nil {
@@ -85,13 +94,10 @@ open class SchoolDetailViewController: UIViewController {
   {
     self.init(nibName: "SchoolDetailViewController", bundle: Bundle(for: SchoolDetailViewController.self), schoolID:schoolID, schoolName:schoolName )
   }
-    
+
   // MARK: - LifeCycle
   override open func viewDidLoad() {
     super.viewDidLoad()
-    self.collectionView.register(StatViewCell.nib, forCellWithReuseIdentifier: StatViewCell.reuseIdentifier)
-    self.collectionView.register(LoadingCollectionViewCell.nib, forCellWithReuseIdentifier: LoadingCollectionViewCell.reuseIdentifier )
-    self.collectionView.register(SchoolHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: SchoolHeaderView.reuseIdentifier)
 
     dataAPI = SchoolDataAPI(config: apiConfig, user: "matt", delegate: self)
     dataAPI?.getSchoolInfo(schoolID)

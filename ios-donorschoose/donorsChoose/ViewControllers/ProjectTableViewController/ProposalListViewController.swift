@@ -29,8 +29,7 @@ open class ProposalListViewController : UIViewController {
   var locationManager:CLLocationManager = CLLocationManager()
   var currentLocation:CLLocationCoordinate2D? =  nil
 
-  /// Mark: - Actions and Outlets
-
+  // Mark: - Actions and Outlets
   @IBOutlet weak var labelHeaderView: UILabel! {
     didSet { labelHeaderView.text = "" }
   }
@@ -52,7 +51,19 @@ open class ProposalListViewController : UIViewController {
   }
 
   @IBOutlet weak var tableView: UITableView! {
-    didSet { tableView.isHidden = false }
+    didSet {
+
+      tableView.dataSource = self
+      tableView.delegate = self
+      tableView.registerReusableCell(ProposalTableViewCell.self)
+      tableView.isHidden = false
+      tableView.estimatedRowHeight = 258
+//    tableView.rowHeight = UITableViewAutomaticDimension
+//      savedLoader.startAnimation()
+//      //Load first page
+//      loadSaved(1)
+
+    }
   }
 
   @IBAction func actionShowSearch(_ sender: AnyObject) {
@@ -134,8 +145,6 @@ open class ProposalListViewController : UIViewController {
   override open func viewDidLoad() {
     super.viewDidLoad()
 
-    tableView.registerReusableCell(ProposalTableViewCell.self)
-
     switch ( currentSearchModel.type ) {
     case .location :
       self.locationManager.delegate = self
@@ -214,6 +223,28 @@ open class ProposalListViewController : UIViewController {
   {
     self.init(nibName: "ProposalListViewController", bundle: Bundle(for: ProposalListViewController.self), user:user , projectVCType:projectVCType, apiConfig:apiConfig, searchModel:searchModel)
   }
+
+  var indexPageRequest = 0
+  public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    print("scrollviewdidscroll")
+
+    // calculates where the user is in the y-axis
+    let offsetY = scrollView.contentOffset.y
+    let contentHeight = scrollView.contentSize.height
+          if offsetY > contentHeight - scrollView.frame.size.height {
+
+            print( "new page request original offset \(indexPageRequest)")
+            // increments the number of the page to request
+            indexPageRequest += 1
+
+            // call your API for more data
+//            loadData()
+            // tell the table view to reload with the new data
+    //        self.tableView.reloadData()
+          }
+  }
+
+
 }
 
 //  MARK: - ProjectSearchDelegate
@@ -224,16 +255,13 @@ extension ProposalListViewController : ProjectSearchDelegate {
   }
 }
 
+
 // MARK: - ProjectDataAPIDelegate
 extension ProposalListViewController : ProposalDataAPIDelegate {
 
   public func dataUpdateCallback( _ dataAPI: ProposalDataAPIProtocol, didChangeData data:[ProposalDataModel]?, error:APIError? ) {
 
     if let someError = error {
-
-      //tableView.hidden = true
-      //alert the user
-
       switch(someError)
       {
       case .notify_USER_INTERNET_OFFLINE:
