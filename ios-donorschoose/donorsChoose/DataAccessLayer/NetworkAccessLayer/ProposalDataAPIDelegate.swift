@@ -13,19 +13,23 @@ public protocol ProposalDataAPIProtocol {
   func getCallbackDelegate() ->  ProposalDataAPIDelegate?
 
   // Services
-  func getDataWithSearchModel(_ searchModel:SearchDataModel)
-  func getDataWithSearchModelAndLocation(_ searchModel:SearchDataModel, location:CLLocationCoordinate2D)
+  func getDataWithSearchModel(_ searchModel:SearchDataModel, pageIndex:Int)
+  func getDataWithSearchModelAndLocation(_ searchModel:SearchDataModel, location:CLLocationCoordinate2D, pageIndex:Int)
   func getDataWithProposalID(_ proposalID:String)
 }
 
 open class ProposalDataAPI : ProposalDataAPIProtocol
 {
+  static let defaultMax = 20
   fileprivate let apiConfig:APIConfig
   fileprivate var callbackDelegate: ProposalDataAPIDelegate?
+  fileprivate var pageIndex = 0
+//  fileprivate var recordCount = 1
+  fileprivate let pageSize = ProposalDataAPI.defaultMax
 
-  // -------------------------------------
+//  fileprivate var pageSize = 10 // aka "max" in the index request
+
   // Mark - DataAPIProtocol
-  // -------------------------------------
   public required init(config:APIConfig, user:String , delegate: ProposalDataAPIDelegate?)
   {
     self.apiConfig = config
@@ -46,13 +50,22 @@ open class ProposalDataAPI : ProposalDataAPIProtocol
     networkRequest(requestURL)
   }
 
-  open func getDataWithSearchModelAndLocation(_ searchModel:SearchDataModel, location:CLLocationCoordinate2D) {
+  open func getDataWithSearchModelAndLocation(_ searchModel:SearchDataModel, location:CLLocationCoordinate2D, pageIndex:Int) {
+
+    // MAS TODO use the pageIndex for paging
+    // "max" and "index" are optional but if provided they will support paged data
 
     let locationCenter = location
     let longitude = locationCenter.longitude
     let latitude = locationCenter.latitude
 
-    let requestURL = "http://api.donorschoose.org/common/json_feed.html?APIKey=\(apiConfig.API_KEY)" + "&centerLat=\(latitude)&centerLng=\(longitude)"
+    var requestURL = "http://api.donorschoose.org/common/json_feed.html?APIKey=\(apiConfig.API_KEY)" + "&centerLat=\(latitude)&centerLng=\(longitude)"
+
+    // append the page index
+//    requestURL += "&index=\(pageIndex)"
+
+    //append the max
+//    requestURL += "&index=\(pageSize)"
 
     switch ( apiConfig.type ) {
     case .production, .stage :
@@ -62,11 +75,11 @@ open class ProposalDataAPI : ProposalDataAPIProtocol
     }
   }
 
-  open func getDataWithSearchModel(_ searchModel:SearchDataModel )
+  open func getDataWithSearchModel(_ searchModel:SearchDataModel, pageIndex:Int )
   {
     let keyworkSearchString = searchModel.keywords.stringByAddingUrlEncoding()
-
-    let max = 12
+    
+    let max = pageSize
     let partnerIDString = "&partnerId=\(apiConfig.PARTNER_ID)"
     var requestURL = "http://api.donorschoose.org/common/json_feed.html?max=\(max)&keywords=%22\(keyworkSearchString)%22&sortBy=\(searchModel.sortOption.requestValue())&APIKey=\(apiConfig.API_KEY)" + partnerIDString
 
@@ -82,6 +95,14 @@ open class ProposalDataAPI : ProposalDataAPIProtocol
 
       requestURL = "http://api.donorschoose.org/common/json_feed.html?APIKey=\(apiConfig.API_KEY)" + partnerIDString + "centerLat=\(latitude)&centerLng=\(longitude)"
     }
+    
+    // MAS TODO handle paging
+    // append the page index
+    //    requestURL += "&index=\(pageIndex)"
+
+    //append the max
+    //    requestURL += "&index=\(pageSize)"
+
 
     switch ( apiConfig.type ) {
 
@@ -157,6 +178,22 @@ open class ProposalDataAPI : ProposalDataAPIProtocol
     {
       // MAS TODO cleanup
       if let headerDict = jsonObj as? [String: AnyObject] {
+
+        // MAS TODO get the "index" and the "totalProposals"
+        //“index”:”0″,
+        // “max”:”10″,
+        if let maxValue = headerDict["max"] {
+          print( "maxValue \(maxValue)")
+          //pagSize = maxValue
+        }
+        if let totalProposalsValue = headerDict["totalProposals"] {
+          print ("totalProposals \(totalProposalsValue) ")
+        }
+
+        if let indexValue = headerDict["index"] {
+          print( "page index = \(indexValue)")
+        }
+
         // breadcrumb
         if let breadcrumb = headerDict["breadcrumb"] as? [AnyObject] {
           for param in breadcrumb {

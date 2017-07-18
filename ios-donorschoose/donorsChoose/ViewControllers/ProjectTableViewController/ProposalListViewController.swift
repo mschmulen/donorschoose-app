@@ -6,7 +6,6 @@ open class ProposalListViewController : UIViewController {
 
   let apiConfig:APIConfig
 
-  /// Mark: - Properties
   public enum PROJECTS_VC_TYPE {
     case `static`
     case customizable
@@ -28,6 +27,8 @@ open class ProposalListViewController : UIViewController {
   let user:UserDataModel
   var locationManager:CLLocationManager = CLLocationManager()
   var currentLocation:CLLocationCoordinate2D? =  nil
+  var indexPageRequest = 0
+  var pageSize = 10
 
   // Mark: - Actions and Outlets
   @IBOutlet weak var labelHeaderView: UILabel! {
@@ -122,13 +123,15 @@ open class ProposalListViewController : UIViewController {
   }
 
   open func fetchData() {
+    // MAS TODO suppor apge Index Loading
     if currentSearchModel.type == .location {
       if let searchLocation  = self.currentLocation {
-        dataAPI?.getDataWithSearchModelAndLocation( currentSearchModel,location: searchLocation )
+        dataAPI?.getDataWithSearchModelAndLocation( currentSearchModel, location: searchLocation, pageIndex: indexPageRequest) //indexPageRequest default to zero )
       }
     }
     else {
-      dataAPI?.getDataWithSearchModel(currentSearchModel)
+      // MAS TODO support the pageIndex for secondary requests
+      dataAPI?.getDataWithSearchModel(currentSearchModel, pageIndex: indexPageRequest)
     }
   }
 
@@ -136,8 +139,7 @@ open class ProposalListViewController : UIViewController {
     fetchData()
   }
 
-  /// MARK: - Life cycle
-
+  /// MARK: - ViewController Life cycle
   override open func viewWillAppear(_ animated: Bool) {
     self.automaticallyAdjustsScrollViewInsets = false
   }
@@ -224,9 +226,9 @@ open class ProposalListViewController : UIViewController {
     self.init(nibName: "ProposalListViewController", bundle: Bundle(for: ProposalListViewController.self), user:user , projectVCType:projectVCType, apiConfig:apiConfig, searchModel:searchModel)
   }
 
-  var indexPageRequest = 0
+
   public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    print("scrollviewdidscroll")
+    print("scrollviewdidscroll for page refresh")
 
     // calculates where the user is in the y-axis
     let offsetY = scrollView.contentOffset.y
@@ -235,7 +237,10 @@ open class ProposalListViewController : UIViewController {
 
             print( "new page request original offset \(indexPageRequest)")
             // increments the number of the page to request
-            indexPageRequest += 1
+            // MAS TODO uncomment to support paged loading
+//            indexPageRequest += 1
+
+            //request another page ...
 
             // call your API for more data
 //            loadData()
