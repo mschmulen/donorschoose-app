@@ -13,25 +13,7 @@ public protocol SchoolDataAPIProtocol {
     init(config:APIConfig, user:String, delegate: SchoolDataAPIDelegate?)
     func getCallbackDelegate() ->  SchoolDataAPIDelegate?
     
-    // General Info
     func getSchoolInfo(_ schoolID:String)
-    
-    // Proposals
-    // Information about the currently-fundable projects associated with this school.
-    // http://data.donorschoose.org/docs/project-listing/json-responses/
-    // func getProposalsForSchool(schoolID:String)
-    
-    // Supporters
-    // Information about donors who have given to projects at this school.
-    // func getSupporters()
-    
-    // School Angels
-    // func getSchoolAngels()
-    
-    // Teachers
-    // Information about teachers at this school with active projects
-    //func getSchoolInfoTeachers(schoolID:String , teachersmax:Int? , teachersindex:Int? )
-    
 }
 
 open class SchoolDataAPI : SchoolDataAPIProtocol
@@ -39,7 +21,6 @@ open class SchoolDataAPI : SchoolDataAPIProtocol
     fileprivate let apiConfig:APIConfig
     fileprivate var callbackDelegate: SchoolDataAPIDelegate?
     
-    // Mark - DataAPIProtocol
     public required init(config:APIConfig, user:String, delegate: SchoolDataAPIDelegate?)
     {
         self.apiConfig = config
@@ -51,58 +32,46 @@ open class SchoolDataAPI : SchoolDataAPIProtocol
         return callbackDelegate
     }
     
-    // Mark - Network API
-
     open func getSchoolInfo(_ schoolID:String)
     {
-        let requestURL = "http://api.donorschoose.org/common/json_school.html?school=\(schoolID)&APIKey=\(apiConfig.API_KEY)"
+        let endpoint = "http://api.donorschoose.org/common/json_school.html?school=\(schoolID)&APIKey=\(apiConfig.API_KEY)"
+        guard let requestURL = URL(string: endpoint) else { return }
         
-        if let requestURL: URL = URL(string: requestURL) {
+        let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: requestURL, completionHandler: {
+            (data, response, error) -> Void in
             
-            let config = URLSessionConfiguration.default
-            let session = URLSession(configuration: config)
-            
-            let task = session.dataTask(with: requestURL, completionHandler: {
-                (data, response, error) -> Void in
-                
-                if let networkError = error {
-                    self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.generateFromNetworkError(networkError))
-                }
-                else {
-                    let httpResponse = response as! HTTPURLResponse
-                    let statusCode = httpResponse.statusCode
-                    
-                    if (statusCode == 200 && data != nil ) {
-                        
-                        // MAS TODO Swift 3 broke
-                        /*
-                        let json: AnyObject? = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions()) // options:.AllowFragments
-                        let results = self.deSerializeContent(json)
-                        self.callbackDelegate?.dataUpdateCallback(self, didChangeData: results , error: nil)
-                        */
-                    }
+            if let networkError = error {
+                self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.generateFromNetworkError(networkError))
+            }
+            else {
+                guard let statusCode = (response as? HTTPURLResponse)?.statusCode,// != 200,
+                    statusCode == 200,
+                    let data = data
                     else {
                         self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.notify_USER_GENERIC_NETWORK)
-                    }
+                    return
                 }
-            }) 
-            task.resume()
-        }
-    }
-    
-    fileprivate func deSerializeContent( _ jsonObj:AnyObject? ) -> SchoolDataModel?
-    {
-        if ( jsonObj != nil )
-        {
-            if let schoolDict = jsonObj as? [String: AnyObject] {
                 
-                if let m = SchoolDataModel.obtainModel(from: schoolDict as JSONObjectBase) {
-                    return m
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
+                    let results = self.deSerializeContent(json)
+                    self.callbackDelegate?.dataUpdateCallback(self, didChangeData: results, error: nil)
+                } catch {
+                    self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.notify_USER_GENERIC_NETWORK)
                 }
             }
-        }
-        return nil
-    }//end deSerializeContent
+        })
+        task.resume()
+    }
+    
+    fileprivate func deSerializeContent( _ jsonObj:Any? ) -> SchoolDataModel?
+    {
+        guard
+            let dict = jsonObj as? [String:AnyObject],
+            let m = SchoolDataModel.obtainModel(from: dict as JSONObjectBase)
+            else { return nil }
+        return m
+    }
     
 }
 

@@ -12,7 +12,6 @@ public protocol TeacherDataAPIProtocol {
   init(apiConfig:APIConfig, user:String, delegate: TeacherDataAPIDelegate?)
   func getCallbackDelegate() ->  TeacherDataAPIDelegate?
   
-  // Services
   func getTeacherInfo(_ teacherID:String)
 }
 
@@ -21,7 +20,6 @@ open class TeacherDataAPI : TeacherDataAPIProtocol
   fileprivate let apiConfig:APIConfig
   fileprivate var callbackDelegate: TeacherDataAPIDelegate?
 
-  // Mark - DataAPIProtocol
   public required init(apiConfig:APIConfig, user:String, delegate: TeacherDataAPIDelegate?)
   {
     self.apiConfig = apiConfig
@@ -33,57 +31,46 @@ open class TeacherDataAPI : TeacherDataAPIProtocol
     return callbackDelegate
   }
 
-  // Mark - Network API
-  open func getTeacherInfo(_ teacherID:String)
+    open func getTeacherInfo(_ teacherID:String)
     {
-      let requestURL = "http://api.donorschoose.org/common/json-teacher.html?teacher=\(teacherID)&APIKey=\(apiConfig.API_KEY)"
-
-      if let requestURL: URL = URL(string: requestURL) {
+        let endpoint = "http://api.donorschoose.org/common/json-teacher.html?teacher=\(teacherID)&APIKey=\(apiConfig.API_KEY)"
+        guard let requestURL = URL(string: endpoint) else { return }
+        
+        let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: requestURL, completionHandler: {
+            (data, response, error) -> Void in
             
-            let config = URLSessionConfiguration.default
-            let session = URLSession(configuration: config)
-            
-            let task = session.dataTask(with: requestURL, completionHandler: { (data, response, error) in
-                
-                if let networkError = error {
-                    self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil, error: APIError.generateFromNetworkError(networkError))
-                }
-                else {
-                    let httpResponse = response as! HTTPURLResponse
-                    let statusCode = httpResponse.statusCode
-                    if (statusCode == 200 && data != nil ) {
-                        do {
-                            let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                            
-                            let results = self.deSerializeContent(json)
-                            self.callbackDelegate?.dataUpdateCallback(self, didChangeData: results , error: nil)
-                        } catch {
-//                          log("error in JSONSerialization")
-//                          self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.notify_USER_GENERIC_NETWORK)
-                        }
-                    }
+            if let networkError = error {
+                self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.generateFromNetworkError(networkError))
+            }
+            else {
+                guard let statusCode = (response as? HTTPURLResponse)?.statusCode,// != 200,
+                    statusCode == 200,
+                    let data = data
                     else {
                         self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.notify_USER_GENERIC_NETWORK)
-                    }
+                        return
                 }
-            })
-            
-            task.resume()
-      }
-  }
-
-  fileprivate func deSerializeContent( _ jsonObj:Any? ) -> TeacherDataModel?
-  {
-    if ( jsonObj != nil )
-    {
-      if let teacherDict = jsonObj as? [String: AnyObject] {
-        if let m = TeacherDataModel.obtainModel(from: teacherDict as JSONObjectBase) {
-          return m
-        }
-      }
+                
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
+                    let results = self.deSerializeContent(json)
+                    self.callbackDelegate?.dataUpdateCallback(self, didChangeData: results, error: nil)
+                } catch {
+                    self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.notify_USER_GENERIC_NETWORK)
+                }
+            }
+        })
+        task.resume()
     }
-    return nil
-  }//end deSerializeContent
-
+    
+    fileprivate func deSerializeContent( _ jsonObj:Any? ) -> TeacherDataModel?
+    {
+        guard
+            let dict = jsonObj as? [String:AnyObject],
+            let m = TeacherDataModel.obtainModel(from: dict as JSONObjectBase)
+            else { return nil }
+        return m
+    }
+    
 }
 

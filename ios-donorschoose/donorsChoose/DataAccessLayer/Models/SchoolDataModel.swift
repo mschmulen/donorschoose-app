@@ -45,11 +45,10 @@ public struct SchoolDataModel {
 
 }
 
-// Conforming to the new protocol
 extension SchoolDataModel: JSONParser {
 
   static func obtainModel(from json: JSONObjectBase) -> SchoolDataModel? {
-
+    
     guard let id = json["id"] as? String,
       let name = json["name"] as? String,
       let schoolURL = json["schoolURL"] as? String,

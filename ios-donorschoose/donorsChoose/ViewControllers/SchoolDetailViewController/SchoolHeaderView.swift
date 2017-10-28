@@ -40,9 +40,7 @@ class SchoolHeaderView: UICollectionReusableView {
     }
 }
 
-// Image loading extension
 extension SchoolHeaderView {
-
   func downloadImage(_ url: URL, imageView:UIImageView ){
     getDataFromUrl(url) { (data, response, error)  in
       DispatchQueue.main.async { () -> Void in

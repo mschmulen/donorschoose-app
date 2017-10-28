@@ -66,7 +66,6 @@
 		C91744511EF8774700C5AB30 /* ViewFundingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91744501EF8774700C5AB30 /* ViewFundingStatus.swift */; };
 		C91744551EF8776300C5AB30 /* StatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91744531EF8776300C5AB30 /* StatView.swift */; };
 		C91744561EF8776300C5AB30 /* StatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C91744541EF8776300C5AB30 /* StatView.xib */; };
-		C91744651EF8779A00C5AB30 /* SchoolDetailFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91744581EF8779A00C5AB30 /* SchoolDetailFlowLayout.swift */; };
 		C91744661EF8779A00C5AB30 /* SchoolDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91744591EF8779A00C5AB30 /* SchoolDetailViewController.swift */; };
 		C91744671EF8779A00C5AB30 /* SchoolDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C917445A1EF8779A00C5AB30 /* SchoolDetailViewController.xib */; };
 		C91744681EF8779A00C5AB30 /* SchoolHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C917445B1EF8779A00C5AB30 /* SchoolHeaderView.swift */; };
@@ -75,7 +74,6 @@
 		C917446B1EF8779A00C5AB30 /* StatViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C917445F1EF8779A00C5AB30 /* StatViewCell.xib */; };
 		C917446C1EF8779A00C5AB30 /* TeacherDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91744601EF8779A00C5AB30 /* TeacherDetailVC.swift */; };
 		C917446D1EF8779A00C5AB30 /* TeacherDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C91744611EF8779A00C5AB30 /* TeacherDetailVC.xib */; };
-		C917446E1EF8779A00C5AB30 /* TeacherDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91744621EF8779A00C5AB30 /* TeacherDetailViewModel.swift */; };
 		C917446F1EF8779A00C5AB30 /* TeacherHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91744631EF8779A00C5AB30 /* TeacherHeaderView.swift */; };
 		C91744701EF8779A00C5AB30 /* TeacherHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C91744641EF8779A00C5AB30 /* TeacherHeaderView.xib */; };
 		C91744741EF877CA00C5AB30 /* LoadingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91744721EF877CA00C5AB30 /* LoadingCollectionViewCell.swift */; };
@@ -490,7 +488,6 @@
 		C91744501EF8774700C5AB30 /* ViewFundingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewFundingStatus.swift; sourceTree = "<group>"; };
 		C91744531EF8776300C5AB30 /* StatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatView.swift; sourceTree = "<group>"; };
 		C91744541EF8776300C5AB30 /* StatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatView.xib; sourceTree = "<group>"; };
-		C91744581EF8779A00C5AB30 /* SchoolDetailFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolDetailFlowLayout.swift; sourceTree = "<group>"; };
 		C91744591EF8779A00C5AB30 /* SchoolDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolDetailViewController.swift; sourceTree = "<group>"; };
 		C917445A1EF8779A00C5AB30 /* SchoolDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SchoolDetailViewController.xib; sourceTree = "<group>"; };
 		C917445B1EF8779A00C5AB30 /* SchoolHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolHeaderView.swift; sourceTree = "<group>"; };
@@ -499,7 +496,6 @@
 		C917445F1EF8779A00C5AB30 /* StatViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatViewCell.xib; sourceTree = "<group>"; };
 		C91744601EF8779A00C5AB30 /* TeacherDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherDetailVC.swift; sourceTree = "<group>"; };
 		C91744611EF8779A00C5AB30 /* TeacherDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherDetailVC.xib; sourceTree = "<group>"; };
-		C91744621EF8779A00C5AB30 /* TeacherDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherDetailViewModel.swift; sourceTree = "<group>"; };
 		C91744631EF8779A00C5AB30 /* TeacherHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherHeaderView.swift; sourceTree = "<group>"; };
 		C91744641EF8779A00C5AB30 /* TeacherHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherHeaderView.xib; sourceTree = "<group>"; };
 		C91744721EF877CA00C5AB30 /* LoadingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -562,6 +558,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		109CFC271FA4F96100EA8B7A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C917445E1EF8779A00C5AB30 /* StatViewCell.swift */,
+				C917445F1EF8779A00C5AB30 /* StatViewCell.xib */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		C91741D91EF8561C00C5AB30 = {
 			isa = PBXGroup;
 			children = (
@@ -643,6 +648,7 @@
 		C91742551EF861EA00C5AB30 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				109CFC271FA4F96100EA8B7A /* Common */,
 				C91744961EF879B500C5AB30 /* NotificationProjectViewController */,
 				C91744871EF878B000C5AB30 /* AboutViewController */,
 				C917447E1EF8786500C5AB30 /* StatsViewController */,
@@ -973,7 +979,6 @@
 		C91744571EF8779A00C5AB30 /* SchoolDetailViewController */ = {
 			isa = PBXGroup;
 			children = (
-				C91744581EF8779A00C5AB30 /* SchoolDetailFlowLayout.swift */,
 				C91744591EF8779A00C5AB30 /* SchoolDetailViewController.swift */,
 				C917445A1EF8779A00C5AB30 /* SchoolDetailViewController.xib */,
 				C917445B1EF8779A00C5AB30 /* SchoolHeaderView.swift */,
@@ -985,11 +990,8 @@
 		C917445D1EF8779A00C5AB30 /* TeacherDetailViewController */ = {
 			isa = PBXGroup;
 			children = (
-				C917445E1EF8779A00C5AB30 /* StatViewCell.swift */,
-				C917445F1EF8779A00C5AB30 /* StatViewCell.xib */,
 				C91744601EF8779A00C5AB30 /* TeacherDetailVC.swift */,
 				C91744611EF8779A00C5AB30 /* TeacherDetailVC.xib */,
-				C91744621EF8779A00C5AB30 /* TeacherDetailViewModel.swift */,
 				C91744631EF8779A00C5AB30 /* TeacherHeaderView.swift */,
 				C91744641EF8779A00C5AB30 /* TeacherHeaderView.xib */,
 			);
@@ -1490,7 +1492,6 @@
 				C917444E1EF8761900C5AB30 /* UIReusable.swift in Sources */,
 				C917448F1EF878DC00C5AB30 /* UIImage+FadeInOut.swift in Sources */,
 				C91744321EF8759100C5AB30 /* ProjectSearchViewController.swift in Sources */,
-				C917446E1EF8779A00C5AB30 /* TeacherDetailViewModel.swift in Sources */,
 				C917441F1EF8751E00C5AB30 /* ProposalListViewController.swift in Sources */,
 				C91743E91EF873D600C5AB30 /* ModelUtils.swift in Sources */,
 				C91744B41EF8B1D000C5AB30 /* ProposalDataModel.swift in Sources */,
@@ -1539,7 +1540,6 @@
 				C91741E61EF8561C00C5AB30 /* AppDelegate.swift in Sources */,
 				C9A686FC1F049EEA00A6E4FF /* IntroWelcomeViewController.swift in Sources */,
 				C91744661EF8779A00C5AB30 /* SchoolDetailViewController.swift in Sources */,
-				C91744651EF8779A00C5AB30 /* SchoolDetailFlowLayout.swift in Sources */,
 				C91744B81EF8B1D000C5AB30 /* UserDataModel.swift in Sources */,
 				C91742FA1EF8686700C5AB30 /* AppRoute.swift in Sources */,
 				C91744461EF875E800C5AB30 /* ProposalDetailViewController.swift in Sources */,

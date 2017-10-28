@@ -71,7 +71,6 @@ extension TeacherHeaderView {
                 self.backgroundImage.fadeIn(duration: config.fadeInTime)
             }
         }
- 
     }
     
     func downloadProfileImage(_ url: URL){
@@ -87,6 +86,6 @@ extension TeacherHeaderView {
         }
         
     }
-
+    
 }
 

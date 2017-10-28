@@ -3,7 +3,6 @@
 
 import Foundation
 
-// MARK: - ProposalDataAPIDelegate
 extension ProposalDetailViewController : ProposalDataAPIDelegate {
     
     public func dataUpdateCallback( _ dataAPI: ProposalDataAPIProtocol, didChangeData data:[ProposalDataModel]?, error:APIError? ) {

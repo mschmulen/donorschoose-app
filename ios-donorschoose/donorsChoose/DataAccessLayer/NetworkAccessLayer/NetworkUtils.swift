@@ -83,6 +83,8 @@ public enum APIError: Error {
     case notify_USER_CONNECTION_LOST
     
     case notify_USER_GENERIC_NETWORK
+    // case notify_USER_GENERIC_MODEL
+    
     case unknown(String)
     case silent(String)
     
