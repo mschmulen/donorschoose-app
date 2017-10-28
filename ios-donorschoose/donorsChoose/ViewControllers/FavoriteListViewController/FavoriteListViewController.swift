@@ -1,7 +1,8 @@
 
 import UIKit
 
-struct FavoriteListViewData : ViewDataProtocol {
+// MAS TODO ViewData Protocol
+struct FavoriteListViewData { //}: ViewDataProtocol {
   var title:String
   let list:[WatchItemProtocol]
   static var empty: FavoriteListViewData {

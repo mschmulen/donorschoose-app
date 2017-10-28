@@ -39,7 +39,7 @@ Please give feedback at [iTunes DonorsChoose Project Finder App](https://itunes.
 
 ####Version 1.11
 
-- Open Source the core DonorsChoose Project finder iOS App! [http://github.com/mschmulen/donorsChooseApp](http://github.com/mschmulen/donorsChooseApp) pull requests and bugs are welcome :) 
+- Open Source the core DonorsChoose Project finder iOS App! [http://github.com/mschmulen/donorsChooseApp](http://github.com/mschmulen/donorsChooseApp) pull requests and bugs reports are welcome :)
 - Fix for html encoding in project synopsis
 - School detail page
 - General bugs fixes and improvements

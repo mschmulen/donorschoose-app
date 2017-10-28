@@ -11,41 +11,69 @@ class UnidirectionalBindingSpec: QuickSpec {
 			var token: Lifetime.Token!
 			var lifetime: Lifetime!
 			var target: BindingTarget<Int>!
-			var value: Int!
+			var optionalTarget: BindingTarget<Int?>!
+			var value: Int?
 
 			beforeEach {
 				token = Lifetime.Token()
 				lifetime = Lifetime(token)
-				target = BindingTarget(lifetime: lifetime, setter: { value = $0 })
+				target = BindingTarget(lifetime: lifetime, action: { value = $0 })
+				optionalTarget = BindingTarget(lifetime: lifetime, action: { value = $0 })
 				value = nil
 			}
 
-			it("should pass through the lifetime") {
-				expect(target.lifetime).to(beIdenticalTo(lifetime))
+			describe("non-optional target") {
+				it("should pass through the lifetime") {
+					expect(target.lifetime).to(beIdenticalTo(lifetime))
+				}
+
+				it("should trigger the supplied setter") {
+					expect(value).to(beNil())
+
+					target.action(1)
+					expect(value) == 1
+				}
+
+				it("should accept bindings from properties") {
+					expect(value).to(beNil())
+
+					let property = MutableProperty(1)
+					target <~ property
+					expect(value) == 1
+
+					property.value = 2
+					expect(value) == 2
+				}
 			}
 
-			it("should trigger the supplied setter") {
-				expect(value).to(beNil())
+			describe("optional target") {
+				it("should pass through the lifetime") {
+					expect(optionalTarget.lifetime).to(beIdenticalTo(lifetime))
+				}
 
-				target.consume(1)
-				expect(value) == 1
-			}
+				it("should trigger the supplied setter") {
+					expect(value).to(beNil())
 
-			it("should accept bindings from properties") {
-				expect(value).to(beNil())
+					optionalTarget.action(1)
+					expect(value) == 1
+				}
 
-				let property = MutableProperty(1)
-				target <~ property
-				expect(value) == 1
+				it("should accept bindings from properties") {
+					expect(value).to(beNil())
 
-				property.value = 2
-				expect(value) == 2
+					let property = MutableProperty(1)
+					optionalTarget <~ property
+					expect(value) == 1
+
+					property.value = 2
+					expect(value) == 2
+				}
 			}
 
 			it("should not deadlock on the same queue") {
 				target = BindingTarget(on: UIScheduler(),
 				                       lifetime: lifetime,
-				                       setter: { value = $0 })
+				                       action: { value = $0 })
 
 				let property = MutableProperty(1)
 				target <~ property
@@ -57,7 +85,7 @@ class UnidirectionalBindingSpec: QuickSpec {
 
 				target = BindingTarget(on: UIScheduler(),
 				                       lifetime: lifetime,
-				                       setter: { value = $0 })
+				                       action: { value = $0 })
 
 				let property = MutableProperty(1)
 
@@ -81,7 +109,7 @@ class UnidirectionalBindingSpec: QuickSpec {
 
 				target = BindingTarget(on: UIScheduler(),
 				                       lifetime: lifetime,
-				                       setter: setter)
+				                       action: setter)
 
 				let scheduler: QueueScheduler
 				if #available(OSX 10.10, *) {

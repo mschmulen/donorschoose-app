@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Dispatch
 import Result
 import Nimble
 import Quick
@@ -59,6 +59,26 @@ class ActionSpec: QuickSpec {
 				action.completed.observeValues { completedCount += 1 }
 			}
 
+			it("should retain the state property") {
+				var property: MutableProperty<Bool>? = MutableProperty(false)
+				weak var weakProperty = property
+				
+				var action: Action<(), (), NoError>? = Action(state: property!, enabledIf: { _ in true }) { _ in
+					return .empty
+				}
+				
+				expect(weakProperty).toNot(beNil())
+				
+				property = nil
+				expect(weakProperty).toNot(beNil())
+				
+				action = nil
+				expect(weakProperty).to(beNil())
+				
+				// Mute "unused variable" warning.
+				_ = action
+			}
+
 			it("should be disabled and not executing after initialization") {
 				expect(action.isEnabled.value) == false
 				expect(action.isExecuting.value) == false
@@ -92,6 +112,59 @@ class ActionSpec: QuickSpec {
 				enabled.value = false
 				expect(action.isEnabled.value) == false
 				expect(action.isExecuting.value) == false
+			}
+
+			it("should not deadlock") {
+				final class ViewModel {
+					let action2 = Action<(), (), NoError> { SignalProducer(value: ()) }
+				}
+
+				let action1 = Action<(), ViewModel, NoError> { SignalProducer(value: ViewModel()) }
+
+				// Fixed in #267. (https://github.com/ReactiveCocoa/ReactiveSwift/pull/267)
+				//
+				// The deadlock happened as the observer disposable releases the closure
+				// `{ _ in viewModel }` here without releasing the mapped signal's
+				// `updateLock` first. The deinitialization of the closure triggered the
+				// propagation of terminal event of the `Action`, which eventually hit
+				// the mapped signal and attempted to acquire `updateLock` to transition
+				// the signal's state.
+				action1.values
+					.flatMap(.latest) { viewModel in viewModel.action2.values.map { _ in viewModel } }
+					.observeValues { _ in }
+
+				action1.apply().start()
+				action1.apply().start()
+			}
+
+			if #available(macOS 10.10, *) {
+				it("should not loop indefinitely") {
+					let condition = MutableProperty(1)
+
+					let action = Action<Void, Void, NoError>(state: condition, enabledIf: { $0 == 0 }) { _ in
+						return .empty
+					}
+
+					let disposable = CompositeDisposable()
+
+					waitUntil(timeout: 0.01) { done in
+						let target = DispatchQueue(label: "test target queue")
+						let highPriority = QueueScheduler(qos: .userInitiated, targeting: target)
+						let lowPriority = QueueScheduler(qos: .default, targeting: target)
+
+						disposable += action.isExecuting.producer
+							.observe(on: highPriority)
+							.startWithValues { _ in
+								condition.value = 10
+							}
+
+						disposable += lowPriority.schedule {
+							done()
+						}
+					}
+
+					disposable.dispose()
+				}
 			}
 
 			describe("completed") {

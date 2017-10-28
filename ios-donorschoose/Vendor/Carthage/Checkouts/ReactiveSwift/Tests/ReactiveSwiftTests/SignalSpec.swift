@@ -12,7 +12,7 @@ import Dispatch
 import Result
 import Nimble
 import Quick
-import ReactiveSwift
+@testable import ReactiveSwift
 
 class SignalSpec: QuickSpec {
 	override func spec() {
@@ -191,6 +191,16 @@ class SignalSpec: QuickSpec {
 				expect(completed) == false
 				observer.sendCompleted()
 				expect(completed) == true
+			}
+
+			it("should dispose the supplied disposable when the signal terminates") {
+				let disposable = SimpleDisposable()
+				let (signal, observer) = Signal<(), NoError>.pipe(disposable: disposable)
+
+				expect(disposable.isDisposed) == false
+
+				observer.sendCompleted()
+				expect(disposable.isDisposed) == true
 			}
 
 			context("memory") {
@@ -482,6 +492,103 @@ class SignalSpec: QuickSpec {
 			}
 		}
 
+		describe("lazyMap") {
+			describe("with a scheduled binding") {
+				var token: Lifetime.Token!
+				var lifetime: Lifetime!
+				var destination: [String] = []
+				var tupleSignal: Signal<(character: String, other: Int), NoError>!
+				var tupleObserver: Signal<(character: String, other: Int), NoError>.Observer!
+				var theLens: Signal<String, NoError>!
+				var getterCounter: Int = 0
+				var lensScheduler: TestScheduler!
+				var targetScheduler: TestScheduler!
+				var target: BindingTarget<String>!
+
+				beforeEach {
+					destination = []
+					token = Lifetime.Token()
+					lifetime = Lifetime(token)
+
+					let (producer, observer) = Signal<(character: String, other: Int), NoError>.pipe()
+					tupleSignal = producer
+					tupleObserver = observer
+
+					lensScheduler = TestScheduler()
+					targetScheduler = TestScheduler()
+
+					getterCounter = 0
+					theLens = tupleSignal.lazyMap(on: lensScheduler) { (tuple: (character: String, other: Int)) -> String in
+						getterCounter += 1
+						return tuple.character
+					}
+
+					target = BindingTarget<String>(on: targetScheduler, lifetime: lifetime) {
+						destination.append($0)
+					}
+
+					target <~ theLens
+				}
+
+				it("should not propagate values until scheduled") {
+					// Send a value along
+					tupleObserver.send(value: (character: "🎃", other: 42))
+
+					// The destination should not change value, and the getter
+					// should not have evaluated yet, as neither has been scheduled
+					expect(destination) == []
+					expect(getterCounter) == 0
+
+					// Advance both schedulers
+					lensScheduler.advance()
+					targetScheduler.advance()
+
+					// The destination receives the previously-sent value, and the
+					// getter obviously evaluated
+					expect(destination) == ["🎃"]
+					expect(getterCounter) == 1
+				}
+
+				it("should evaluate the getter only when scheduled") {
+					// Send a value along
+					tupleObserver.send(value: (character: "🎃", other: 42))
+
+					// The destination should not change value, and the getter
+					// should not have evaluated yet, as neither has been scheduled
+					expect(destination) == []
+					expect(getterCounter) == 0
+
+					// When the getter's scheduler advances, the getter should
+					// be evaluated, but the destination still shouldn't accept
+					// the new value
+					lensScheduler.advance()
+					expect(getterCounter) == 1
+					expect(destination) == []
+
+					// Sending other values along shouldn't evaluate the getter
+					tupleObserver.send(value: (character: "😾", other: 42))
+					tupleObserver.send(value: (character: "🍬", other: 13))
+					tupleObserver.send(value: (character: "👻", other: 17))
+					expect(getterCounter) == 1
+					expect(destination) == []
+
+					// Push the scheduler along for the lens, and the getter
+					// should evaluate
+					lensScheduler.advance()
+					expect(getterCounter) == 2
+
+					// ...but the destination still won't receive the value
+					expect(destination) == []
+
+					// Finally, pushing the target scheduler along will
+					// propagate only the first and last values
+					targetScheduler.advance()
+					expect(getterCounter) == 2
+					expect(destination) == ["🎃", "👻"]
+				}
+			}
+		}
+
 		describe("filter") {
 			it("should omit values from the signal") {
 				let (signal, observer) = Signal<Int, NoError>.pipe()
@@ -501,6 +608,94 @@ class SignalSpec: QuickSpec {
 
 				observer.send(value: 2)
 				expect(lastValue) == 2
+			}
+		}
+		
+		describe("filterMap") {
+			it("should omit values from the signal that are nil after the transformation") {
+				let (signal, observer) = Signal<String, NoError>.pipe()
+				let mappedSignal: Signal<Int, NoError> = signal.filterMap { Int.init($0) }
+				
+				var lastValue: Int?
+				
+				mappedSignal.observeValues { lastValue = $0 }
+				
+				expect(lastValue).to(beNil())
+
+				observer.send(value: "0")
+				expect(lastValue) == 0
+				
+				observer.send(value: "1")
+				expect(lastValue) == 1
+				
+				observer.send(value: "A")
+				expect(lastValue) == 1
+			}
+			
+			it("should stop emiting values after an error") {
+				let (signal, observer) = Signal<String, TestError>.pipe()
+				let mappedSignal: Signal<Int, TestError> = signal.filterMap { Int.init($0) }
+				
+				var lastValue: Int?
+				
+				mappedSignal.observeResult { result in
+					if let value = result.value {
+						lastValue = value
+					}
+				}
+				
+				expect(lastValue).to(beNil())
+				
+				observer.send(value: "0")
+				expect(lastValue) == 0
+				
+				observer.send(error: .default)
+				
+				observer.send(value: "1")
+				expect(lastValue) == 0
+			}
+			
+			it("should stop emiting values after a complete") {
+				let (signal, observer) = Signal<String, NoError>.pipe()
+				let mappedSignal: Signal<Int, NoError> = signal.filterMap { Int.init($0) }
+				
+				var lastValue: Int?
+				
+				mappedSignal.observeValues { lastValue = $0 }
+				
+				expect(lastValue).to(beNil())
+				
+				observer.send(value: "0")
+				expect(lastValue) == 0
+				
+				observer.sendCompleted()
+				
+				observer.send(value: "1")
+				expect(lastValue) == 0
+			}
+			
+			it("should send completed") {
+				let (signal, observer) = Signal<String, NoError>.pipe()
+				let mappedSignal: Signal<Int, NoError> = signal.filterMap { Int.init($0) }
+				
+				var completed: Bool = false
+				
+				mappedSignal.observeCompleted { completed = true }
+				observer.sendCompleted()
+				
+				expect(completed) == true
+			}
+			
+			it("should send failure") {
+				let (signal, observer) = Signal<String, TestError>.pipe()
+				let mappedSignal: Signal<Int, TestError> = signal.filterMap { Int.init($0) }
+				
+				var failure: TestError?
+				
+				mappedSignal.observeFailed { failure = $0 }
+				observer.send(error: .error1)
+				
+				expect(failure) == .error1
 			}
 		}
 
@@ -1435,6 +1630,98 @@ class SignalSpec: QuickSpec {
 			}
 		}
 
+		describe("throttle while") {
+			var scheduler: ImmediateScheduler!
+			var shouldThrottle: MutableProperty<Bool>!
+			var observer: Signal<Int, NoError>.Observer!
+			var signal: Signal<Int, NoError>!
+
+			beforeEach {
+				scheduler = ImmediateScheduler()
+				shouldThrottle = MutableProperty(false)
+
+				let (baseSignal, baseObserver) = Signal<Int, NoError>.pipe()
+				observer = baseObserver
+
+				signal = baseSignal.throttle(while: shouldThrottle, on: scheduler)
+				expect(signal).notTo(beNil())
+			}
+
+			it("passes through unthrottled values") {
+				var values: [Int] = []
+				signal.observeValues { values.append($0) }
+
+				observer.send(value: 1)
+				observer.send(value: 2)
+				observer.send(value: 3)
+
+				expect(values) == [1, 2, 3]
+			}
+
+			it("emits the latest throttled value when resumed") {
+				var values: [Int] = []
+				signal.observeValues { values.append($0) }
+
+				shouldThrottle.value = true
+				observer.send(value: 1)
+				observer.send(value: 2)
+				shouldThrottle.value = false
+
+				expect(values) == [2]
+			}
+
+			it("continues sending values after being resumed") {
+				var values: [Int] = []
+				signal.observeValues { values.append($0) }
+
+				shouldThrottle.value = true
+				observer.send(value: 1)
+				shouldThrottle.value = false
+				observer.send(value: 2)
+				observer.send(value: 3)
+
+				expect(values) == [1, 2, 3]
+			}
+
+			it("stays throttled if the property completes while throttled") {
+				var values: [Int] = []
+				signal.observeValues { values.append($0) }
+
+				shouldThrottle.value = false
+				observer.send(value: 1)
+				shouldThrottle.value = true
+				observer.send(value: 2)
+				shouldThrottle = nil
+				observer.send(value: 3)
+
+				expect(values) == [1]
+			}
+
+			it("stays resumed if the property completes while resumed") {
+				var values: [Int] = []
+				signal.observeValues { values.append($0) }
+
+				shouldThrottle.value = true
+				observer.send(value: 1)
+				shouldThrottle.value = false
+				observer.send(value: 2)
+				shouldThrottle = nil
+				observer.send(value: 3)
+
+				expect(values) == [1, 2, 3]
+			}
+
+			it("doesn't extend the lifetime of the throttle property") {
+				var completed = false
+				shouldThrottle.lifetime.observeEnded { completed = true }
+
+				observer.send(value: 1)
+				shouldThrottle = nil
+
+				expect(completed) == true
+			}
+		}
+
 		describe("debounce") {
 			var scheduler: TestScheduler!
 			var observer: Signal<Int, NoError>.Observer!
@@ -1625,6 +1912,141 @@ class SignalSpec: QuickSpec {
 				
 				samplerObserver.sendCompleted()
 				expect(completed) == true
+			}
+		}
+
+		describe("withLatest(from: signal)") {
+			var withLatestSignal: Signal<(Int, String), NoError>!
+			var observer: Signal<Int, NoError>.Observer!
+			var sampleeObserver: Signal<String, NoError>.Observer!
+
+			beforeEach {
+				let (signal, incomingObserver) = Signal<Int, NoError>.pipe()
+				let (samplee, incomingSampleeObserver) = Signal<String, NoError>.pipe()
+				withLatestSignal = signal.withLatest(from: samplee)
+				observer = incomingObserver
+				sampleeObserver = incomingSampleeObserver
+			}
+
+			it("should forward the latest value when the receiver fires") {
+				var result: [String] = []
+				withLatestSignal.observeValues { (left, right) in result.append("\(left)\(right)") }
+
+				sampleeObserver.send(value: "a")
+				sampleeObserver.send(value: "b")
+				observer.send(value: 1)
+				expect(result) == [ "1b" ]
+			}
+
+			it("should do nothing if receiver fires before samplee sends value") {
+				var result: [String] = []
+				withLatestSignal.observeValues { (left, right) in result.append("\(left)\(right)") }
+
+				observer.send(value: 1)
+				expect(result).to(beEmpty())
+			}
+
+			it("should send latest value with samplee value multiple times when receiver fires multiple times") {
+				var result: [String] = []
+				withLatestSignal.observeValues { (left, right) in result.append("\(left)\(right)") }
+
+				sampleeObserver.send(value: "a")
+				observer.send(value: 1)
+				observer.send(value: 2)
+				expect(result) == [ "1a", "2a" ]
+			}
+
+			it("should complete when receiver has completed") {
+				var completed = false
+				withLatestSignal.observeCompleted { completed = true }
+
+				sampleeObserver.sendCompleted()
+				expect(completed) == false
+
+				observer.sendCompleted()
+				expect(completed) == true
+			}
+
+			it("should not affect when samplee has completed") {
+				var event: Event<(Int, String), NoError>? = nil
+				withLatestSignal.observe { event = $0 }
+
+				sampleeObserver.sendCompleted()
+				expect(event).to(beNil())
+			}
+
+			it("should not affect when samplee has interrupted") {
+				var event: Event<(Int, String), NoError>? = nil
+				withLatestSignal.observe { event = $0 }
+
+				sampleeObserver.sendInterrupted()
+				expect(event).to(beNil())
+			}
+		}
+
+		describe("withLatest(from: producer)") {
+			var withLatestSignal: Signal<(Int, String), NoError>!
+			var observer: Signal<Int, NoError>.Observer!
+			var sampleeObserver: Signal<String, NoError>.Observer!
+
+			beforeEach {
+				let (signal, incomingObserver) = Signal<Int, NoError>.pipe()
+				let (samplee, incomingSampleeObserver) = SignalProducer<String, NoError>.pipe()
+				withLatestSignal = signal.withLatest(from: samplee)
+				observer = incomingObserver
+				sampleeObserver = incomingSampleeObserver
+			}
+
+			it("should forward the latest value when the receiver fires") {
+				var result: [String] = []
+				withLatestSignal.observeValues { (left, right) in result.append("\(left)\(right)") }
+
+				sampleeObserver.send(value: "a")
+				sampleeObserver.send(value: "b")
+				observer.send(value: 1)
+				expect(result) == [ "1b" ]
+			}
+
+			it("should do nothing if receiver fires before samplee sends value") {
+				var result: [String] = []
+				withLatestSignal.observeValues { (left, right) in result.append("\(left)\(right)") }
+
+				observer.send(value: 1)
+				expect(result).to(beEmpty())
+			}
+
+			it("should send latest value with samplee value multiple times when receiver fires multiple times") {
+				var result: [String] = []
+				withLatestSignal.observeValues { (left, right) in result.append("\(left)\(right)") }
+
+				sampleeObserver.send(value: "a")
+				observer.send(value: 1)
+				observer.send(value: 2)
+				expect(result) == [ "1a", "2a" ]
+			}
+
+			it("should complete when receiver has completed") {
+				var completed = false
+				withLatestSignal.observeCompleted { completed = true }
+
+				observer.sendCompleted()
+				expect(completed) == true
+			}
+
+			it("should not affect when samplee has completed") {
+				var event: Event<(Int, String), NoError>? = nil
+				withLatestSignal.observe { event = $0 }
+
+				sampleeObserver.sendCompleted()
+				expect(event).to(beNil())
+			}
+
+			it("should not affect when samplee has interrupted") {
+				var event: Event<(Int, String), NoError>? = nil
+				withLatestSignal.observe { event = $0 }
+
+				sampleeObserver.sendInterrupted()
+				expect(event).to(beNil())
 			}
 		}
 
@@ -2042,7 +2464,56 @@ class SignalSpec: QuickSpec {
 				expect(error) == TestError.default
 			}
 		}
-		
+
+		describe("attempt throws") {
+			it("should forward original values upon success") {
+				let (baseSignal, observer) = Signal<Int, AnyError>.pipe()
+				let signal = baseSignal.attempt { _ in
+					_ = try operation(value: 1)
+				}
+
+				var current: Int?
+				signal
+					.assumeNoErrors()
+					.observeValues { value in
+						current = value
+					}
+
+				for value in 1...5 {
+					observer.send(value: value)
+					expect(current) == value
+				}
+			}
+
+			it("should error if an attempt fails") {
+				let (baseSignal, observer) = Signal<Int, NoError>.pipe()
+				let signal = baseSignal.attempt { _ in
+					_ = try operation(value: nil) as Int
+				}
+
+				var error: TestError?
+				signal.observeFailed { err in
+					error = err.error as? TestError
+				}
+
+				observer.send(value: 42)
+				expect(error) == TestError.default
+			}
+
+			it("should allow throwing closures with NoError") {
+				let (baseSignal, observer) = Signal<Int, NoError>.pipe()
+				let signal = baseSignal.attempt { _ in
+					_ = try operation(value: 1)
+				}
+
+				var value: Int?
+				signal.observeResult { value = $0.value }
+
+				observer.send(value: 42)
+				expect(value) == 42
+			}
+		}
+
 		describe("attemptMap") {
 			it("should forward mapped values upon success") {
 				let (baseSignal, observer) = Signal<Int, TestError>.pipe()
@@ -2079,7 +2550,57 @@ class SignalSpec: QuickSpec {
 				expect(error) == TestError.default
 			}
 		}
-		
+
+		describe("attemptMap throws") {
+			it("should forward mapped values upon success") {
+				let (baseSignal, observer) = Signal<Int, AnyError>.pipe()
+				let signal = baseSignal.attemptMap { num -> Bool in
+					try operation(value: num % 2 == 0)
+				}
+
+				var even: Bool?
+				signal
+					.assumeNoErrors()
+					.observeValues { value in
+						even = value
+					}
+
+				observer.send(value: 1)
+				expect(even) == false
+
+				observer.send(value: 2)
+				expect(even) == true
+			}
+
+			it("should error if a mapping fails") {
+				let (baseSignal, observer) = Signal<Int, AnyError>.pipe()
+				let signal = baseSignal.attemptMap { _ -> Bool in
+					try operation(value: nil)
+				}
+
+				var error: TestError?
+				signal.observeFailed { err in
+					error = err.error as? TestError
+				}
+
+				observer.send(value: 42)
+				expect(error) == TestError.default
+			}
+
+			it("should allow throwing closures with NoError") {
+				let (baseSignal, observer) = Signal<Int, NoError>.pipe()
+				let signal = baseSignal.attemptMap { num in
+					try operation(value: num % 2 == 0)
+				}
+
+				var value: Bool?
+				signal.observeResult { value = $0.value }
+
+				observer.send(value: 2)
+				expect(value) == true
+			}
+		}
+
 		describe("combinePrevious") {
 			var observer: Signal<Int, NoError>.Observer!
 			let initialValue: Int = 0
@@ -2371,5 +2892,77 @@ class SignalSpec: QuickSpec {
 				}
 			}
 		}
+		
+		describe("negated attribute") {
+			it("should return the negate of a value in a Boolean signal") {
+				let (signal, observer) = Signal<Bool, NoError>.pipe()
+				signal.negate().observeValues { value in
+					expect(value).to(beFalse())
+				}
+				observer.send(value: true)
+				observer.sendCompleted()
+			}
+		}
+		
+		describe("and attribute") {
+			it("should emit true when both signals emits the same value") {
+				let (signal1, observer1) = Signal<Bool, NoError>.pipe()
+				let (signal2, observer2) = Signal<Bool, NoError>.pipe()
+				signal1.and(signal2).observeValues { value in
+					expect(value).to(beTrue())
+				}
+				observer1.send(value: true)
+				observer2.send(value: true)
+				
+				observer1.sendCompleted()
+				observer2.sendCompleted()
+			}
+			
+			it("should emit false when both signals emits opposite values") {
+				let (signal1, observer1) = Signal<Bool, NoError>.pipe()
+				let (signal2, observer2) = Signal<Bool, NoError>.pipe()
+				signal1.and(signal2).observeValues { value in
+					expect(value).to(beFalse())
+				}
+				observer1.send(value: false)
+				observer2.send(value: true)
+				
+				observer1.sendCompleted()
+				observer2.sendCompleted()
+			}
+		}
+		
+		describe("or attribute") {
+			it("should emit true when at least one of the signals emits true") {
+				let (signal1, observer1) = Signal<Bool, NoError>.pipe()
+				let (signal2, observer2) = Signal<Bool, NoError>.pipe()
+				signal1.or(signal2).observeValues { value in
+					expect(value).to(beTrue())
+				}
+				observer1.send(value: true)
+				observer2.send(value: false)
+				
+				observer1.sendCompleted()
+				observer2.sendCompleted()
+			}
+			
+			it("should emit false when both signals emits false") {
+				let (signal1, observer1) = Signal<Bool, NoError>.pipe()
+				let (signal2, observer2) = Signal<Bool, NoError>.pipe()
+				signal1.or(signal2).observeValues { value in
+					expect(value).to(beFalse())
+				}
+				observer1.send(value: false)
+				observer2.send(value: false)
+				
+				observer1.sendCompleted()
+				observer2.sendCompleted()
+			}
+		}
 	}
+}
+
+private func operation<T>(value: T?) throws -> T {
+	guard let value = value else { throw TestError.default }
+	return value
 }

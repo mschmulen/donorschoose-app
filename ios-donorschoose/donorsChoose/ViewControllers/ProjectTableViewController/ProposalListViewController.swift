@@ -235,11 +235,11 @@ open class ProposalListViewController : UIViewController {
     let contentHeight = scrollView.contentSize.height
           if offsetY > contentHeight - scrollView.frame.size.height {
 
-            print( "new page request original offset \(indexPageRequest)")
             // increments the number of the page to request
             // MAS TODO uncomment to support paged loading
 //            indexPageRequest += 1
-
+            print( "new page request original offset \(indexPageRequest)")
+            
             //request another page ...
 
             // call your API for more data
