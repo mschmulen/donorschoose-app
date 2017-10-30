@@ -1,5 +1,6 @@
 //
 //  TeacherDetailVC.swift
+//
 
 import UIKit
 
@@ -149,7 +150,6 @@ open class TeacherDetailVC: UIViewController {
         super.didReceiveMemoryWarning()
     }
 }
-
 
 extension TeacherDetailVC : TeacherDataAPIDelegate {
     
