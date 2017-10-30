@@ -35,7 +35,6 @@ class ProposalTableViewCell: UITableViewCell {
     let calendar: Calendar = Calendar.current
     let daysFromExpires = (calendar as NSCalendar).components(.day, from: model.expirationDate as Date)
 
-    //calculate the days left
     if let daysLeft = daysFromExpires.day {
       if (daysLeft < 30 ) {
         timeLeftLabel.isHidden = false
@@ -50,15 +49,13 @@ class ProposalTableViewCell: UITableViewCell {
       timeLeftLabel.text = "unknown days left!"
       timeLeftLabel.isHidden = true
     }
-
-    //load the image view
+    
     if let imageURLString = model.thumbImageURL  {
       if let url = URL(string: imageURLString) {
         downloadImage(url)
       }
     }
-
-    // update the percent funded bar
+    
     let percentFloat = CGFloat( CGFloat(model.percentFunded) * 0.01 )
     viewFundingStatusBar.percentComplete = percentFloat
   }
@@ -89,7 +86,6 @@ class ProposalTableViewCell: UITableViewCell {
 
 }
 
-// MARK: - Animation methods
 extension ProposalTableViewCell : AnimatedTableViewCellProtocol {
 
   func startAnimation() {
@@ -101,7 +97,6 @@ extension ProposalTableViewCell : AnimatedTableViewCellProtocol {
 
 }
 
-// Image loading
 extension ProposalTableViewCell {
 
   func downloadImage(_ url: URL){
@@ -110,7 +105,6 @@ extension ProposalTableViewCell {
         guard let data = data , error == nil else {
           return
         }
-        //imageHeaderThumbnail.contentMode = .ScaleAspectFit
         self.imageThumbnail.image = UIImage(data: data)
       }
     }

@@ -126,7 +126,7 @@ public class FavoriteListViewController: UITableViewController {
       }
     }
     else if item is WatchItemSchool {
-      let vc = SchoolDetailViewController(schoolID: item.modelID, schoolName: item.title)
+        let vc = SchoolDetailViewController(schoolID: item.modelID, schoolName: item.title, schoolCity: nil)
       if let nav = self.navigationController {
           nav.pushViewController(vc, animated: true)
       }

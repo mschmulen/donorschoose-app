@@ -11,7 +11,8 @@ open class SchoolDetailViewController: UIViewController {
     let apiConfig = APIConfig()
     let schoolID:String
     let schoolName:String?
-    
+    let schoolCity:String?
+
     var dataAPI:SchoolDataAPIProtocol?
     var statList:[StatType] = [StatType]()
     var backgroundImageURL:URL? = nil
@@ -84,15 +85,16 @@ open class SchoolDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!, schoolID:String , schoolName:String?) {
+    init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!, schoolID:String , schoolName:String? , schoolCity:String?) {
         self.schoolID = schoolID
         self.schoolName = schoolName
+        self.schoolCity = schoolCity
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    public convenience init( schoolID:String , schoolName:String?)
+    public convenience init( schoolID:String , schoolName:String?, schoolCity:String?)
     {
-        self.init(nibName: "SchoolDetailViewController", bundle: Bundle(for: SchoolDetailViewController.self), schoolID:schoolID, schoolName:schoolName )
+        self.init(nibName: "SchoolDetailViewController", bundle: Bundle(for: SchoolDetailViewController.self), schoolID:schoolID, schoolName:schoolName, schoolCity:schoolCity )
     }
     
     override open func viewWillLayoutSubviews()
@@ -111,7 +113,6 @@ open class SchoolDetailViewController: UIViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        
         dataAPI = SchoolDataAPI(config: apiConfig, user: "matt", delegate: self)
         dataAPI?.getSchoolInfo(schoolID)
     }
@@ -119,11 +120,8 @@ open class SchoolDetailViewController: UIViewController {
     override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
 }
 
-
-// MARK: - SchoolDataAPIDelegate
 extension SchoolDetailViewController : SchoolDataAPIDelegate {
     
     public func dataUpdateCallback( _ dataAPI: SchoolDataAPIProtocol, didChangeData data:SchoolDataModel?, error:APIError? ) {
@@ -133,7 +131,6 @@ extension SchoolDetailViewController : SchoolDataAPIDelegate {
                 self.present(alertVC, animated: true, completion: nil)
             }
         }
-        
         
         if let dataModel = data {
             self.model = dataModel
@@ -175,15 +172,14 @@ extension SchoolDetailViewController : UICollectionViewDataSource {
         switch kind {
             
         case UICollectionElementKindSectionHeader:
-            
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SchoolHeaderView.reuseIdentifier, for: indexPath) as! SchoolHeaderView
+            
             if let backgroundImage = self.backgroundImageURL {
                 headerView.loadBackgroundImagePicture(backgroundImage)
             }
             
-            if let name = schoolName {
-                headerView.labelName.text = name
-            }
+            headerView.labelName.text = schoolName ?? ""
+            headerView.labelCity.text = schoolCity ?? ""
             
             return headerView
         case UICollectionElementKindSectionFooter:
@@ -210,9 +206,7 @@ extension SchoolDetailViewController : UICollectionViewDelegateFlowLayout {
                                sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if statList.count <= 0 { return CGSize.zero }
-        
         if let cell = StatViewCell.fromNib() {
-            
             let cellMargins = cell.layoutMargins.left + cell.layoutMargins.right
             cell.configure(name: statList[indexPath.row].Name, value: statList[indexPath.row].Value)
             let width = calculatedCellWidth - cellMargins

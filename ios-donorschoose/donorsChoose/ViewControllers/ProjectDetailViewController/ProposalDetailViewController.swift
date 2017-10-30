@@ -89,18 +89,24 @@ open class ProposalDetailViewController: UIViewController {
     
     @IBAction func actionSchoolInfo(_ sender: AnyObject) {
         
-        if let schoolID = self.model?.extractedSchoolID,
-            let schoolName = self.model?.schoolName
+        guard let schoolID = self.model?.extractedSchoolID,
+            let schoolName = self.model?.schoolName else {
+                return
+        }
+        
+        var schoolLocation:String?
+        if let city = self.model?.city, let state = self.model?.state {
+            schoolLocation = " \(city), \(state) "
+        }
+        
+        if let currentNC = self.navigationController {
+            let vc = SchoolDetailViewController(schoolID: schoolID , schoolName: schoolName, schoolCity:schoolLocation )
+            currentNC.pushViewController(vc, animated: true)
+        }
+        else
         {
-            if let currentNC = self.navigationController {
-                let vc = SchoolDetailViewController(schoolID: schoolID , schoolName: schoolName )
-                currentNC.pushViewController(vc, animated: true)
-            }
-            else
-            {
-                let vc = SchoolDetailViewController(schoolID: schoolID , schoolName: schoolName)
-                self.present(vc, animated: true, completion: nil)
-            }
+            let vc = SchoolDetailViewController(schoolID: schoolID , schoolName: schoolName, schoolCity:schoolLocation)
+            self.present(vc, animated: true, completion: nil)
         }
     }
     

@@ -53,7 +53,7 @@ open class DevViewController: UIViewController {
             vc.navigationController?.pushViewController(detailVC, animated: true)
           }),
           ("School DetailVC", { vc in
-            let detailVC = SchoolDetailViewController(schoolID: "1234", schoolName: "Shool Name")
+            let detailVC = SchoolDetailViewController(schoolID: "1234", schoolName: "Shool Name", schoolCity: "School City")
             vc.navigationController?.pushViewController(detailVC, animated: true)
           })
         ]
