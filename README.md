@@ -11,7 +11,7 @@ Available on iTunes app store! [DonorsChoose Project Finder App](https://itunes.
 ![Tour Four](resources/screenshots/NearMe.png)
 ![Tour Five](resources/screenshots/Favorites.png)
 
-##Features
+## Features
 
 DonorsChoose.org Project finder for Donors Choose donors built by Matt Schmulen to assist champions and supports of [DonorsChoose.org](http://donorsChoose.org).
 
@@ -24,39 +24,43 @@ Making it easy for you to find DonorsChoose.org projects, teachers and schools t
 
 Help a DonorsChoose classroom project in need today and bring their classroom dreams to life !
 
-##Getting Started
+## Getting Started
 
 - get the code: `git clone ` 
 - install dependencies: `cd donorschoose-app/ios-donorschoose/Vendor && carthage update --no-build --no-use-binaries`
 - open the XCode Project form the `donorschoose-app/ios-donorschoose` folder `open donorsChoose.xcworkspace/`
 - build and run from XCode 
 
-##Feedback
+## Feedback
 
 Please give feedback at [iTunes DonorsChoose Project Finder App](https://itunes.apple.com/us/app/donors-choose-project-finder/id1074056163?mt=8) or  [http://github.com/mschmulen/donorsChooseApp](http://github.com/mschmulen/donorsChooseApp)
 
-##Version notes
+## Version notes
 
-####Version 1.11
+#### Version 1.12
+
+- Improvements to School and Teacher detail screen
+
+#### Version 1.11
 
 - Open Source the core DonorsChoose Project finder iOS App! [http://github.com/mschmulen/donorsChooseApp](http://github.com/mschmulen/donorsChooseApp) pull requests and bugs reports are welcome :)
 - Fix for html encoding in project synopsis
 - School detail page
 - General bugs fixes and improvements
 
-####Version 1.10
+#### Version 1.10
 
 - App name changed to DonorsChoose.org Project finder
 - General bugs fixes and improvements
 
-####Version 1.0.1
+#### Version 1.0.1
 
 - Tab view with project listing view controller, network request to api showing keyword search results in a projectTableView
 - Detail view of projects (simple webview)
 - Added pull to refresh of projectTableView
 - Added SearchViewController, to support simple search
 
-##Notes
+## Notes
 
 Donors Choose links:
 
