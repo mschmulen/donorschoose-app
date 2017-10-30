@@ -75,6 +75,8 @@ extension TeacherDataModel: JSONParser {
     
     static func obtainModel(from json: JSONObjectBase) -> TeacherDataModel? {
         
+        print( json )
+        
         // guarenteed, required
         guard let id = json["id"] as? String,
             let name = json["name"] as? String,
