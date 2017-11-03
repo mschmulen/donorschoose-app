@@ -269,7 +269,6 @@ extension SchoolDetailViewController : UICollectionViewDelegateFlowLayout {
 //                }
                 return CGSize(width: self.view.frame.width - 30, height: 100)
         }
-    
     }
     
 }
