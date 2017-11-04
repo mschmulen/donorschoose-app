@@ -13,18 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
     WatchList.registerNotificationSettings( application )
-
-//    let firstRun = true
-//    if firstRun == true {
-//      let vc = IntroWelcomePageViewController()
-//      //      vc.delegate = self
-////      self.show(vc, sender: nil)
-//      window?.rootViewController = vc
-//    }
-//    else {
-      topNav = TopNavViewController(userIDString: "1111", activity: nil)
-      window?.rootViewController = topNav
-//    }
+    
+    topNav = TopNavViewController(userIDString: "1111", activity: nil)
+    window?.rootViewController = topNav
+    
     return true
   }
   

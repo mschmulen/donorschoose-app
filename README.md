@@ -37,6 +37,12 @@ Please give feedback at [iTunes DonorsChoose Project Finder App](https://itunes.
 
 ## Version notes
 
+#### Version 1.13
+
+- School Details now shows projects of the School
+- You can now save Schools to your Favorites so you can easily find projects associated with your favorite school
+- UI updates
+
 #### Version 1.12
 
 - Improvements to School and Teacher detail screen
