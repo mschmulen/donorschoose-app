@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -34,13 +34,21 @@
                                 <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project Finder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7on-PN-bdI">
+                                <rect key="frame" x="116" y="196" width="143" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="xRx-Ba-1ua" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5Zy-GY-qFp"/>
                             <constraint firstItem="2K2-xW-gcK" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="8mL-Mp-aBd"/>
                             <constraint firstItem="2K2-xW-gcK" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="MpJ-rJ-CTX"/>
+                            <constraint firstItem="2K2-xW-gcK" firstAttribute="top" secondItem="7on-PN-bdI" secondAttribute="bottom" constant="66.5" id="ata-a9-zSY"/>
                             <constraint firstItem="xRx-Ba-1ua" firstAttribute="top" secondItem="2K2-xW-gcK" secondAttribute="bottom" constant="25.5" id="fjF-O8-UgN"/>
+                            <constraint firstItem="7on-PN-bdI" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="zaq-ge-xUo"/>
                         </constraints>
                     </view>
                 </viewController>

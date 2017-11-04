@@ -10,8 +10,7 @@ class CardView: UIView {
 
     layer.borderWidth = 1.0
     layer.borderColor = UIColor.lightGray.cgColor
-
-    //Shadow
+    
     clipsToBounds = false
     layer.masksToBounds = false;
 

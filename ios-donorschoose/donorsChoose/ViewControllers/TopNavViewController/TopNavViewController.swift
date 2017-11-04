@@ -32,7 +32,7 @@ open class TopNavViewController: UITabBarController {
     }
     
     open static func showAuthChallenge(_ parentVC:UIViewController) {
-        
+        // MAS TODO , auth challenge if needed , to support authentication
     }
     
     open func authUser() {
@@ -53,7 +53,6 @@ open class TopNavViewController: UITabBarController {
         // MAS TODO , support first run and show intro experience here
     }
     
-    // MARK: – init
     required public init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
