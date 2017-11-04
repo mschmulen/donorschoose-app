@@ -1180,7 +1180,7 @@
 				TargetAttributes = {
 					C91741E11EF8561C00C5AB30 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = BMKEG7AHZS;
+						DevelopmentTeam = GVE69PZWG4;
 						ProvisioningStyle = Automatic;
 					};
 					C91741F51EF8561D00C5AB30 = {
@@ -1941,7 +1941,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = BMKEG7AHZS;
+				DEVELOPMENT_TEAM = GVE69PZWG4;
 				INFOPLIST_FILE = donorsChoose/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1957,7 +1957,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = BMKEG7AHZS;
+				DEVELOPMENT_TEAM = GVE69PZWG4;
 				INFOPLIST_FILE = donorsChoose/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

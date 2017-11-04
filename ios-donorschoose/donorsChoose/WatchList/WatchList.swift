@@ -75,43 +75,46 @@ public class WatchList {
   func addItem(_ item: WatchItemProtocol, intrestType: WatchItemEventSourceType) {
 
     // first check and see if the item already eists
-    if doesExistInItemDictionary( item ) == true {
-      return
-    }
+    if doesExistInItemDictionary( item ) == true { return }
 
     // persist a representation of this todo item in NSUserDefaults
     var itemDictionary = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) ?? Dictionary() // if todoItems hasn't been set in user defaults, initialize todoDictionary to an empty dictionary using nil-coalescing operator (??)
 
     // store NSData representation of todo item in dictionary with UUID as key
       // MAS TODO Handle deadline if item
-      if let insertItem = item as? WatchItemProposal {
-          if let insertItemDeadline = insertItem.deadline {
-              itemDictionary[item.UUID] = [
-                  "type":WatchItemType.PROPOSAL.rawValue,
-                  "title": insertItem.title,
-                  "modelID": insertItem.modelID,
-                  "UUID": insertItem.UUID,
-                  "deadline":insertItemDeadline
-              ]
-          }
-      }
-      else if let insertItem = item as? WatchItemTeacher{
-          itemDictionary[item.UUID] = [
-              "type":WatchItemType.TEACHER.rawValue,"title": insertItem.title, "modelID": insertItem.modelID, "UUID": insertItem.UUID
-          ]
-      }
-      else if let insertItem = item as? WatchItemSchool {
-          itemDictionary[item.UUID] = [
-              "type": WatchItemType.SCHOOL.rawValue,"title": insertItem.title, "modelID": insertItem.modelID, "UUID": insertItem.UUID
-          ]
-      }
-      else if let insertItem = item as? WatchItemCustomSearch {
-          itemDictionary[item.UUID] = ["type": WatchItemType.CUSTOM_SEARCH.rawValue,"title": insertItem.title, "modelID": insertItem.modelID, "UUID": insertItem.UUID , "searchString": insertItem.searchString ]
-      }
-      else {
-          // MAS TOOD Support custom search
-//          log( "un supported type")
-      }
+    switch (item.type) {
+    case .CUSTOM_SEARCH:
+        if let insertItem = item as? WatchItemCustomSearch {
+            itemDictionary[item.UUID] = ["type": WatchItemType.CUSTOM_SEARCH.rawValue,"title": insertItem.title, "modelID": insertItem.modelID, "UUID": insertItem.UUID , "searchString": insertItem.searchString ]
+        }
+    case .PROPOSAL:
+        if let insertItem = item as? WatchItemProposal {
+            if let insertItemDeadline = insertItem.deadline {
+                itemDictionary[item.UUID] = [
+                    "type":WatchItemType.PROPOSAL.rawValue,
+                    "title": insertItem.title,
+                    "modelID": insertItem.modelID,
+                    "UUID": insertItem.UUID,
+                    "deadline":insertItemDeadline
+                ]
+            }
+        }
+    case .SCHOOL:
+        if let insertItem = item as? WatchItemSchool {
+            itemDictionary[item.UUID] = [
+                "type": WatchItemType.SCHOOL.rawValue,"title": insertItem.title, "modelID": insertItem.modelID, "UUID": insertItem.UUID
+            ]
+        }
+    case .TEACHER:
+        if let insertItem = item as? WatchItemTeacher{
+            itemDictionary[item.UUID] = [
+                "type":WatchItemType.TEACHER.rawValue,"title": insertItem.title, "modelID": insertItem.modelID, "UUID": insertItem.UUID
+            ]
+        }
+    case .UNKNOWN:
+        print( "unsupported watch type")
+        break;
+    }
     UserDefaults.standard.set(itemDictionary, forKey: ITEMS_KEY)
   }
 
@@ -181,23 +184,27 @@ public class WatchList {
 //    }
     return false
   }
-
-  // MAS TODO pass the struct not the string ...
-  func doesExistInItemDictionary( _ modelIDString:String ) -> Bool {
-//    if let itemDictionary = UserDefaults.standard.dictionary(forKey: ITEMS_KEY)  {
-//      for (_, value) in itemDictionary {
-//        // MAS TODO compare first by type
-////              if let mID = value["modelID"] as? String {
-////               if mID == modelIDString {
-////                return true
-////               }
-////              }
-//      }
-//    }
+    
+    func doesExistInItemDictionary( _ modelIDString:String , type:WatchItemType) -> Bool {
+    
+    if let itemDictionary = UserDefaults.standard.dictionary(forKey: ITEMS_KEY)  {
+      for (_, value) in itemDictionary {
+        if let watchItemValue = value as? [String:Any] {
+            print( "watchItemValue:\(watchItemValue)")
+            // MAS TODO compare by type first
+            if let mID = watchItemValue["modelID"] as? String {
+                if mID == modelIDString {
+                    return true
+                }
+            }
+        }
+      }
+    }
     return false
   }
-
+    
   func removeWatchItemByModelID( _ modelIDString:String ) {
+    print( "MAS TODO removeWatchItemByModelID ")
     // MAS TODO Remove WatchItem By Model ID
 //        if let itemDictionary = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) {
 //            for (_, value) in itemDictionary {
@@ -218,92 +225,48 @@ public class WatchList {
 //            }
 //        }
     }
+
+    // MAS TODO, use a generic with a protocol for the GUID
+    //Proposal
+    class func addToWatchList( _ model:ProposalDataModel) {
+        let itemModel = WatchItemProposal(title: model.title, modelID:  model.id,  UUID: UUID().uuidString, deadline:model.expirationDate)
+        WatchList.sharedInstance.addItem(itemModel, intrestType: WatchItemEventSourceType.watchlist_ADD)
+    }
     
-    /*
-     func addNotificationForWatchItem(item: WatchItemProtocol) {
-     
-     // create a corresponding local notification
-     let notification = UILocalNotification()
-     notification.alertBody = "DonorsChoose \"\(item.title)\" has Ended" // text that will be displayed in the notification
-     notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
-     
-     let shortTime = NSDate().dateByAddingTimeInterval(10)
-     
-     //NSDate *correctDate = [NSDate dateWithTimeInterval:1.0 sinceDate:yourDate]
-     
-     //when notification will be fired
-     // notification.fireDate = item.deadline
-     notification.fireDate = shortTime
-     
-     //notification.soundName = UILocalNotificationDefaultSoundName // play default sound
-     
-     // assign a unique identifier to the notification so that we can retrieve it later
-     notification.userInfo = ["title": item.title, "modelID": item.modelID, "UUID": item.UUID]
-     
-     UIApplication.sharedApplication().scheduleLocalNotification(notification)
-     }
-     */
+    class func removeFromWatchList( _ model:ProposalDataModel) {
+        WatchList.sharedInstance.removeWatchItemByModelID(model.id)
+    }
     
-    /*
-    func doesNotificationExistByModelID( modelID:String ) -> Bool {
-   
-      let scheduledNotifications: [UILocalNotification]? = UIApplication.sharedApplication().scheduledLocalNotifications
-        
-        // loop through notifications ...
-        for notification in scheduledNotifications! {
-            if (notification.userInfo!["modelID"] as! String == modelID) {
-                return true
-            }
-        }
-        
-        return false
-    }//end doesExistByModelID
-    */
-
-
-  // MAS TODO, use a generic with a protocol for the GUID
-
-  //Proposal
-  class func addToWatchList( _ model:ProposalDataModel) {
-    let itemModel = WatchItemProposal(title: model.title, modelID:  model.id,  UUID: UUID().uuidString, deadline:model.expirationDate)
-    WatchList.sharedInstance.addItem(itemModel, intrestType: WatchItemEventSourceType.watchlist_ADD)
-  }
-
-  class func removeFromWatchList( _ model:ProposalDataModel) {
-    WatchList.sharedInstance.removeWatchItemByModelID(model.id)
-  }
-
-  class func doesWatchListItemExist( _ model:ProposalDataModel ) -> Bool {
-    return WatchList.sharedInstance.doesExistInItemDictionary(model.id)
-  }
-
-  // Teacher
-  class func addToWatchList( _ model:TeacherDataModel) {
-    let itemModel = WatchItemTeacher(title: model.name, modelID:  model.id,  UUID: UUID().uuidString)
-    WatchList.sharedInstance.addItem(itemModel, intrestType: WatchItemEventSourceType.watchlist_ADD)
-  }
-
-  class func removeFromWatchList( _ model:TeacherDataModel) {
-    WatchList.sharedInstance.removeWatchItemByModelID(model.id)
-  }
-
-  class func doesWatchListItemExist( _ model:TeacherDataModel ) -> Bool {
-    return WatchList.sharedInstance.doesExistInItemDictionary(model.id)
-  }
-
-  // School
-  class func addToWatchList( _ model:SchoolDataModel) {
-    let itemModel = WatchItemSchool(title: model.name, modelID:  model.id,  UUID: UUID().uuidString)
-    WatchList.sharedInstance.addItem(itemModel, intrestType: WatchItemEventSourceType.watchlist_ADD)
-  }
-
-  class func removeFromWatchList( _ model:SchoolDataModel) {
-    WatchList.sharedInstance.removeWatchItemByModelID(model.id)
-  }
-
-  class func doesWatchListItemExist( _ model:SchoolDataModel ) -> Bool {
-    return WatchList.sharedInstance.doesExistInItemDictionary(model.id)
-  }
+    class func doesWatchListItemExist( _ model:ProposalDataModel ) -> Bool {
+        return WatchList.sharedInstance.doesExistInItemDictionary(model.id, type: .PROPOSAL)
+    }
+    
+    // Teacher
+    class func addToWatchList( _ model:TeacherDataModel) {
+        let itemModel = WatchItemTeacher(title: model.name, modelID:  model.id,  UUID: UUID().uuidString)
+        WatchList.sharedInstance.addItem(itemModel, intrestType: WatchItemEventSourceType.watchlist_ADD)
+    }
+    
+    class func removeFromWatchList( _ model:TeacherDataModel) {
+        WatchList.sharedInstance.removeWatchItemByModelID(model.id)
+    }
+    
+    class func doesWatchListItemExist( _ model:TeacherDataModel ) -> Bool {
+        return WatchList.sharedInstance.doesExistInItemDictionary(model.id, type: .TEACHER)
+    }
+    
+    class func addToWatchList( _ model:SchoolDataModel) {
+        let itemModel = WatchItemSchool(title: model.name, modelID:  model.id,  UUID: UUID().uuidString)
+        WatchList.sharedInstance.addItem(itemModel, intrestType: WatchItemEventSourceType.watchlist_ADD)
+    }
+    
+    class func removeFromWatchList( _ model:SchoolDataModel) {
+        WatchList.sharedInstance.removeWatchItemByModelID(model.id)
+    }
+    
+    class func doesWatchListItemExist( _ model:SchoolDataModel ) -> Bool {
+        return WatchList.sharedInstance.doesExistInItemDictionary(model.id, type:.SCHOOL)
+    }
 
   // CustomSearch , MAS TODO
   class func addToWatchList( _ model:SearchDataModel) {

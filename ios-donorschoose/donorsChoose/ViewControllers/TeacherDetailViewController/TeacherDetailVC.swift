@@ -80,7 +80,7 @@ open class TeacherDetailVC: UIViewController {
         if let model = self.model {
             let optionMenu = UIAlertController(title: nil, message: "Favorite this Teacher", preferredStyle: .actionSheet)
             var watchAction: UIAlertAction? = nil
-            let doesExist =  WatchList.sharedInstance.doesExistInItemDictionary(model.id)
+            let doesExist =  WatchList.sharedInstance.doesExistInItemDictionary(model.id , type: .TEACHER)
             if doesExist == true {
                 watchAction = UIAlertAction(title: "Remove From My Favorites", style: .default, handler: {
                     (alert:UIAlertAction!) -> Void in

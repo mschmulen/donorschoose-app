@@ -170,12 +170,7 @@ extension FavoriteListViewController {
     let title = "Favorites"
     let vm = FavoriteListViewModel()
     let vc = FavoriteListViewController(user:user, apiConfig:apiConfig)
-
-//    vc.observe(vm.viewData)
-//    vc.updateSearch = { searchString in
-//      vm.fetchProducts(searchString: searchString)
-//    }
-
+    
     vc.selectFavorite = { id in
       vm.selectFavorite(id:id)
     }
@@ -186,7 +181,7 @@ extension FavoriteListViewController {
 
     let nvc = UINavigationController(rootViewController: vc)
     nvc.tabBarItem = UITabBarItem(title: title, image: nil, tag:4)
-    nvc.tabBarItem.setFAIcon(FAType.faShoppingCart)
+    nvc.tabBarItem.setFAIcon(FAType.faHeart)
     vc.title = title
     return nvc
   }

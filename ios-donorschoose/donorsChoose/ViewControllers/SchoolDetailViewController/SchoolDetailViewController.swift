@@ -136,6 +136,9 @@ open class SchoolDetailViewController: UIViewController {
         super.viewDidLoad()
         dataAPI = SchoolDataAPI(config: apiConfig, user: "matt", delegate: self)
         dataAPI?.getSchoolInfo(schoolID)
+        
+        let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(SchoolDetailViewController.actionShare(_:)))
+        self.navigationItem.rightBarButtonItem = buttonShare
     }
     
     override open func didReceiveMemoryWarning() {
