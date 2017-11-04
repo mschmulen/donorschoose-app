@@ -2,35 +2,33 @@
 
 import Foundation
 
-// https://data.donorschoose.org/docs/teacher-pages/
-
 public protocol TeacherDataAPIDelegate {
-  func dataUpdateCallback( _ dataAPI: TeacherDataAPIProtocol, didChangeData data:TeacherDataModel?, error:APIError? )
+    func dataUpdateCallback( _ dataAPI: TeacherDataAPIProtocol, didChangeData data:TeacherDataModel?, error:APIError? )
 }
 
 public protocol TeacherDataAPIProtocol {
-  init(apiConfig:APIConfig, user:String, delegate: TeacherDataAPIDelegate?)
-  func getCallbackDelegate() ->  TeacherDataAPIDelegate?
-  
-  func getTeacherInfo(_ teacherID:String)
+    init(apiConfig:APIConfig, user:String, delegate: TeacherDataAPIDelegate?)
+    func getCallbackDelegate() ->  TeacherDataAPIDelegate?
+    
+    func getTeacherInfo(_ teacherID:String)
 }
 
 open class TeacherDataAPI : TeacherDataAPIProtocol
 {
-  fileprivate let apiConfig:APIConfig
-  fileprivate var callbackDelegate: TeacherDataAPIDelegate?
-
-  public required init(apiConfig:APIConfig, user:String, delegate: TeacherDataAPIDelegate?)
-  {
-    self.apiConfig = apiConfig
-    self.callbackDelegate = delegate
-  }
-  
-  open func getCallbackDelegate() -> TeacherDataAPIDelegate?
-  {
-    return callbackDelegate
-  }
-
+    fileprivate let apiConfig:APIConfig
+    fileprivate var callbackDelegate: TeacherDataAPIDelegate?
+    
+    public required init(apiConfig:APIConfig, user:String, delegate: TeacherDataAPIDelegate?)
+    {
+        self.apiConfig = apiConfig
+        self.callbackDelegate = delegate
+    }
+    
+    open func getCallbackDelegate() -> TeacherDataAPIDelegate?
+    {
+        return callbackDelegate
+    }
+    
     open func getTeacherInfo(_ teacherID:String)
     {
         let endpoint = "http://api.donorschoose.org/common/json-teacher.html?teacher=\(teacherID)&APIKey=\(apiConfig.API_KEY)"

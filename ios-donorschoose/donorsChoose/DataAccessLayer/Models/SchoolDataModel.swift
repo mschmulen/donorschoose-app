@@ -1,26 +1,17 @@
+//
 // SchoolDataModel.swift
+//
 
 import Foundation
 
-// https://data.donorschoose.org/docs/school-pages/
-
 public struct SchoolDataModel {
-    //imutable always provided
     let id: String
     let name: String
     let schoolURL: String
-    //let gradeType: Object
-    // gradeType[id]
-    // gradeType[name]
     let povertyLevel:String
     let city:String
     let zip:String
     let state:String
-    // latitude
-    // longitude
-    // zone:object
-    //zone[id]
-    //zone[name]
     let totalProposals:String
     
     let proposals:[ProposalDataModel]
@@ -55,8 +46,6 @@ extension SchoolDataModel: JSONParser {
     
     static func obtainModel(from json: JSONObjectBase) -> SchoolDataModel? {
         
-        print( json )
-        
         guard let id = json["id"] as? String,
             let name = json["name"] as? String,
             let schoolURL = json["schoolURL"] as? String,
@@ -73,7 +62,7 @@ extension SchoolDataModel: JSONParser {
         if let proposalList = json["proposals"] as? [AnyObject] {
             for proposal in proposalList {
                 if let m = ProposalDataModel.obtainModel(from: proposal) {
-                     proposals.append( m )
+                    proposals.append( m )
                 }
             }
         }

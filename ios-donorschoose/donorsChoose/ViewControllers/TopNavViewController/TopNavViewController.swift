@@ -66,8 +66,7 @@ open class TopNavViewController: UITabBarController {
   public convenience init( userIDString:String, activity:NSUserActivity? )
   {
     self.init(nibName: nil, bundle: nil, userIDString:userIDString , activity:activity )
-
-    //load the current user
+    
     let user = UserDataModel()
 
     let nvcSplash = SplashViewController.factoryNav()

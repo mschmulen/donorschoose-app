@@ -8,9 +8,7 @@ public protocol Identifiable: Hashable {
 }
 
 extension Identifiable {
-  public var hashValue: Int {
-    return id.hashValue
-  }
+  public var hashValue: Int { return id.hashValue }
 }
 
 public struct Model: Identifiable {

@@ -5,7 +5,7 @@ import MessageUI
 extension ProposalDetailViewController : MFMailComposeViewControllerDelegate {
 
   public func mailComposeController(_ controller:MFMailComposeViewController, didFinishWith result:MFMailComposeResult, error:Error?) {
-    // MAS TODO hanlde error cases
+    // MAS TODO hanlde error cases in Mail
     switch result {
     case MFMailComposeResult.cancelled:
         print("Mail cancelled")

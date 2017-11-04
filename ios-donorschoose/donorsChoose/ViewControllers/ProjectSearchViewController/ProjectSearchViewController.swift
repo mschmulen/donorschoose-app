@@ -1,4 +1,6 @@
+//
 // ProjectSearchViewController.swift
+//
 
 import UIKit
 
@@ -14,7 +16,6 @@ open class ProjectSearchViewController: UIViewController {
 
   @IBAction func actionSaveSearch(_ sender: AnyObject) {
 
-    //create a new searchModelObject and pass it back to the calling delegate
     if let newSearchString = textFieldSearchTopics.text {
       self.currentSearchModel.keywords = newSearchString
       var newSearchStruct = SearchDataModel( type: .keyword, keywordString:newSearchString )

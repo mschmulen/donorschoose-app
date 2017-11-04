@@ -2,8 +2,6 @@
 
 import Foundation
 
-// https://data.donorschoose.org/docs/school-pages/
-
 public protocol SchoolDataAPIDelegate {
     func dataUpdateCallback( _ dataAPI: SchoolDataAPIProtocol, didChangeData data:SchoolDataModel?, error:APIError? )
 }
@@ -49,7 +47,7 @@ open class SchoolDataAPI : SchoolDataAPIProtocol
                     let data = data
                     else {
                         self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.notify_USER_GENERIC_NETWORK)
-                    return
+                        return
                 }
                 
                 do {

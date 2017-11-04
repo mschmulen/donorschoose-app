@@ -1,6 +1,6 @@
-
+//
 //  UserDataModel.swift
-
+//
 import Foundation
 
 extension DefaultsKeys {
@@ -18,12 +18,10 @@ open class UserDataModel {
   
   open var customSearchModel: SearchDataModel {
       didSet {
-          //save it to the plistFile
           customSearchModel.save(customSearchModelPListName)
       }
   }
   
-  // UserDefaults Getters/Setters
   open var didShowIntro: Bool {
       get { return Defaults[.didShowIntro] }
       set { Defaults[.didShowIntro] = newValue }
@@ -39,7 +37,7 @@ open class UserDataModel {
       set { Defaults[.didShowInNeedIntro] = newValue }
   }
 
-  // MAS TODO 
+    // MAS TODO
     /*
     func loadSearchDataModel(completionBlock: (SearchDataModel?, NSError?) -> Void) {
         
@@ -69,8 +67,6 @@ open class UserDataModel {
             */
             completionBlock(self, error)
         })
-
-        
     }
 
     */

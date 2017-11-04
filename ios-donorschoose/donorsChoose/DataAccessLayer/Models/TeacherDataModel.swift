@@ -1,5 +1,6 @@
+//
 // TeacherDataModel.swift
-
+//
 import Foundation
 
 public struct TeacherDataModel {
@@ -21,7 +22,6 @@ public struct TeacherDataModel {
     let teacherChallengeId:String?
     let totalFundedProposals:String?
     
-    // getter is public while the setter is private ... I specify that only the setter is private!
     public fileprivate(set) var myRefcount: Int
     
     init( id:String,
@@ -62,22 +62,13 @@ public struct TeacherDataModel {
         myRefcount = 0
     }
     
-    // I only want the `count` to be modified
-    // via functions like these
-    mutating func increment() {
-        myRefcount += 1
-    }
-    
+    mutating func increment() { myRefcount += 1 }
 }
 
-// Conforming to the new protocol
 extension TeacherDataModel: JSONParser {
     
     static func obtainModel(from json: JSONObjectBase) -> TeacherDataModel? {
         
-        print( json )
-        
-        // guarenteed, required
         guard let id = json["id"] as? String,
             let name = json["name"] as? String,
             let profileURL = json["profileURL"] as? String,

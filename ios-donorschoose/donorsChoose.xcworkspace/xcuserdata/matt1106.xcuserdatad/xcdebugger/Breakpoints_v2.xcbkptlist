@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "donorsChoose/ViewControllers/FavoriteListViewController/FavoriteListViewController.swift"
-            timestampString = "531449488.410423"
+            timestampString = "531450170.77449"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "129"
@@ -25,44 +25,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "donorsChoose/DataAccessLayer/Models/TeacherDataModel.swift"
-            timestampString = "531098219.106221"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "obtainModel(from:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "donorsChoose/DataAccessLayer/Models/ProposalDataModel.swift"
-            timestampString = "531096157.913918"
+            timestampString = "531450170.774558"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
-            landmarkName = "obtainModel(from:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "donorsChoose/DataAccessLayer/Models/SchoolDataModel.swift"
-            timestampString = "531098219.106316"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
             landmarkName = "obtainModel(from:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "donorsChoose/ViewControllers/SchoolDetailViewController/SchoolDetailViewController.swift"
-            timestampString = "531449488.410603"
+            timestampString = "531450170.774607"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "168"
@@ -90,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "donorsChoose/ViewControllers/SchoolDetailViewController/SchoolDetailViewController.swift"
-            timestampString = "531449488.410664"
+            timestampString = "531450170.774659"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "283"
@@ -106,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "donorsChoose/WatchList/WatchList.swift"
-            timestampString = "531449488.410725"
+            timestampString = "531450170.774712"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "118"
@@ -122,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "donorsChoose/WatchList/WatchList.swift"
-            timestampString = "531449488.410781"
+            timestampString = "531450170.774765"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "103"
@@ -134,11 +102,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "donorsChoose/WatchList/WatchList.swift"
-            timestampString = "531449488.41083"
+            timestampString = "531450170.774813"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "91"
@@ -154,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "donorsChoose/WatchList/WatchList.swift"
-            timestampString = "531449488.410879"
+            timestampString = "531450170.77486"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "259"
@@ -170,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "donorsChoose/ViewControllers/SchoolDetailViewController/SchoolDetailViewController.swift"
-            timestampString = "531449488.410927"
+            timestampString = "531450170.774906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "77"
@@ -186,12 +154,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "donorsChoose/WatchList/WatchList.swift"
-            timestampString = "531449488.410971"
+            timestampString = "531450170.774947"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
-            landmarkName = "doesExistInItemDictionary(_:)"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "removeWatchItemByModelID(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -201,13 +169,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "donorsChoose/WatchList/WatchList.swift"
-            timestampString = "531449488.411015"
+            filePath = "donorsChoose/DataAccessLayer/NetworkAccessLayer/NetworkUtils.swift"
+            timestampString = "531450170.774995"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
-            landmarkName = "removeWatchItemByModelID(_:)"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
