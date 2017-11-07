@@ -39,6 +39,9 @@ Please give feedback at [iTunes DonorsChoose Project Finder App](https://itunes.
 
 #### Version (next)
 
+- iPhone X support
+
+
 #### Version 1.13
 
 - School Details now shows projects of the School
