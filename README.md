@@ -31,6 +31,13 @@ Help a DonorsChoose classroom project in need today and bring their classroom dr
 - open the XCode Project form the `donorschoose-app/ios-donorschoose` folder `open donorsChoose.xcworkspace/`
 - build and run from XCode 
 
+
+## Automation
+
+Screenshots
+
+`fastlane snapshot`
+
 ## Feedback
 
 Please give feedback at [iTunes DonorsChoose Project Finder App](https://itunes.apple.com/us/app/donors-choose-project-finder/id1074056163?mt=8) or  [http://github.com/mschmulen/donorsChooseApp](http://github.com/mschmulen/donorsChooseApp)

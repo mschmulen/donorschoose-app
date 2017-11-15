@@ -90,38 +90,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "donorsChoose/WatchList/WatchList.swift"
-            timestampString = "531450623.651268"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "addItem(_:intrestType:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "donorsChoose/WatchList/WatchList.swift"
-            timestampString = "531450623.651319"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "addItem(_:intrestType:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "donorsChoose/WatchList/WatchList.swift"
             timestampString = "531450623.651368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"

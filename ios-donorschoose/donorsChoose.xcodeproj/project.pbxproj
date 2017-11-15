@@ -11,6 +11,8 @@
 		107311361FA7E4A3002D9D8D /* ProposalViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 107311341FA7E4A3002D9D8D /* ProposalViewCell.xib */; };
 		1073115A1FA7E9AE002D9D8D /* SchoolDetailProposalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107311581FA7E9AE002D9D8D /* SchoolDetailProposalHeaderView.swift */; };
 		1073115B1FA7E9AE002D9D8D /* SchoolDetailProposalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 107311591FA7E9AE002D9D8D /* SchoolDetailProposalHeaderView.xib */; };
+		10C5F8971FB383A700BCD796 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C5F8751FB383A700BCD796 /* SnapshotHelper.swift */; };
+		10C5F8CE1FB38FEF00BCD796 /* apiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10C5F8AC1FB38FEF00BCD796 /* apiKeys.plist */; };
 		2CA4D48F836B0C14E08FA7A9 /* Pods_donorsChooseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EDAA7C66BDE1B61B600AA65 /* Pods_donorsChooseTests.framework */; };
 		313C58C2A2F321E7BC531BA6 /* Pods_donorsChoose.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC50CC84EE7ACF10DF42466 /* Pods_donorsChoose.framework */; };
 		46C747E7EF9EB693CF5E5354 /* Pods_donorsChooseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B68847E19FD1205F6E6FD876 /* Pods_donorsChooseUITests.framework */; };
@@ -425,6 +427,8 @@
 		107311341FA7E4A3002D9D8D /* ProposalViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProposalViewCell.xib; sourceTree = "<group>"; };
 		107311581FA7E9AE002D9D8D /* SchoolDetailProposalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDetailProposalHeaderView.swift; sourceTree = "<group>"; };
 		107311591FA7E9AE002D9D8D /* SchoolDetailProposalHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SchoolDetailProposalHeaderView.xib; sourceTree = "<group>"; };
+		10C5F8751FB383A700BCD796 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
+		10C5F8AC1FB38FEF00BCD796 /* apiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = apiKeys.plist; sourceTree = "<group>"; };
 		4FC50CC84EE7ACF10DF42466 /* Pods_donorsChoose.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_donorsChoose.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EDAA7C66BDE1B61B600AA65 /* Pods_donorsChooseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_donorsChooseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		68E2C8EFA5709A9FEFC5BCB5 /* Pods-donorsChoose.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-donorsChoose.release.xcconfig"; path = "Pods/Target Support Files/Pods-donorsChoose/Pods-donorsChoose.release.xcconfig"; sourceTree = "<group>"; };
@@ -671,6 +675,8 @@
 			isa = PBXGroup;
 			children = (
 				C91742051EF8561D00C5AB30 /* donorsChooseUITests.swift */,
+				10C5F8AC1FB38FEF00BCD796 /* apiKeys.plist */,
+				10C5F8751FB383A700BCD796 /* SnapshotHelper.swift */,
 				C91742071EF8561D00C5AB30 /* Info.plist */,
 			);
 			path = donorsChooseUITests;
@@ -1180,8 +1186,8 @@
 				TargetAttributes = {
 					C91741E11EF8561C00C5AB30 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = BMKEG7AHZS;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = GVE69PZWG4;
+						ProvisioningStyle = Automatic;
 					};
 					C91741F51EF8561D00C5AB30 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -1542,6 +1548,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10C5F8CE1FB38FEF00BCD796 /* apiKeys.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1787,6 +1794,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C91742061EF8561D00C5AB30 /* donorsChooseUITests.swift in Sources */,
+				10C5F8971FB383A700BCD796 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1941,16 +1949,16 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = BMKEG7AHZS;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GVE69PZWG4;
 				INFOPLIST_FILE = donorsChoose/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jumptack.donorsChoose;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3fd33281-e3fe-4c0e-9b07-f8c3321d9430";
-				PROVISIONING_PROFILE_SPECIFIER = "donorsChoose App Distribution A";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1961,16 +1969,16 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = BMKEG7AHZS;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GVE69PZWG4;
 				INFOPLIST_FILE = donorsChoose/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jumptack.donorsChoose;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3fd33281-e3fe-4c0e-9b07-f8c3321d9430";
-				PROVISIONING_PROFILE_SPECIFIER = "donorsChoose App Distribution A";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
