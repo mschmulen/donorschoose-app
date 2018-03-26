@@ -2,6 +2,8 @@
 
 import UIKit
 import MessageUI
+import Firebase
+import Crashlytics
 
 public enum ShareActionType {
     case email
@@ -60,8 +62,15 @@ open class ProposalDetailViewController: UIViewController {
     }
     
     @IBAction func actionGive(_ sender: AnyObject) {
+        
         if let model = self.model {
             let giveURL = model.proposalURL
+        // MAS TODO
+//            Analytics.logEvent("give", parameters: [
+//                "proposal-id": model.id as NSObject,
+//                "url": giveURL as NSObject
+//                ])
+            
             if let url:URL = URL(string: giveURL) {
                 UIApplication.shared.openURL(url)
             }
@@ -159,6 +168,11 @@ open class ProposalDetailViewController: UIViewController {
             
             let emailAction = UIAlertAction(title: "Email", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
+        // MAS TODO
+//                Analytics.logEvent(AnalyticsEventShare, parameters: [
+//                    AnalyticsParameterItemID: "id-\(model.id)" as NSObject,
+//                    AnalyticsParameterContentType: "proposal" as NSObject
+//                    ])
                 
                 let emailTitle = "Checkout this great school project!"
                 var messageBodyText = ""
@@ -184,13 +198,24 @@ open class ProposalDetailViewController: UIViewController {
             
             let webAction = UIAlertAction(title: "Web", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
+        // MAS TODO
+//                Analytics.logEvent(AnalyticsEventShare, parameters: [
+//                    AnalyticsParameterItemID: "id-\(model.id)" as NSObject,
+//                    AnalyticsParameterContentType: "proposal" as NSObject
+//                    ])
+
                 
                 UIApplication.shared.openURL(url)
             })
             
             let copyAction = UIAlertAction(title: "Copy URL", style: .default, handler: {
                 (alert:UIAlertAction!) -> Void in
-                //Analytics.eventShare( ShareActionType.copy_URL )
+        // MAS TODO
+//                Analytics.logEvent(AnalyticsEventShare, parameters: [
+//                    AnalyticsParameterItemID: "id-\(model.id)" as NSObject,
+//                    AnalyticsParameterContentType: "proposal" as NSObject
+//                    ])
+                
                 UIPasteboard.general.string = url.absoluteString
             })
             
@@ -203,6 +228,12 @@ open class ProposalDetailViewController: UIViewController {
                 })
             }
             else {
+        // MAS TODO
+//                Analytics.logEvent(AnalyticsEventShare, parameters: [
+//                    AnalyticsParameterItemID: "id-\(model.id)" as NSObject,
+//                    AnalyticsParameterContentType: "proposal" as NSObject
+//                    ])
+                
                 watchAction = UIAlertAction(title: "Add To My Favorites", style: .default, handler: {
                     (alert:UIAlertAction!) -> Void in
                     WatchList.addToWatchList(model)
@@ -211,7 +242,6 @@ open class ProposalDetailViewController: UIViewController {
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
                 (alert: UIAlertAction!) -> Void in
-                //Analytics.eventShare( ShareActionType.cancel )
             })
             
             optionMenu.addAction(emailAction)
@@ -271,6 +301,14 @@ open class ProposalDetailViewController: UIViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
+        // MAS TODO
+//        if let itemID = model?.id , let itemName = model?.proposalURL {
+//            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+//                AnalyticsParameterItemID: "id-\(itemID)" as NSObject,
+//                AnalyticsParameterItemName: itemName as NSObject,
+//                AnalyticsParameterContentType: "proposal" as NSObject
+//                ])
+//        }
         
         dataAPI = ProposalDataAPI(config: apiConfig,user: "matt", delegate: self)
         
@@ -279,6 +317,16 @@ open class ProposalDetailViewController: UIViewController {
         
         confgureUI()
         
+        
+        if let model = self.model {
+            
+            Answers.logContentView(withName: "Proposal", contentType: "ProposalDetail", contentId: model.id, customAttributes: [
+                "TeacherID":model.teacherID,
+                "costToComplete":model.costToComplete,
+                "totalPrice":model.totalPrice,
+                "Screen Orientation":"Landscape"
+                ])
+        }
         if let proposalIDFromModel = self.model?.id {
             self.proposalID = proposalIDFromModel
         }

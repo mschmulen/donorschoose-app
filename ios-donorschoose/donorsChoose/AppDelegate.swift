@@ -3,6 +3,9 @@
 //
 
 import UIKit
+import Firebase
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -11,6 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var topNav: TopNavViewController? = nil
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    
+    Fabric.with([Crashlytics.self])
+    Fabric.with([Answers.self])
+    
+    FirebaseApp.configure()
 
     WatchList.registerNotificationSettings( application )
     

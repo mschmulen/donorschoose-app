@@ -3,6 +3,8 @@
 //
 
 import UIKit
+//import Firebase
+import Crashlytics
 
 open class TeacherDetailVC: UIViewController {
     
@@ -139,11 +141,24 @@ open class TeacherDetailVC: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         
+                // MAS TODO
+//        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+//            AnalyticsParameterItemID: "id-\(teacherID)" as NSObject,
+//            AnalyticsParameterItemName: teacherName as NSObject,
+//            AnalyticsParameterContentType: "teacher" as NSObject
+//            ])
+        
         let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(TeacherDetailVC.actionShare(_:)))
         self.navigationItem.rightBarButtonItem = buttonShare
         
         dataAPI = TeacherDataAPI(apiConfig: apiConfig, user: "matt", delegate: self)
         dataAPI?.getTeacherInfo(teacherID)
+        
+        Answers.logContentView(withName: "Teacher", contentType: "TeacherDetail", contentId: teacherID, customAttributes: [
+            "teacherID":teacherID,
+            "Screen Orientation":"Landscape"
+            ])
+        
     }
     
     override open func didReceiveMemoryWarning() {
