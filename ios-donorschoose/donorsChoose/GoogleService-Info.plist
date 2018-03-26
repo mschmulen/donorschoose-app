@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>659034013656-pbd8u244i08inek1mjfaclt3rqk0cttv.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.659034013656-pbd8u244i08inek1mjfaclt3rqk0cttv</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD4VKwOP_mAQTpoDDdBERHJv9ltZAofS6I</string>
+	<key>GCM_SENDER_ID</key>
+	<string>659034013656</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.jumptack.donorsChoose</string>
+	<key>PROJECT_ID</key>
+	<string>donorschoose-cf338</string>
+	<key>STORAGE_BUCKET</key>
+	<string>donorschoose-cf338.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:659034013656:ios:93896301939dd3e0</string>
+	<key>DATABASE_URL</key>
+	<string>https://donorschoose-cf338.firebaseio.com</string>
+</dict>
+</plist>
