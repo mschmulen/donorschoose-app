@@ -1,0 +1,35 @@
+
+# ----  Common
+
+github "Vaberer/FontAwesome.swift"
+
+#github "ReactiveCocoa/ReactiveSwift" "1.1.3"
+#github "ReactiveCocoa/ReactiveCocoa" ~> 5.0
+#github "ReactiveX/RxSwift" ~> 3.6
+
+#github "Alamofire/Alamofire" ~> 4.0
+#github "SwiftyJSON/SwiftyJSON"
+
+#github "Haneke/HanekeSwift" "feature/swift-3"
+#github "soffes/GradientView" "swift3"
+#github "malcommac/SwiftDate" ~> 4.0
+
+
+# ----  Extended Features
+
+#github "i-schuetz/SwiftCharts" ~> 0.6.1
+
+# ---- Custom
+
+# git "file:///Users/matt1106/trees/rackspace/mobile/rackspace-ios-api/RackspaceAPI" "master"
+#github "mschmulen/SwiftAutoLayout" "swift-3.0"
+
+# ----  Vendor
+
+#github "algolia/algoliasearch-client-swift" ~> 4.0
+
+# ----  Misc
+#github "delba/TextAttributes" ~> 1.0
+#github "IBM-Swift/swift-html-entities" ~> 3.0
+#github "krzysztofzablocki/Strongify" ~> 1.1
+#github "Raizlabs/Anchorage" ~> 3.3
