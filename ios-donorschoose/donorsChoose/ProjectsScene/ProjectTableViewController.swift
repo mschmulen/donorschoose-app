@@ -16,7 +16,7 @@ class ProjectTableViewController: UITableViewController {
     var showFavorites:(()->(Void))?
     
     var locationManager:CLLocationManager = CLLocationManager()
-    var currentLocation:CLLocationCoordinate2D? =  nil
+    var lastLocation:CLLocation? //CLLocationCoordinate2D? =  nil
     var indexPageRequest = 0
     
     var didShowNotification = false
@@ -33,11 +33,14 @@ class ProjectTableViewController: UITableViewController {
         case location(fetchModel:SearchDataModel)
         case keyword(fetchModel:SearchDataModel)
         case inspires(fetchModel:SearchDataModel)
+        case none(fetchModel:SearchDataModel)
         
         var label:String {
             switch self {
+            case .none ( let fetchModel ):
+                return "" //urgent: "//\(fetchModel.pageSize)"
             case .location ( let fetchModel ):
-                return "Current Location: \(fetchModel.pageSize)"
+                return "Current Location: "//\(fetchModel.pageSize)"
             case .keyword ( let fetchModel ):
                 return "\(fetchModel.keywords ?? "")"//" \(fetchModel.pageSize)"
             case .inspires ( let fetchModel ):
@@ -47,6 +50,7 @@ class ProjectTableViewController: UITableViewController {
         
         var hashValue: Int {
             switch self {
+            case .none(let model): return model.hashValue
             case .keyword(let model): return model.hashValue
             case .inspires(let model): return model.hashValue
             case .location(let model): return model.hashValue
@@ -129,6 +133,8 @@ class ProjectTableViewController: UITableViewController {
             print( "fetchSectionData \(index) : \(section.label)")
             self.tableData.append( (section,[]) )
             switch section {
+            case .none(let searchModel):
+                fetchSection(searchModel, section:section,  index:index)
             case .inspires(let searchModel):
                 fetchSection(searchModel, section:section,  index:index)
             case .keyword(let searchModel):
@@ -196,7 +202,7 @@ class ProjectTableViewController: UITableViewController {
         tableView.separatorStyle = .none
         
         guard let viewData = self.viewData else { return }
-        dataAPI = ProjectAPI(config: viewData.apiConfig,user: "matt", delegate: self)
+        dataAPI = ProjectAPI(config: viewData.apiConfig,user: "matt")//, delegate: self)
         tableView.backgroundView = ProjectsEmptyBackgroundView(frame: tableView.frame, config: viewData.viewConfig)
         
         refreshControl = UIRefreshControl()
@@ -212,17 +218,20 @@ class ProjectTableViewController: UITableViewController {
             self.navigationItem.rightBarButtonItem = buttonAddFavorite
             
             NotificationCenter.default.addObserver(self, selector: #selector(ProjectTableViewController.refreshWatchItemsFromNotificationEvent), name: NSNotification.Name(rawValue: WatchList.RefreshEventName), object: nil)
+            fetchAll()
         case .nearMe:
             self.locationManager.delegate = self
             self.locationManager.requestWhenInUseAuthorization()
-            sections = [.location(fetchModel:viewData.initalSearchDataModel)]
+//            sections = [.location(fetchModel:viewData.initalSearchDataModel)]
             updateLocation()
         case .inNeed:
-            sections = [.location(fetchModel:viewData.initalSearchDataModel)]
+            sections = [.none(fetchModel:viewData.initalSearchDataModel)]
+            fetchAll()
         case .customSearch:
-            sections = [.location(fetchModel:viewData.initalSearchDataModel)]
+            sections = [.keyword(fetchModel:viewData.initalSearchDataModel)]
+            fetchAll()
         }
-        fetchAll()
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -276,7 +285,6 @@ class ProjectTableViewController: UITableViewController {
     }
     
     // override func prepare(for segue: UIStoryboardSegue, sender: Any?) { }
-    
 }
 
 extension ProjectTableViewController : CLLocationManagerDelegate  {
@@ -286,14 +294,27 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let userLocation:CLLocation =  locations.first {
-            if currentLocation == nil  {
-                currentLocation = userLocation.coordinate
-                fetchAll()
+        if let newLocation:CLLocation = locations.first {
+            
+            if let lastKnownLocation = lastLocation {
+                let distanceInMeters = newLocation.distance(from: lastKnownLocation)
+                print( "distanceInMeters: \(distanceInMeters) < 100 = early out")
+                if distanceInMeters < 100 {
+                    return
+                }
+                lastLocation = newLocation
+            } else {
+                lastLocation = newLocation
             }
-            else {
-                currentLocation = userLocation.coordinate
+            
+            guard let location = lastLocation  else {
+                return
             }
+            var locationSearchModel = SearchDataModel(type: .locationLatLong, keywordString: nil)
+            locationSearchModel.locationLat = "\(location.coordinate.latitude)"
+            locationSearchModel.locationLng = "\(location.coordinate.longitude)"
+            sections = [Section.location(fetchModel: locationSearchModel)]
+            fetchAll()
         }
     }
     
@@ -327,14 +348,14 @@ extension ProjectTableViewController : ProjectSearchDelegate {
         // MAS TODO Update SearchUpdate
         // currentSearchModel = newSearchModel
         // fetch()
-        print("searchUpdate \(newSearchModel.keywords)")
+//        print("searchUpdate \(newSearchModel.keywords)")
     }
 }
 
-extension ProjectTableViewController : ProjectAPIDelegate {
-    
-    public func dataUpdateCallback( _ dataAPI: ProjectAPIProtocol, didChangeData data:[ProposalModel]?, error:APIError? ) {
-        
+//extension ProjectTableViewController : ProjectAPIDelegate {
+//
+//    public func dataUpdateCallback( _ dataAPI: ProjectAPIProtocol, didChangeData data:[ProposalModel]?, error:APIError? ) {
+
 //        if let someError = error {
 //        }
 //        else {
@@ -353,8 +374,8 @@ extension ProjectTableViewController : ProjectAPIDelegate {
 //                })
 //            }
 //        }
-    }
-}
+//    }
+//}
 
 extension ProjectTableViewController {
     

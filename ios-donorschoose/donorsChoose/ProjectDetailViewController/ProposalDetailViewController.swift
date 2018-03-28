@@ -314,7 +314,7 @@ open class ProposalDetailViewController: UIViewController {
         //                ])
         //        }
         
-        dataAPI = ProjectAPI(config: apiConfig,user: "matt", delegate: self)
+        dataAPI = ProjectAPI(config: apiConfig,user: "matt")//, delegate: self)
         
         let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProposalDetailViewController.actionShare(_:)))
         self.navigationItem.rightBarButtonItem = buttonShare
@@ -473,10 +473,10 @@ extension ProposalDetailViewController : UICollectionViewDelegate {
     }
 }
 
-extension ProposalDetailViewController : ProjectAPIDelegate {
+//extension ProposalDetailViewController : ProjectAPIDelegate {
+
+//    public func dataUpdateCallback( _ dataAPI: ProjectAPIProtocol, didChangeData data:[ProposalModel]?, error:APIError? ) {
     
-    public func dataUpdateCallback( _ dataAPI: ProjectAPIProtocol, didChangeData data:[ProposalModel]?, error:APIError? ) {
-        
 //        if let someError = error {
 //            //tableView.hidden = true
 //            //alert the user
@@ -514,5 +514,6 @@ extension ProposalDetailViewController : ProjectAPIDelegate {
 //             */
 //        }
         //self.refreshControl.endRefreshing()
-    }
-}
+//    }
+//}
+

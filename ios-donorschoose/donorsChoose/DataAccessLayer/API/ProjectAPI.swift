@@ -3,17 +3,13 @@
 import Foundation
 import CoreLocation
 
-public protocol ProjectAPIDelegate {
-    func dataUpdateCallback( _ dataAPI: ProjectAPIProtocol, didChangeData dataList:[ProposalModel]?, error:APIError? )
-}
+//public protocol ProjectAPIDelegate {
+//    func dataUpdateCallback( _ dataAPI: ProjectAPIProtocol, didChangeData dataList:[ProposalModel]?, error:APIError? )
+//}
 
 public protocol ProjectAPIProtocol {
-    init(config:APIConfig, user:String, delegate: ProjectAPIDelegate?)
-    func getCallbackDelegate() ->  ProjectAPIDelegate?
-    
-//    func getDataWithProposalID(_ proposalID:String)
-//    func getDataWithSearchModel(_ searchModel:SearchDataModel, pageSize:Int, pageIndex:Int)
-//    func getDataWithSearchModelAndLocation(_ searchModel:SearchDataModel, location:CLLocationCoordinate2D, pageSize:Int, pageIndex:Int)
+    init(config:APIConfig, user:String)//, delegate: ProjectAPIDelegate?)
+//    func getCallbackDelegate() ->  ProjectAPIDelegate?
     
     func getData(_ searchModel:SearchDataModel, pageIndex:Int, callback: @escaping ([ProposalModel], APIError?) -> Void)
     func getData(_ proposalID:String, callback: @escaping (ProposalModel?, APIError?) -> Void)
@@ -22,21 +18,22 @@ public protocol ProjectAPIProtocol {
 class ProjectAPI : ProjectAPIProtocol
 {
     fileprivate let apiConfig:APIConfig
-    fileprivate var callbackDelegate: ProjectAPIDelegate?
+
     fileprivate var pageIndex = 0
     
     fileprivate let queue = DispatchQueue(label: "serial queue", attributes: [])
     
-    public required init(config:APIConfig, user:String , delegate: ProjectAPIDelegate?)
+    public required init(config:APIConfig, user:String )//, delegate: ProjectAPIDelegate?)
     {
         self.apiConfig = config
-        self.callbackDelegate = delegate
+//        self.callbackDelegate = delegate
     }
     
-    func getCallbackDelegate() -> ProjectAPIDelegate?
-    {
-        return callbackDelegate
-    }
+//    fileprivate var callbackDelegate: ProjectAPIDelegate?
+//    func getCallbackDelegate() -> ProjectAPIDelegate?
+//    {
+//        return callbackDelegate
+//    }
     
 //    func getDataWithProposalID(_ proposalID:String) {
 //        var components = URLComponents()
@@ -154,25 +151,38 @@ class ProjectAPI : ProjectAPIProtocol
         components.host = "api.donorschoose.org"
         components.path = "/common/json_feed.html"
         let maxQueryItem = URLQueryItem(name: "max", value: "\(searchModel.pageSize)")
-        let sortByQueryItem:URLQueryItem
         let apiKeyQueryItem = URLQueryItem(name: "APIKey", value: apiConfig.apiKey)
         let partnerIdQueryItem = URLQueryItem(name: "partnerId", value: apiConfig.partnerID)
-
-        var keywordsQueryItem:URLQueryItem?
-        if let keywords = searchModel.keywords {
-            switch searchModel.type {
-            case .keyword, .inspiresUser:
-                keywordsQueryItem = URLQueryItem(name: "keywords", value: "\(keywords.stringByAddingUrlEncoding())")
-            default:
-                break
+        let sortByQueryItem:URLQueryItem =  URLQueryItem(name: "sortBy", value: "\(searchModel.sortOption.requestValue())")
+        
+        switch searchModel.type {
+        case .keyword:
+            if let keywords = searchModel.keywords {
+                let keywordsQueryItem:URLQueryItem = URLQueryItem(name: "keywords", value: "\(keywords.stringByAddingUrlEncoding())")
+                components.queryItems = [maxQueryItem, keywordsQueryItem, sortByQueryItem, apiKeyQueryItem, partnerIdQueryItem]
+            } else {
+                components.queryItems = [maxQueryItem, sortByQueryItem, apiKeyQueryItem, partnerIdQueryItem]
             }
-        }
-        sortByQueryItem =  URLQueryItem(name: "sortBy", value: "\(searchModel.sortOption.requestValue())")
-        if let keywordsQueryItem = keywordsQueryItem {
-            components.queryItems = [maxQueryItem, keywordsQueryItem, sortByQueryItem, apiKeyQueryItem, partnerIdQueryItem]
-        } else {
+        case .inspiresUser:
+            if let keywords = searchModel.keywords {
+                let keywordsQueryItem:URLQueryItem = URLQueryItem(name: "keywords", value: "\(keywords.stringByAddingUrlEncoding())")
+                components.queryItems = [maxQueryItem, keywordsQueryItem, sortByQueryItem, apiKeyQueryItem, partnerIdQueryItem]
+            } else {
+                components.queryItems = [maxQueryItem, sortByQueryItem, apiKeyQueryItem, partnerIdQueryItem]
+            }
+        case .locationLatLong:
+            if let latitude = searchModel.locationLat, let longitude = searchModel.locationLng {
+                let centerLatQueryItem = URLQueryItem(name: "centerLat", value: "\(latitude)")
+                let centerLngQueryItem = URLQueryItem(name: "centerLng", value: "\(longitude)")
+                // MAS TODO support other pramters
+                components.queryItems = [apiKeyQueryItem, centerLatQueryItem,centerLngQueryItem, partnerIdQueryItem ] // sortByQueryItem, maxQueryItem ,]
+            } else {
+                components.queryItems = [maxQueryItem, sortByQueryItem, apiKeyQueryItem, partnerIdQueryItem]
+            }
+        case .urgent:
             components.queryItems = [maxQueryItem, sortByQueryItem, apiKeyQueryItem, partnerIdQueryItem]
         }
+        
         return components.url
     }
     

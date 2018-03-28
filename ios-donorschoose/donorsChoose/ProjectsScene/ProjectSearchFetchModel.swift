@@ -1,15 +1,31 @@
 
 import Foundation
+import CoreLocation
 
 // MAS TODO Rename to ProjectFetchModel
 public struct SearchDataModel : Codable, UserDefaultStorable {
     
     var type:SearchModelType
-    var keywords:String?
     var sortOption:SearchSortOption
+    var pageSize:Int
+    
+    var keywords:String?
     var subject1:SearchSubject?
     
-    var pageSize = 20
+    var locationLat:String? //CLLocationCoordinate2D?
+    var locationLng:String? //CLLocationCoordinate2D?
+    
+//    if let userLocation:CLLocation =  locations.first {
+//        if currentLocation == nil  {
+//            currentLocation = userLocation.coordinate
+//            fetchAll()
+//        }
+//        else {
+//            currentLocation = userLocation.coordinate
+//        }
+//    }
+
+    
     
     public init(type:SearchModelType,  keywordString:String? , pageSize:Int = 20) {
         self.type = type
