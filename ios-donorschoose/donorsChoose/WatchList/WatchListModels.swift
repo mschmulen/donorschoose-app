@@ -38,6 +38,8 @@ public protocol WatchItemProtocol {
     var title: String { get set }
     var modelID: String { get set }
     var deadline: Date? { get set }
+    
+    var searchModel:SearchDataModel { get }
 }
 
 
@@ -54,6 +56,11 @@ open class WatchItemUnknown : WatchItemProtocol {
         self.modelID = modelID
         self.UUID = UUID
     }
+    
+    public var searchModel:SearchDataModel {
+        return SearchDataModel(type: .urgent, keywordString: "", pageSize:5)
+    }
+
 }
 
 open class WatchItemCustomSearch : WatchItemProtocol {
@@ -67,12 +74,17 @@ open class WatchItemCustomSearch : WatchItemProtocol {
     
     init(title: String, modelID:String , searchString: String){//, searchSortOption:SEARCH_SORT_OPTION) {
         self.title = title
-        self.type = WatchItemType.TEACHER
+        self.type = WatchItemType.CUSTOM_SEARCH
         self.modelID = modelID
         self.UUID = modelID
         self.searchString = searchString
         //self.searchSortOption = searchSortOption
     }
+    
+    public var searchModel:SearchDataModel {
+        return SearchDataModel(type: .keyword, keywordString: title, pageSize:5)
+    }
+    
 }
 
 
@@ -89,6 +101,11 @@ open class WatchItemTeacher : WatchItemProtocol {
         self.modelID = modelID
         self.UUID = UUID
     }
+    
+    public var searchModel:SearchDataModel {
+        return SearchDataModel(type: .urgent, keywordString: title, pageSize:5)
+    }
+
 }
 
 open class WatchItemSchool : WatchItemProtocol {
@@ -104,6 +121,11 @@ open class WatchItemSchool : WatchItemProtocol {
         self.modelID = modelID
         self.UUID = UUID
     }
+    
+    public var searchModel:SearchDataModel {
+        return SearchDataModel(type: .urgent, keywordString: title, pageSize:5)
+    }
+    
 }
 
 open class WatchItemProposal : WatchItemProtocol {
@@ -131,4 +153,9 @@ open class WatchItemProposal : WatchItemProtocol {
         self.UUID = UUID
         self.deadline = deadline
     }
+    
+    public var searchModel:SearchDataModel {
+        return SearchDataModel(type: .urgent, keywordString: title, pageSize:5)
+    }
+
 }

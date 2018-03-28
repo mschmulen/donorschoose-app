@@ -3,39 +3,80 @@
 //
 import Foundation
 
-extension DefaultsKeys {
-  static let launchCount = DefaultsKey<Int>("launchCount")
-  static let didShowIntro = DefaultsKey<Bool>("didShowIntro")
-  static let didShowCustomSearchIntro = DefaultsKey<Bool>("didShowCustomSearchIntro")
-  static let didShowInNeedIntro = DefaultsKey<Bool>("didShowInNeedIntro")
+
+// MAS TODO UserDefaults config
+
+//open class DefaultsKeys {
+//    fileprivate init() {}
+//}
+//
+//extension DefaultsKeys {
+//  static let launchCount = DefaultsKey<Int>("launchCount")
+//  static let didShowIntro = DefaultsKey<Bool>("didShowIntro")
+//  static let didShowCustomSearchIntro = DefaultsKey<Bool>("didShowCustomSearchIntro")
+//  static let didShowInNeedIntro = DefaultsKey<Bool>("didShowInNeedIntro")
+//}
+
+struct LocalUserData: Codable, UserDefaultStorable {
+    let launchCount:Int
+    let didShowIntro:Bool
+    let didShowCustomSearchIntro:Bool
+    let didShowInNeedIntro:Bool
+    
+    //    let themeName: String
+    //    let backgroundImageURL: URL?
 }
 
 open class UserDataModel {
     
-  fileprivate var customSearchModelPList: Plist?
+//    var localCustomSearch:LocalCustomSearchModel? {
+//        get {
+////            let localCustomSearchs = LocalCustomSearchModel.read()
+//            return LocalCustomSearchModel.read()
+//        }
+//
+//        set {
+//            localCustomSearch?.write()
+//        }
+//    }
+    
+    var localUserData:LocalUserData? {
+        get {
+            return LocalUserData.read()
+        }
+        
+        set {
+            localUserData?.write()
+        }
+    }
+    
+    // MAS TODO Convert legacy search models to the current one.
+    
+//  fileprivate var customSearchModelPList: Plist?
+//  fileprivate let customSearchModelPListName = "userCustomSearchModel"
   
-  fileprivate let customSearchModelPListName = "userCustomSearchModel"
-  
-  open var customSearchModel: SearchDataModel {
-      didSet {
-          customSearchModel.save(customSearchModelPListName)
-      }
-  }
-  
-  open var didShowIntro: Bool {
-      get { return Defaults[.didShowIntro] }
-      set { Defaults[.didShowIntro] = newValue }
-  }
-  
-  open var didShowCustomSearchIntro: Bool {
-      get { return Defaults[.didShowCustomSearchIntro] }
-      set { Defaults[.didShowCustomSearchIntro] = newValue }
-  }
-  
-  open var didShowInNeedIntro: Bool {
-      get { return Defaults[.didShowInNeedIntro] }
-      set { Defaults[.didShowInNeedIntro] = newValue }
-  }
+//  open var customSearchModel: SearchDataModel {
+//      didSet {
+//          customSearchModel.save(customSearchModelPListName)
+//      }
+//  }
+    
+
+    
+//  open var didShowIntro: Bool = false //{
+//      get { return Defaults[.didShowIntro] }
+//      set { Defaults[.didShowIntro] = newValue }
+//  }
+
+//  open var didShowCustomSearchIntro: Bool = false//{
+//      get { return Defaults[.didShowCustomSearchIntro] }
+//      set { Defaults[.didShowCustomSearchIntro] = newValue }
+//  }
+    
+//  open var didShowInNeedIntro: Bool = false//{
+//      get { return Defaults[.didShowInNeedIntro] }
+//      set { Defaults[.didShowInNeedIntro] = newValue }
+//  }
 
     // MAS TODO
     /*
@@ -72,7 +113,7 @@ open class UserDataModel {
     */
 
   public init() {
-    customSearchModel = SearchDataModel(pListName: customSearchModelPListName)
+//    customSearchModel = SearchDataModel(pListName: customSearchModelPListName)
   }
   
 }

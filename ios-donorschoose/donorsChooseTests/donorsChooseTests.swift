@@ -1,5 +1,10 @@
 //
 //  donorsChooseTests.swift
+//  donorsChooseTests
+//
+//  Created by Matt Schmulen on 2/13/18.
+//  Copyright © 2018 jumptack. All rights reserved.
+//
 
 import XCTest
 @testable import donorsChoose

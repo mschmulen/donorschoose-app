@@ -19,7 +19,7 @@ public class WatchListDebugViewController: UITableViewController {
     refreshList()
   }
 
-  func refreshOnNotificationEvent()
+    @objc func refreshOnNotificationEvent()
   {
     refreshList()
   }
