@@ -18,7 +18,13 @@ open class ProjectSearchViewController: UIViewController {
     
     fileprivate let callbackDelegate: ProjectSearchDelegate
     
-    @IBOutlet weak var tableViewResults: UITableView!
+    @IBOutlet weak var tableViewResults: UITableView! {
+        didSet {
+            tableViewResults.isHidden = true
+            tableViewResults.delegate = self
+            tableViewResults.dataSource = self 
+        }
+    }
     @IBOutlet weak var buttonSearch: UIButton!
     
     @IBOutlet weak var textFieldSearchTopics: UITextField!
@@ -57,14 +63,13 @@ open class ProjectSearchViewController: UIViewController {
                 // self.processError(someError)
             }
             else {
-                self.results = data
                 DispatchQueue.main.async(execute: {
+                    self.results = data
                     self.tableViewResults.isHidden = false
                     self.tableViewResults.reloadData()
-//                    self.refreshControl?.endRefreshing()
+                    // self.refreshControl?.endRefreshing()
                 })
             }
-            //            }
         })
         
         //        guard let viewData = viewData else { return }
@@ -221,6 +226,48 @@ extension ProjectSearchViewController : UIPickerViewDelegate {
         self.viewData = newViewData
     }
 }
+
+extension ProjectSearchViewController : UITableViewDataSource {
+
+    public func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return results.count
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell: ProposalTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
+        let cell = UITableViewCell()
+        cell.textLabel?.text = results[ indexPath.row ].title
+        return cell
+    }
+}
+
+extension ProjectSearchViewController : UITableViewDelegate {
+
+//    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let detailVC = ProposalDetailViewController(apiConfig:apiConfig, model: tableData[(indexPath as NSIndexPath).row] )
+//        if let nav = self.navigationController {
+//            nav.pushViewController(detailVC, animated: true)
+//        }
+//        else
+//        {
+//            self.present(detailVC, animated: true, completion: nil)
+//        }
+//    }
+    
+//    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if((indexPath as NSIndexPath).row < tableData.count)
+//        {
+//            if let atvc:AnimatedTableViewCellProtocol = cell as? AnimatedTableViewCellProtocol {
+//                atvc.startAnimation()
+//            }
+//        }
+//    }
+}
+
 
 extension ProjectSearchViewController {
 

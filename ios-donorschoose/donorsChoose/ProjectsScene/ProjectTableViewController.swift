@@ -23,13 +23,12 @@ class ProjectTableViewController: UITableViewController {
     
     var dataAPI:ProjectAPIProtocol?
     
-//    var searchModels:[SearchDataModel] = [SearchDataModel]()
     var sections:[Section] = [Section]()
     typealias sectionModel = (section:Section,rows:[ProposalModel])
-    // var tableData = [ProposalModel]()
     var tableData = Array<sectionModel>()
     
     enum Section : Hashable {
+        
         case location(fetchModel:ProjectSearchDataModel)
         case keyword(fetchModel:ProjectSearchDataModel)
         case inspires(fetchModel:ProjectSearchDataModel)
@@ -335,7 +334,7 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
         if let newLocation:CLLocation = locations.first {
             if let lastKnownLocation = lastLocation {
                 let distanceInMeters = newLocation.distance(from: lastKnownLocation)
-                print( "distanceInMeters: \(distanceInMeters) < 100 = early out")
+//                print( "distanceInMeters: \(distanceInMeters) < 100 = early out")
                 if distanceInMeters < 100 {
                     return
                 }
@@ -381,13 +380,10 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
         case .authorizedWhenInUse:
             updateLocation()
         case .denied:
-            // MAS TODO provide notification to user to change settings
             print(".Denied")
         case .notDetermined:
-            // MAS TODO provide notification to user to change settings
             print(".notDetermined")
         case .restricted:
-            // MAS TODO provide notification to user to change settings
             print( "restricted")
         }
     }
@@ -401,31 +397,6 @@ extension ProjectTableViewController : ProjectSearchDelegate {
 //        print("searchUpdate \(newSearchModel.keywords)")
     }
 }
-
-//extension ProjectTableViewController : ProjectAPIDelegate {
-//
-//    public func dataUpdateCallback( _ dataAPI: ProjectAPIProtocol, didChangeData data:[ProposalModel]?, error:APIError? ) {
-
-//        if let someError = error {
-//        }
-//        else {
-//            if let newTableData = data , let first = sections.first {
-//                //                records = newTableData
-//                //                tableData.append(ProjectTableViewController.sectionModel.)
-//                //                let records = tableData[indexPath.section].1 //records[ (indexPath as NSIndexPath).row]
-//                //                let record = records[indexPath.row]
-//
-//                tableData = [(first,newTableData)]
-//
-//                DispatchQueue.main.async(execute: {
-//                    self.tableView.isHidden = false
-//                    self.tableView.reloadData()
-//                    self.refreshControl?.endRefreshing()
-//                })
-//            }
-//        }
-//    }
-//}
 
 extension ProjectTableViewController {
     
