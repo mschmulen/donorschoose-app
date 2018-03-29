@@ -21,7 +21,6 @@ github "Vaberer/FontAwesome.swift"
 
 # ---- Custom
 
-# git "file:///Users/matt1106/trees/rackspace/mobile/rackspace-ios-api/RackspaceAPI" "master"
 #github "mschmulen/SwiftAutoLayout" "swift-3.0"
 
 # ----  Vendor
