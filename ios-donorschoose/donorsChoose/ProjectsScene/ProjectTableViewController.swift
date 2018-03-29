@@ -43,9 +43,9 @@ class ProjectTableViewController: UITableViewController {
                 print("//\(fetchModel.pageSize)")
                 print("//\(fetchModel)")
                 if let locationInfo = fetchModel.locationInfo {
-                    return "Current Location: \(locationInfo.city), \(locationInfo.state)"
+                    return "Projects near: \(locationInfo.city), \(locationInfo.state)"
                 }
-                return "Current Location:"
+                return "Projects near me:"
             case .keyword ( let fetchModel ):
                 return "\(fetchModel.keywords ?? "")"
             case .inspires ( let fetchModel ):
@@ -54,7 +54,6 @@ class ProjectTableViewController: UITableViewController {
                     return "Search: \(keywords)"
                 }
                 return "Inspires Me:"
-
             }
         }
         
@@ -72,11 +71,8 @@ class ProjectTableViewController: UITableViewController {
         }
     }
     
-    
     @IBAction func actionAddFavorite(_ sender: AnyObject) {
         showFavorites?()
-        //let vc = ProjectSearchViewController(searchModel: viewData.searchModel , callbackDelegate:self)
-        //self.navigationController.pushViewController(vc, animated: true)
     }
     
     @IBAction func refresh(_ sender:AnyObject)
