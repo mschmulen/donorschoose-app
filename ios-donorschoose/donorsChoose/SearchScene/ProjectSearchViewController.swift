@@ -3,14 +3,19 @@
 //
 
 import UIKit
+import Firebase
 
 public protocol ProjectSearchDelegate {
-    func searchUpdate( _ newSearchModel: SearchDataModel )
+    func searchUpdate( _ newSearchModel: ProjectSearchDataModel )
 }
 
 open class ProjectSearchViewController: UIViewController {
     
     var viewData:ViewData
+    var dataAPI:ProjectAPIProtocol?
+    
+    var results:[ProposalModel] = [ProposalModel]()
+    
     fileprivate let callbackDelegate: ProjectSearchDelegate
     
     @IBOutlet weak var tableViewResults: UITableView!
@@ -31,7 +36,7 @@ open class ProjectSearchViewController: UIViewController {
         if let newSearchString = textFieldSearchTopics.text {
             
             let newViewData = ViewData(
-                searchModel: SearchDataModel(
+                searchModel: ProjectSearchDataModel(
                     type: viewData.searchModel.type,
                     keywordString: newSearchString
                 )
@@ -42,23 +47,57 @@ open class ProjectSearchViewController: UIViewController {
         }
     }
     
+    func fetch(_ searchModel:ProjectSearchDataModel) {
+        print( "fetchRecords.type \(searchModel.type.rawValue)")
+        print( "fetchRecords.keywords \(searchModel.keywords ?? "~" )")
+        
+        dataAPI?.getData(searchModel, pageIndex: 0, callback: { (data, error) in
+            if let someError = error {
+                print( "\(someError)")
+                // self.processError(someError)
+            }
+            else {
+                self.results = data
+                DispatchQueue.main.async(execute: {
+                    self.tableViewResults.isHidden = false
+                    self.tableViewResults.reloadData()
+//                    self.refreshControl?.endRefreshing()
+                })
+            }
+            //            }
+        })
+        
+        //        guard let viewData = viewData else { return }
+        // MAS TODO support page index Loading
+        //        if searchModel.type == .locationLatLong {
+        //            if let searchLocation  = self.currentLocation {
+        //                dataAPI?.getDataWithSearchModelAndLocation( searchModel, location: searchLocation, pageSize: searchModel.maxPageSize, pageIndex: indexPageRequest) //indexPageRequest default to zero )
+        //            }
+        //        }
+        //        else {
+        // MAS TODO support the pageIndex for secondary requests
+        //            dataAPI?.getDataWithSearchModel(searchModel, pageSize:searchModel.maxPageSize, pageIndex: indexPageRequest)
+        //        }
+    }
+    
     func saveToFavorites() {
         
         guard let searchString = textFieldSearchTopics.text else { return }
         if (searchString.isEmpty) == true { return }
         
-        //            self.currentSearchModel.keywords = newSearchString
-        //            var newSearchStruct = SearchDataModel( type: .keyword, keywordString:newSearchString )
-        //            newSearchStruct.sortOption = SearchDataModel.SearchSortOption.enumFromRowValue(pickerSortOrder.selectedRow(inComponent: 0))
-        
         let newViewData = ViewData(
-            searchModel: SearchDataModel(
+            searchModel: ProjectSearchDataModel(
                 type: viewData.searchModel.type,
                 keywordString: searchString
             )
         )
         self.viewData = newViewData
-//        self.currentSearchModel.keywords = searchString
+        
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+            AnalyticsParameterItemID: "keywords-\(viewData.searchModel.keywords ?? "")",
+            AnalyticsParameterItemName: "actionFavorite",
+            AnalyticsParameterContentType: "Search"
+            ])
         
         let optionMenu = UIAlertController(title: nil, message: "Add This Search to Favorites: \(searchString) \(viewData.searchModel.sortOption.pickerLabel)", preferredStyle: .actionSheet)
         
@@ -95,14 +134,14 @@ open class ProjectSearchViewController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        //analytics
-        //viewDidLoadEvent(String(describing: self))
+        dataAPI = ProjectAPI(config: viewData.apiConfig,user: "matt")
         
-//        let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProjectSearchViewController.actionShare(_:)))
-//        self.navigationItem.rightBarButtonItem = buttonShare
+        // let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProjectSearchViewController.actionShare(_:)))
+        // self.navigationItem.rightBarButtonItem = buttonShare
         
         textFieldSearchTopics.delegate = self
         textFieldSearchTopics.text = viewData.searchModel.keywords
+        fetch(viewData.searchModel)
     }
     
     override open func didReceiveMemoryWarning() {
@@ -113,22 +152,40 @@ open class ProjectSearchViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!, searchModel:SearchDataModel , callbackDelegate:ProjectSearchDelegate ) {
+    init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!, searchModel:ProjectSearchDataModel , callbackDelegate:ProjectSearchDelegate ) {
         self.callbackDelegate = callbackDelegate
         viewData = ViewData(searchModel:searchModel)
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    public convenience init( searchModel:SearchDataModel , callbackDelegate:ProjectSearchDelegate)
+    public convenience init( searchModel:ProjectSearchDataModel , callbackDelegate:ProjectSearchDelegate)
     {
         self.init(nibName: "ProjectSearchViewController", bundle: Bundle(for: ProjectSearchViewController.self), searchModel:searchModel , callbackDelegate:callbackDelegate )
     }
-    
 }
 
 extension ProjectSearchViewController : UITextFieldDelegate {
+    
+//    public func textFieldDidEndEditing(_ textField: UITextField) {
+//        print( "did end")
+//    }
+//
+//    public func textFieldDidBeginEditing(_ textField: UITextField) {
+//        print( "did begine")
+//    }
+    
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textFieldSearchTopics.resignFirstResponder()
+        if let newSearchString = textField.text , (newSearchString.isEmpty == false) {
+            let newViewData = ViewData(
+                searchModel: ProjectSearchDataModel(
+                    type: viewData.searchModel.type,
+                    keywordString: newSearchString
+                )
+            )
+            self.viewData = newViewData
+            fetch(viewData.searchModel)
+        }
         return true
     }
 }
@@ -140,7 +197,7 @@ extension ProjectSearchViewController : UIPickerViewDataSource {
     }
     
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return SearchDataModel.SearchSortOption.pickerOptions.count
+        return ProjectSearchDataModel.SearchSortOption.pickerOptions.count
     }
     
 }
@@ -148,18 +205,18 @@ extension ProjectSearchViewController : UIPickerViewDataSource {
 extension ProjectSearchViewController : UIPickerViewDelegate {
     
     public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return SearchDataModel.SearchSortOption.enumFromRowValue(row).pickerLabel
+        return ProjectSearchDataModel.SearchSortOption.enumFromRowValue(row).pickerLabel
     }
     
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         var newViewData = ViewData(
-            searchModel: SearchDataModel(
+            searchModel: ProjectSearchDataModel(
                 type: viewData.searchModel.type,
                 keywordString: viewData.searchModel.keywords
             )
         )
-        newViewData.searchModel.sortOption = SearchDataModel.SearchSortOption.enumFromRowValue(row)
+        newViewData.searchModel.sortOption = ProjectSearchDataModel.SearchSortOption.enumFromRowValue(row)
         
         self.viewData = newViewData
     }
@@ -169,7 +226,8 @@ extension ProjectSearchViewController {
 
     struct ViewData {
         let showLocationSearch = false
-        var searchModel:SearchDataModel
+        var searchModel:ProjectSearchDataModel
+        let apiConfig:APIConfig = APIConfig()
     }
 
 }

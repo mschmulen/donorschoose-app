@@ -39,7 +39,7 @@ public protocol WatchItemProtocol {
     var modelID: String { get set }
     var deadline: Date? { get set }
     
-    var searchModel:SearchDataModel { get }
+    var searchModel:ProjectSearchDataModel { get }
 }
 
 
@@ -57,8 +57,8 @@ open class WatchItemUnknown : WatchItemProtocol {
         self.UUID = UUID
     }
     
-    public var searchModel:SearchDataModel {
-        return SearchDataModel(type: .urgent, keywordString: "", pageSize:5)
+    public var searchModel:ProjectSearchDataModel {
+        return ProjectSearchDataModel(type: .urgent, keywordString: "", pageSize:5)
     }
 
 }
@@ -81,8 +81,8 @@ open class WatchItemCustomSearch : WatchItemProtocol {
         //self.searchSortOption = searchSortOption
     }
     
-    public var searchModel:SearchDataModel {
-        return SearchDataModel(type: .keyword, keywordString: title, pageSize:5)
+    public var searchModel:ProjectSearchDataModel {
+        return ProjectSearchDataModel(type: .keyword, keywordString: title, pageSize:5)
     }
     
 }
@@ -102,8 +102,8 @@ open class WatchItemTeacher : WatchItemProtocol {
         self.UUID = UUID
     }
     
-    public var searchModel:SearchDataModel {
-        return SearchDataModel(type: .urgent, keywordString: title, pageSize:5)
+    public var searchModel:ProjectSearchDataModel {
+        return ProjectSearchDataModel(type: .urgent, keywordString: title, pageSize:5)
     }
 
 }
@@ -122,8 +122,8 @@ open class WatchItemSchool : WatchItemProtocol {
         self.UUID = UUID
     }
     
-    public var searchModel:SearchDataModel {
-        return SearchDataModel(type: .urgent, keywordString: title, pageSize:5)
+    public var searchModel:ProjectSearchDataModel {
+        return ProjectSearchDataModel(type: .urgent, keywordString: title, pageSize:5)
     }
     
 }
@@ -154,8 +154,8 @@ open class WatchItemProposal : WatchItemProtocol {
         self.deadline = deadline
     }
     
-    public var searchModel:SearchDataModel {
-        return SearchDataModel(type: .urgent, keywordString: title, pageSize:5)
+    public var searchModel:ProjectSearchDataModel {
+        return ProjectSearchDataModel(type: .urgent, keywordString: title, pageSize:5)
     }
 
 }

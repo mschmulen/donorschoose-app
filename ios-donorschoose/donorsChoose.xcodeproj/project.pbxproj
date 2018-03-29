@@ -75,7 +75,7 @@
 		108E307B20346FA900567895 /* ProjectSearchFetchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E306E20346FA900567895 /* ProjectSearchFetchModel.swift */; };
 		108E307C20346FA900567895 /* SerializationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E306F20346FA900567895 /* SerializationError.swift */; };
 		108E307D20346FA900567895 /* Model+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E307020346FA900567895 /* Model+Identifiable.swift */; };
-		108E307E20346FA900567895 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E307120346FA900567895 /* UserDataModel.swift */; };
+		108E307E20346FA900567895 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E307120346FA900567895 /* UserModel.swift */; };
 		108E307F20346FA900567895 /* TeacherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E307220346FA900567895 /* TeacherModel.swift */; };
 		108E308020346FA900567895 /* Proposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E307320346FA900567895 /* Proposal.swift */; };
 		108E308120346FA900567895 /* DonorPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E307420346FA900567895 /* DonorPageModel.swift */; };
@@ -274,7 +274,7 @@
 		108E306E20346FA900567895 /* ProjectSearchFetchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSearchFetchModel.swift; sourceTree = "<group>"; };
 		108E306F20346FA900567895 /* SerializationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerializationError.swift; sourceTree = "<group>"; };
 		108E307020346FA900567895 /* Model+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Model+Identifiable.swift"; sourceTree = "<group>"; };
-		108E307120346FA900567895 /* UserDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
+		108E307120346FA900567895 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		108E307220346FA900567895 /* TeacherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherModel.swift; sourceTree = "<group>"; };
 		108E307320346FA900567895 /* Proposal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Proposal.swift; sourceTree = "<group>"; };
 		108E307420346FA900567895 /* DonorPageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonorPageModel.swift; sourceTree = "<group>"; };
@@ -589,7 +589,7 @@
 				108E307420346FA900567895 /* DonorPageModel.swift */,
 				108E307520346FA900567895 /* SchoolModel.swift */,
 				107FF5582066EE920083F4DA /* Models+Codable.swift */,
-				108E307120346FA900567895 /* UserDataModel.swift */,
+				108E307120346FA900567895 /* UserModel.swift */,
 				108E307020346FA900567895 /* Model+Identifiable.swift */,
 			);
 			path = Models;
@@ -1161,7 +1161,7 @@
 				108E309120346FDF00567895 /* UIImage+FadeInOut.swift in Sources */,
 				108E307C20346FA900567895 /* SerializationError.swift in Sources */,
 				107FF5592066EE920083F4DA /* Models+Codable.swift in Sources */,
-				108E307E20346FA900567895 /* UserDataModel.swift in Sources */,
+				108E307E20346FA900567895 /* UserModel.swift in Sources */,
 				108E307B20346FA900567895 /* ProjectSearchFetchModel.swift in Sources */,
 				108E306020346F7D00567895 /* ProposalFooterView.swift in Sources */,
 				108D7FF82069660300D86BB6 /* FavoritesEmptyBackgroundView.swift in Sources */,

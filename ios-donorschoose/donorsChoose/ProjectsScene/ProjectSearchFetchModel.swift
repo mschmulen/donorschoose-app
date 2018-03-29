@@ -2,8 +2,15 @@
 import Foundation
 import CoreLocation
 
-// MAS TODO Rename to ProjectFetchModel
-public struct SearchDataModel : Codable, UserDefaultStorable {
+
+public struct LocationInfo : Codable, UserDefaultStorable {
+    let city:String
+    let state:String
+    let zip:String
+    let countryCode:String
+}
+
+public struct ProjectSearchDataModel : Codable, UserDefaultStorable {
     
     var type:SearchModelType
     var sortOption:SearchSortOption
@@ -12,20 +19,10 @@ public struct SearchDataModel : Codable, UserDefaultStorable {
     var keywords:String?
     var subject1:SearchSubject?
     
-    var locationLat:String? //CLLocationCoordinate2D?
-    var locationLng:String? //CLLocationCoordinate2D?
-    
-//    if let userLocation:CLLocation =  locations.first {
-//        if currentLocation == nil  {
-//            currentLocation = userLocation.coordinate
-//            fetchAll()
-//        }
-//        else {
-//            currentLocation = userLocation.coordinate
-//        }
-//    }
-
-    
+    // location info
+    var latitude:Double?
+    var longitude:Double?
+    var locationInfo:LocationInfo?
     
     public init(type:SearchModelType,  keywordString:String? , pageSize:Int = 20) {
         self.type = type
@@ -157,33 +154,24 @@ public struct SearchDataModel : Codable, UserDefaultStorable {
     }
     
     public enum SearchModelType : Int, Codable {
-        
         case urgent = 0
-        
         case locationLatLong = 1
-        
         case keyword = 2
-        
         // MAS TOOD Remove ( use the keyword )
         case inspiresUser
-        
-        // case locationCityState
-        // https://www.donorschoose.org/donors/search.html?state=NC&community=10007:3
-        // https://api.donorschoose.org/common/json_feed.html?state=NC&community=10007:3&APIKey=DONORSCHOOSE
     }
     
 }
 
-extension SearchDataModel: Hashable {
+extension ProjectSearchDataModel: Hashable {
     
     public var hashValue: Int {
         return type.hashValue ^ sortOption.hashValue ^ (keywords ?? "").hashValue // ^ (subject1 ?? 0)
         // return model.type.hashValue ^ (model.keywords ?? "").hashValue
         // return [model.type, (model.keywords ?? "").hashValue ].hashValue
-        
     }
     
-    public static func == (lhs: SearchDataModel, rhs: SearchDataModel) -> Bool {
+    public static func == (lhs: ProjectSearchDataModel, rhs: ProjectSearchDataModel) -> Bool {
         return lhs.hashValue == rhs.hashValue
     }
 }

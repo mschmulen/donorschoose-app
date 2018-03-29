@@ -65,6 +65,13 @@ open class ProposalDetailViewController: UIViewController {
         
         if let model = self.model {
             let giveURL = model.proposalURL
+            
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                AnalyticsParameterItemID: "id-\(model.id)" as NSObject,
+                AnalyticsParameterItemName: "actionGive" as NSObject,
+                AnalyticsParameterContentType: "Proposal" as NSObject
+                ])
+            
             if let url:URL = URL(string: giveURL) {
                 UIApplication.shared.openURL(url)
             }
@@ -162,11 +169,6 @@ open class ProposalDetailViewController: UIViewController {
             
             let emailAction = UIAlertAction(title: "Email", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
-                // MAS TODO
-                //                Analytics.logEvent(AnalyticsEventShare, parameters: [
-                //                    AnalyticsParameterItemID: "id-\(model.id)" as NSObject,
-                //                    AnalyticsParameterContentType: "proposal" as NSObject
-                //                    ])
                 
                 let emailTitle = "Checkout this great school project!"
                 var messageBodyText = ""
@@ -300,21 +302,12 @@ open class ProposalDetailViewController: UIViewController {
             }
             
         })
-        
     }
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        // MAS TODO
-        //        if let itemID = model?.id , let itemName = model?.proposalURL {
-        //            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-        //                AnalyticsParameterItemID: "id-\(itemID)" as NSObject,
-        //                AnalyticsParameterItemName: itemName as NSObject,
-        //                AnalyticsParameterContentType: "proposal" as NSObject
-        //                ])
-        //        }
         
-        dataAPI = ProjectAPI(config: apiConfig,user: "matt")//, delegate: self)
+        dataAPI = ProjectAPI(config: apiConfig,user: "matt")
         
         let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProposalDetailViewController.actionShare(_:)))
         self.navigationItem.rightBarButtonItem = buttonShare

@@ -3,7 +3,7 @@
 //
 
 import UIKit
-//import Firebase
+import Firebase
 import Crashlytics
 
 open class TeacherDetailVC: UIViewController {
@@ -35,6 +35,13 @@ open class TeacherDetailVC: UIViewController {
     func shareAsAlertController() {
         
         if let model = self.viewData.model {
+            
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                AnalyticsParameterItemID: "id-\(model.id)",
+                AnalyticsParameterItemName: "actionFavorite",
+                AnalyticsParameterContentType: "Teacher"
+                ])
+            
             let optionMenu = UIAlertController(title: nil, message: "Favorite this Teacher", preferredStyle: .actionSheet)
             var watchAction: UIAlertAction? = nil
             let doesExist =  WatchList.sharedInstance.doesExistInItemDictionary(model.id , type: .TEACHER)

@@ -7,7 +7,7 @@ import CoreLocation
 public protocol ProjectAPIProtocol {
     init(config:APIConfig, user:String)
     
-    func getData(_ searchModel:SearchDataModel, pageIndex:Int, callback: @escaping ([ProposalModel], APIError?) -> Void)
+    func getData(_ searchModel:ProjectSearchDataModel, pageIndex:Int, callback: @escaping ([ProposalModel], APIError?) -> Void)
     func getData(_ proposalID:String, callback: @escaping (ProposalModel?, APIError?) -> Void)
 }
 
@@ -24,7 +24,7 @@ class ProjectAPI : ProjectAPIProtocol
         self.apiConfig = config
     }
     
-    func makeRequestURL(_ searchModel:SearchDataModel) -> URL? {
+    func makeRequestURL(_ searchModel:ProjectSearchDataModel) -> URL? {
         var components = URLComponents()
         components.scheme = "http"
         components.host = "api.donorschoose.org"
@@ -50,7 +50,7 @@ class ProjectAPI : ProjectAPIProtocol
                 components.queryItems = [maxQueryItem, sortByQueryItem, apiKeyQueryItem, partnerIdQueryItem]
             }
         case .locationLatLong:
-            if let latitude = searchModel.locationLat, let longitude = searchModel.locationLng {
+            if let latitude = searchModel.latitude, let longitude = searchModel.longitude {
                 let centerLatQueryItem = URLQueryItem(name: "centerLat", value: "\(latitude)")
                 let centerLngQueryItem = URLQueryItem(name: "centerLng", value: "\(longitude)")
                 // MAS TODO support other pramters
@@ -112,7 +112,7 @@ class ProjectAPI : ProjectAPIProtocol
         task.resume()
     }
     
-    func getData(_ searchModel:SearchDataModel, pageIndex:Int, callback: @escaping ([ProposalModel], APIError?) -> Void) {
+    func getData(_ searchModel:ProjectSearchDataModel, pageIndex:Int, callback: @escaping ([ProposalModel], APIError?) -> Void) {
         
         guard let requestURL = makeRequestURL(searchModel) else {
             callback([ProposalModel](), APIError.genericNetwork)

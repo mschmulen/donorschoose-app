@@ -54,7 +54,7 @@ open class TopNavViewController: UITabBarController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, userIDString:String, activity:NSUserActivity? ) {
+    public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, user:UserDataModel, activity:NSUserActivity? ) {
         self.activity = activity
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -66,9 +66,9 @@ open class TopNavViewController: UITabBarController {
         return nvc
     }
     
-    public convenience init( userIDString:String, activity:NSUserActivity? )
+    public convenience init( user:UserDataModel, activity:NSUserActivity? )
     {
-        self.init(nibName: nil, bundle: nil, userIDString:userIDString , activity:activity )
+        self.init(nibName: nil, bundle: nil, user:user , activity:activity )
         
         let vcAbout = UIStoryboard(name: "About", bundle: nil).instantiateInitialViewController() as? AboutTableViewController
         let vcUrgent = UIStoryboard(name: "Project", bundle: Bundle.main).instantiateInitialViewController() as? ProjectTableViewController
@@ -77,9 +77,9 @@ open class TopNavViewController: UITabBarController {
         let vcFav = UIStoryboard(name: "Favorites", bundle: Bundle.main).instantiateInitialViewController() as? FavoriteListViewController
         
         vcAbout?.viewData = AboutTableViewController.ViewData(model: nil)
-        vcUrgent?.viewData = ProjectTableViewController.ViewData(initalSearchDataModel: SearchDataModel(type: .urgent, keywordString: nil), viewConfig: ProjectTableViewController.ProjectsVCType.inNeed)
-        vcNearMe?.viewData = ProjectTableViewController.ViewData(initalSearchDataModel: SearchDataModel( type: .locationLatLong, keywordString: "Near Me" ), viewConfig: ProjectTableViewController.ProjectsVCType.nearMe)
-        vcInspiresMe?.viewData = ProjectTableViewController.ViewData(initalSearchDataModel: SearchDataModel(type: .inspiresUser, keywordString: nil), viewConfig: ProjectTableViewController.ProjectsVCType.inspiresME)
+        vcUrgent?.viewData = ProjectTableViewController.ViewData(initalSearchDataModel: ProjectSearchDataModel(type: .urgent, keywordString: nil), viewConfig: ProjectTableViewController.ProjectsVCType.inNeed)
+        vcNearMe?.viewData = ProjectTableViewController.ViewData(initalSearchDataModel: ProjectSearchDataModel( type: .locationLatLong, keywordString: "Near Me" ), viewConfig: ProjectTableViewController.ProjectsVCType.nearMe)
+        vcInspiresMe?.viewData = ProjectTableViewController.ViewData(initalSearchDataModel: ProjectSearchDataModel(type: .inspiresUser, keywordString: nil), viewConfig: ProjectTableViewController.ProjectsVCType.inspiresME)
         
         vcFav?.viewData = FavoriteListViewController.ViewData()
         

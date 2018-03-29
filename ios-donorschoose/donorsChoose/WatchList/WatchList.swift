@@ -148,7 +148,7 @@ public class WatchList {
     //  }
     
     //comparison functions
-    private func isEqual( _ model:SearchDataModel, watchItemDictionary:[String:Any]) -> Bool {
+    private func isEqual( _ model:ProjectSearchDataModel, watchItemDictionary:[String:Any]) -> Bool {
         
         guard let _ = watchItemDictionary["type"] as? String,
             let _ = watchItemDictionary["title"] as? String,
@@ -164,7 +164,7 @@ public class WatchList {
     }
     
     // MAS TODO complete comparison of SearchDataModel withe the WatchItem dictionary
-    func doesExistInItemDictionary( _ model:SearchDataModel ) -> Bool {
+    func doesExistInItemDictionary( _ model:ProjectSearchDataModel ) -> Bool {
         if let itemDictionary = UserDefaults.standard.dictionary(forKey: ITEMS_KEY)  {
             for (_, value) in itemDictionary {
                 if let watchItemValue = value as? [String:Any] {
@@ -271,7 +271,7 @@ public class WatchList {
     
     // CustomSearch , MAS TODO
     // dont use the search keywords as the ModelGUID
-    class func addToWatchList( _ model:SearchDataModel) {
+    class func addToWatchList( _ model:ProjectSearchDataModel) {
         //model.sortOption
         if let keywords = model.keywords {
             // MAS TODO change modelID to a GUID
@@ -280,13 +280,13 @@ public class WatchList {
         }
     }
     
-    class func removeFromWatchList( _ model:SearchDataModel) {
+    class func removeFromWatchList( _ model:ProjectSearchDataModel) {
         if let keywords = model.keywords {
             WatchList.sharedInstance.removeWatchItemByModelID(keywords)
         }
     }
     
-    class func doesWatchListItemExist( _ model:SearchDataModel) -> Bool {
+    class func doesWatchListItemExist( _ model:ProjectSearchDataModel) -> Bool {
         return WatchList.sharedInstance.doesExistInItemDictionary(model)
     }
     

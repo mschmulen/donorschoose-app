@@ -119,24 +119,10 @@ open class LocationDetailViewController: UIViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        
-        // MAS TODO
-//        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-//            AnalyticsParameterItemID: "id-\(schoolID)" as NSObject,
-//            AnalyticsParameterItemName: schoolName ?? "unknown" as NSObject,
-//            AnalyticsParameterContentType: "school" as NSObject
-//            ])
-        
-//        dataAPI = SchoolDataAPI(config: apiConfig, user: "matt", delegate: self)
-//        dataAPI?.getSchoolInfo(viewData.schoolID)
-        
+
         let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(LocationDetailViewController.actionShare(_:)))
         self.navigationItem.rightBarButtonItem = buttonShare
         
-//        Answers.logContentView(withName: "School", contentType: "SchoolDetail", contentId: viewData.schoolID, customAttributes: [
-//            "schoolID":viewData.schoolID,
-//            "Screen Orientation":"Landscape"
-//            ])
     }
     
     override open func didReceiveMemoryWarning() {

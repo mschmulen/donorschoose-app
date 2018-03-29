@@ -17,7 +17,6 @@ class ProjectTableViewController: UITableViewController {
     
     var locationManager:CLLocationManager = CLLocationManager()
     var lastLocation:CLLocation?
-    var locality:String?
     var indexPageRequest = 0
     
     var didShowNotification = false
@@ -31,10 +30,10 @@ class ProjectTableViewController: UITableViewController {
     var tableData = Array<sectionModel>()
     
     enum Section : Hashable {
-        case location(fetchModel:SearchDataModel)
-        case keyword(fetchModel:SearchDataModel)
-        case inspires(fetchModel:SearchDataModel)
-        case none(fetchModel:SearchDataModel)
+        case location(fetchModel:ProjectSearchDataModel)
+        case keyword(fetchModel:ProjectSearchDataModel)
+        case inspires(fetchModel:ProjectSearchDataModel)
+        case none(fetchModel:ProjectSearchDataModel)
         
         var label:String {
             switch self {
@@ -44,12 +43,19 @@ class ProjectTableViewController: UITableViewController {
             case .location ( let fetchModel):
                 print("//\(fetchModel.pageSize)")
                 print("//\(fetchModel)")
-                return "Current Location: "
+                if let locationInfo = fetchModel.locationInfo {
+                    return "Current Location: \(locationInfo.city), \(locationInfo.state)"
+                }
+                return "Current Location:"
             case .keyword ( let fetchModel ):
                 return "\(fetchModel.keywords ?? "")"
             case .inspires ( let fetchModel ):
-                return "projects: \(fetchModel.keywords ?? ""): "
                 print("\(fetchModel.sortOption.shortLabel) \(fetchModel.pageSize)")
+                if let keywords = fetchModel.keywords{
+                    return "Search: \(keywords)"
+                }
+                return "Inspires Me:"
+
             }
         }
         
@@ -132,7 +138,6 @@ class ProjectTableViewController: UITableViewController {
     }
     
     func fetchAll() {
-        print( "fetchAll")
         self.tableData.removeAll()
         for (index,section) in sections.enumerated() {
             print( "fetchSectionData \(index) : \(section.label)")
@@ -150,7 +155,7 @@ class ProjectTableViewController: UITableViewController {
         }
     }
     
-    func fetchSection(_ searchModel:SearchDataModel, section:Section, index:Int) {
+    func fetchSection(_ searchModel:ProjectSearchDataModel, section:Section, index:Int) {
         print( "fetchRecords.type \(searchModel.type.rawValue)")
         print( "fetchRecords.keywords \(searchModel.keywords ?? "~" )")
         
@@ -298,37 +303,36 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
         locationManager.startUpdatingLocation()
     }
     
-    func getLocationName(latitude:Double, longitude:Double)->(state:String, city:String)? {
+    func getLocationInfo(latitude:Double, longitude:Double, callback:((LocationInfo?)->(Void))? = nil) {
         
         let location = CLLocation(latitude: latitude, longitude: longitude)
-        print("getLocationName \(location)")
         
         CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
             print(location)
+            
             if let error = error {
                 print("Reverse geocoder failed with error" + error.localizedDescription)
-                return
+                callback?(nil)
             }
-
-            // let pm = placemarks![0] as! CLPlacemark
-            if let placemarks = placemarks {
-                    if let first = placemarks.first , let locality = first.locality {
-                        print("locality: \(locality)")
-                        print("sub locality: \(first.subLocality)")
-                        self.locality = locality
-                    }
+            
+            if let first = placemarks?.first ,
+                let addressDictionary = first.addressDictionary,
+                let city = addressDictionary["City"] as? String,
+                let state = addressDictionary["State"] as? String,
+                let countryCode = addressDictionary["CountryCode"] as? String,
+                let zip = addressDictionary["ZIP"] as? String
+            {
+                let locationInfo = LocationInfo(city: city, state: state, zip: zip, countryCode: countryCode)
+                callback?(locationInfo)
             }
             else {
-                print("Problem with the data received from geocoder")
-                return
+                callback?(nil)
             }
         })
-        return nil
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let newLocation:CLLocation = locations.first {
-            
             if let lastKnownLocation = lastLocation {
                 let distanceInMeters = newLocation.distance(from: lastKnownLocation)
                 print( "distanceInMeters: \(distanceInMeters) < 100 = early out")
@@ -344,14 +348,23 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
                 return
             }
             
-            //reverse geo lookup the name
-            getLocationName(latitude:location.coordinate.latitude, longitude:location.coordinate.longitude)
-            
-            var locationSearchModel = SearchDataModel(type: .locationLatLong, keywordString: nil)
-            locationSearchModel.locationLat = "\(location.coordinate.latitude)"
-            locationSearchModel.locationLng = "\(location.coordinate.longitude)"
-            sections = [Section.location(fetchModel: locationSearchModel)]
-            fetchAll()
+            getLocationInfo(latitude:location.coordinate.latitude, longitude:location.coordinate.longitude, callback: { locationInfo in
+                if let info = locationInfo {
+                    print( "info: \(info) ")
+                    var locationSearchModel = ProjectSearchDataModel(type: .locationLatLong, keywordString: nil)
+                    locationSearchModel.latitude = location.coordinate.latitude
+                    locationSearchModel.longitude = location.coordinate.longitude
+                    locationSearchModel.locationInfo = info
+                    self.sections = [Section.location(fetchModel: locationSearchModel)]
+                    self.fetchAll()
+                } else {
+                    var locationSearchModel = ProjectSearchDataModel(type: .locationLatLong, keywordString: nil)
+                    locationSearchModel.latitude = location.coordinate.latitude
+                    locationSearchModel.longitude = location.coordinate.longitude
+                    self.sections = [Section.location(fetchModel: locationSearchModel)]
+                    self.fetchAll()
+                }
+            })
         }
     }
     
@@ -381,7 +394,7 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
 }
 
 extension ProjectTableViewController : ProjectSearchDelegate {
-    public func searchUpdate( _ newSearchModel: SearchDataModel ) {
+    public func searchUpdate( _ newSearchModel: ProjectSearchDataModel ) {
         // MAS TODO Update SearchUpdate
         // currentSearchModel = newSearchModel
         // fetch()
@@ -422,12 +435,12 @@ extension ProjectTableViewController {
         case inspiresME
         case customSearch
         
-        var defaultSearchModels:[SearchDataModel]? {
+        var defaultSearchModels:[ProjectSearchDataModel]? {
             switch self {
             case .inNeed:
-                return [SearchDataModel(type: .urgent, keywordString: nil)]
+                return [ProjectSearchDataModel(type: .urgent, keywordString: nil)]
             case .nearMe:
-                return [SearchDataModel(type: .locationLatLong, keywordString: nil)]
+                return [ProjectSearchDataModel(type: .locationLatLong, keywordString: nil)]
             case .inspiresME, .customSearch:
                 return nil
             }
@@ -435,7 +448,7 @@ extension ProjectTableViewController {
     }
     
     struct ViewData {
-        let initalSearchDataModel:SearchDataModel
+        let initalSearchDataModel:ProjectSearchDataModel
         let viewConfig:ProjectsVCType
         let user:UserDataModel = UserDataModel()
         let apiConfig:APIConfig = APIConfig()

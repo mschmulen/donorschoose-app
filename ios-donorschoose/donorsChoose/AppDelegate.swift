@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import Fabric
-import Crashlytics
+import Firebase
+//import Fabric
+//import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,14 +18,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var topNav: TopNavViewController? = nil
     
+    var userInfo:UserDataModel? = UserDataModel()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        FirebaseApp.configure()
         
         // Fabric.with([Crashlytics.self])
         // Fabric.with([Answers.self])
         
         WatchList.registerNotificationSettings( application )
         
-        topNav = TopNavViewController(userIDString: "1111", activity: nil)
+        if let user = userInfo {
+            topNav = TopNavViewController(user: user, activity: nil)
+        } else  {
+            topNav = TopNavViewController(user: UserDataModel(), activity: nil)
+        }
         window?.rootViewController = topNav
         
         return true

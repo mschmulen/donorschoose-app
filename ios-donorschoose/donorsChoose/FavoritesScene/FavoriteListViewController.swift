@@ -14,7 +14,7 @@ public class FavoriteListViewController: UITableViewController {
     var favorites:[Row] = [Row]()
     
     @IBAction func actionAddFavorite(_ sender: AnyObject) {
-        let searchModel = SearchDataModel(type: .keyword, keywordString: "")
+        let searchModel = ProjectSearchDataModel(type: .keyword, keywordString: "")
         let vc = ProjectSearchViewController(searchModel: searchModel , callbackDelegate:self)
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -186,7 +186,7 @@ public class FavoriteListViewController: UITableViewController {
         else if item is WatchItemCustomSearch {
             
             if let vc = UIStoryboard(name: "Project", bundle: Bundle.main).instantiateInitialViewController() as? ProjectTableViewController {
-                vc.viewData = ProjectTableViewController.ViewData(initalSearchDataModel: SearchDataModel(type: .keyword, keywordString: item.title),viewConfig: ProjectTableViewController.ProjectsVCType.customSearch)
+                vc.viewData = ProjectTableViewController.ViewData(initalSearchDataModel: ProjectSearchDataModel(type: .keyword, keywordString: item.title),viewConfig: ProjectTableViewController.ProjectsVCType.customSearch)
                 
                 if let nav = self.navigationController {
                     nav.pushViewController(vc, animated: true)
@@ -212,7 +212,7 @@ public class FavoriteListViewController: UITableViewController {
 }
 
 extension FavoriteListViewController : ProjectSearchDelegate {
-    public func searchUpdate( _ newSearchModel: SearchDataModel ) {
+    public func searchUpdate( _ newSearchModel: ProjectSearchDataModel ) {
         let searchModel = newSearchModel
         print( "searchModel \(String(describing: searchModel.keywords))")
         // print( "searchModel \(searchModel.subject1)")
