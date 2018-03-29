@@ -1,5 +1,9 @@
 //
-// ProjectSearchViewController.swift
+//  ProjectSearchViewController.swift
+//  donorsChoose
+//
+//  Created by Matt Schmulen on 3/29/18.
+//  Copyright © 2018 jumptack. All rights reserved.
 //
 
 import UIKit
@@ -22,18 +26,17 @@ open class ProjectSearchViewController: UIViewController {
         didSet {
             tableViewResults.isHidden = true
             tableViewResults.delegate = self
-            tableViewResults.dataSource = self 
+            tableViewResults.dataSource = self
         }
     }
-    @IBOutlet weak var buttonSearch: UIButton!
     
     @IBOutlet weak var textFieldSearchTopics: UITextField!
     
-    @IBOutlet weak var textFieldLocation: UITextField! {
-        didSet {
-            textFieldLocation.isHidden = !viewData.showLocationSearch
-        }
-    }
+//    @IBOutlet weak var textFieldLocation: UITextField! {
+//        didSet {
+//            textFieldLocation.isHidden = !viewData.showLocationSearch
+//        }
+//    }
     
     @IBOutlet weak var pickerSortOrder: UIPickerView!
     
@@ -138,11 +141,12 @@ open class ProjectSearchViewController: UIViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        
         dataAPI = ProjectAPI(config: viewData.apiConfig,user: "matt")
         
-        // let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProjectSearchViewController.actionShare(_:)))
-        // self.navigationItem.rightBarButtonItem = buttonShare
+        // let buttonSave : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProjectSearchViewController.actionSaveSearch(_:)))
+        let buttonSave = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(ProjectSearchViewController.actionSaveSearch(_:)))
+        
+        self.navigationItem.rightBarButtonItem = buttonSave
         
         textFieldSearchTopics.delegate = self
         textFieldSearchTopics.text = viewData.searchModel.keywords
@@ -171,13 +175,13 @@ open class ProjectSearchViewController: UIViewController {
 
 extension ProjectSearchViewController : UITextFieldDelegate {
     
-//    public func textFieldDidEndEditing(_ textField: UITextField) {
-//        print( "did end")
-//    }
-//
-//    public func textFieldDidBeginEditing(_ textField: UITextField) {
-//        print( "did begine")
-//    }
+    //    public func textFieldDidEndEditing(_ textField: UITextField) {
+    //        print( "did end")
+    //    }
+    //
+    //    public func textFieldDidBeginEditing(_ textField: UITextField) {
+    //        print( "did begine")
+    //    }
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textFieldSearchTopics.resignFirstResponder()
@@ -228,17 +232,17 @@ extension ProjectSearchViewController : UIPickerViewDelegate {
 }
 
 extension ProjectSearchViewController : UITableViewDataSource {
-
+    
     public func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return results.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell: ProposalTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
+        //        let cell: ProposalTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
         let cell = UITableViewCell()
         cell.textLabel?.text = results[ indexPath.row ].title
         return cell
@@ -246,35 +250,35 @@ extension ProjectSearchViewController : UITableViewDataSource {
 }
 
 extension ProjectSearchViewController : UITableViewDelegate {
-
-//    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let detailVC = ProposalDetailViewController(apiConfig:apiConfig, model: tableData[(indexPath as NSIndexPath).row] )
-//        if let nav = self.navigationController {
-//            nav.pushViewController(detailVC, animated: true)
-//        }
-//        else
-//        {
-//            self.present(detailVC, animated: true, completion: nil)
-//        }
-//    }
     
-//    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        if((indexPath as NSIndexPath).row < tableData.count)
-//        {
-//            if let atvc:AnimatedTableViewCellProtocol = cell as? AnimatedTableViewCellProtocol {
-//                atvc.startAnimation()
-//            }
-//        }
-//    }
+    //    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //        let detailVC = ProposalDetailViewController(apiConfig:apiConfig, model: tableData[(indexPath as NSIndexPath).row] )
+    //        if let nav = self.navigationController {
+    //            nav.pushViewController(detailVC, animated: true)
+    //        }
+    //        else
+    //        {
+    //            self.present(detailVC, animated: true, completion: nil)
+    //        }
+    //    }
+    
+    //    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    //        if((indexPath as NSIndexPath).row < tableData.count)
+    //        {
+    //            if let atvc:AnimatedTableViewCellProtocol = cell as? AnimatedTableViewCellProtocol {
+    //                atvc.startAnimation()
+    //            }
+    //        }
+    //    }
 }
 
 
 extension ProjectSearchViewController {
-
+    
     struct ViewData {
         let showLocationSearch = false
         var searchModel:ProjectSearchDataModel
         let apiConfig:APIConfig = APIConfig()
     }
-
+    
 }

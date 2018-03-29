@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProjectSearchViewController" customModule="donorsChoose" customModuleProvider="target">
             <connections>
-                <outlet property="buttonSearch" destination="Bmo-ay-UBO" id="Y22-dV-frl"/>
-                <outlet property="pickerSortOrder" destination="CeD-OO-o4l" id="eMp-ue-Fsq"/>
-                <outlet property="tableViewResults" destination="sxN-9c-bGo" id="MQe-ws-NbC"/>
-                <outlet property="textFieldLocation" destination="lFR-qc-Wr8" id="AcM-AB-S3l"/>
-                <outlet property="textFieldSearchTopics" destination="cjE-dY-BcQ" id="pK3-Zx-tx7"/>
+                <outlet property="pickerSortOrder" destination="8Wb-tl-yuw" id="6mp-Xu-f2P"/>
+                <outlet property="tableViewResults" destination="uQf-OW-T22" id="dIM-OF-0VB"/>
+                <outlet property="textFieldSearchTopics" destination="92n-tf-LR8" id="NoR-wl-CUT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,81 +23,57 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Projects" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZB6-LV-Xee">
-                    <rect key="frame" x="8" y="99" width="359" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Projects" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nm5-a1-Y3N">
+                    <rect key="frame" x="8" y="60" width="359" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search topics, teachers &amp; Schools" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cjE-dY-BcQ">
-                    <rect key="frame" x="20" y="128" width="335" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search topics, teachers &amp; Schools" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="92n-tf-LR8">
+                    <rect key="frame" x="20" y="89" width="335" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CeD-OO-o4l">
-                    <rect key="frame" x="8" y="245" width="359" height="80"/>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Wb-tl-yuw">
+                    <rect key="frame" x="8" y="158" width="359" height="80"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="80" id="YYR-JW-IAF"/>
+                        <constraint firstAttribute="height" constant="80" id="Opr-gU-L1m"/>
                     </constraints>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="k1c-ue-UNC"/>
-                        <outlet property="delegate" destination="-1" id="CRx-AK-hFC"/>
+                        <outlet property="dataSource" destination="-1" id="wjj-WJ-gkf"/>
+                        <outlet property="delegate" destination="-1" id="cM6-Bk-wlV"/>
                     </connections>
                 </pickerView>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City, State or zip" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lFR-qc-Wr8">
-                    <rect key="frame" x="20" y="166" width="335" height="30"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort Priority" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbA-8u-SD7">
-                    <rect key="frame" x="141.5" y="216" width="91.5" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort Priority" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIy-4U-sNC">
+                    <rect key="frame" x="142" y="129" width="91.5" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sxN-9c-bGo">
-                    <rect key="frame" x="8" y="333" width="359" height="320"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uQf-OW-T22">
+                    <rect key="frame" x="8" y="246" width="359" height="401"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bmo-ay-UBO">
-                    <rect key="frame" x="288" y="60" width="79" height="34"/>
-                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="79" id="h5Z-zr-pP4"/>
-                    </constraints>
-                    <state key="normal" title="Save">
-                        <color key="titleColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="actionSaveSearch:" destination="-1" eventType="touchUpInside" id="f4E-V0-TGt"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="cjE-dY-BcQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="1ei-6U-g0Y"/>
-                <constraint firstAttribute="trailing" secondItem="sxN-9c-bGo" secondAttribute="trailing" constant="8" id="Be2-nc-CV2"/>
-                <constraint firstAttribute="trailing" secondItem="ZB6-LV-Xee" secondAttribute="trailing" constant="8" id="CD2-gR-BOK"/>
-                <constraint firstItem="Bmo-ay-UBO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="60" id="D2c-lY-mXj"/>
-                <constraint firstItem="ZB6-LV-Xee" firstAttribute="top" secondItem="Bmo-ay-UBO" secondAttribute="bottom" constant="5" id="DjT-J6-x42"/>
-                <constraint firstItem="CeD-OO-o4l" firstAttribute="top" secondItem="LbA-8u-SD7" secondAttribute="bottom" constant="8" symbolic="YES" id="ITA-dZ-fRC"/>
-                <constraint firstItem="LbA-8u-SD7" firstAttribute="top" secondItem="lFR-qc-Wr8" secondAttribute="bottom" constant="20" id="LDk-9p-fJA"/>
-                <constraint firstAttribute="trailing" secondItem="cjE-dY-BcQ" secondAttribute="trailing" constant="20" id="Tis-B3-eLu"/>
-                <constraint firstItem="lFR-qc-Wr8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="TsV-Gp-XKI"/>
-                <constraint firstItem="CeD-OO-o4l" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="UcW-fG-Ogp"/>
-                <constraint firstItem="ZB6-LV-Xee" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Zcq-R7-Tza"/>
-                <constraint firstAttribute="trailing" secondItem="CeD-OO-o4l" secondAttribute="trailing" constant="8" id="dPA-DB-gFd"/>
-                <constraint firstItem="LbA-8u-SD7" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="e2G-zT-PKg"/>
-                <constraint firstAttribute="trailing" secondItem="lFR-qc-Wr8" secondAttribute="trailing" constant="20" id="epk-wW-sxU"/>
-                <constraint firstItem="cjE-dY-BcQ" firstAttribute="top" secondItem="ZB6-LV-Xee" secondAttribute="bottom" constant="8" id="fFJ-gf-mQG"/>
-                <constraint firstAttribute="trailing" secondItem="Bmo-ay-UBO" secondAttribute="trailing" constant="8" id="fbn-zR-BoT"/>
-                <constraint firstItem="sxN-9c-bGo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="hYb-m9-DPV"/>
-                <constraint firstItem="sxN-9c-bGo" firstAttribute="top" secondItem="CeD-OO-o4l" secondAttribute="bottom" constant="8" id="oMI-TV-8Jt"/>
-                <constraint firstItem="lFR-qc-Wr8" firstAttribute="top" secondItem="cjE-dY-BcQ" secondAttribute="bottom" constant="8" id="raU-2C-mDH"/>
-                <constraint firstAttribute="bottom" secondItem="sxN-9c-bGo" secondAttribute="bottom" constant="14" id="y95-TW-hyt"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="92n-tf-LR8" secondAttribute="trailing" constant="20" id="3wQ-Q4-4Mm"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Nm5-a1-Y3N" secondAttribute="trailing" constant="8" id="4ES-Di-XUF"/>
+                <constraint firstItem="KIy-4U-sNC" firstAttribute="top" secondItem="92n-tf-LR8" secondAttribute="bottom" constant="10" id="930-eh-QaO"/>
+                <constraint firstItem="8Wb-tl-yuw" firstAttribute="top" secondItem="KIy-4U-sNC" secondAttribute="bottom" constant="8" symbolic="YES" id="A3J-Pv-jQc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8Wb-tl-yuw" secondAttribute="trailing" constant="8" id="KAi-j4-paM"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="uQf-OW-T22" secondAttribute="trailing" constant="8" id="LD5-mY-ugG"/>
+                <constraint firstItem="KIy-4U-sNC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WZH-gr-9WG"/>
+                <constraint firstItem="Nm5-a1-Y3N" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="Z4U-7Z-hy9"/>
+                <constraint firstItem="92n-tf-LR8" firstAttribute="top" secondItem="Nm5-a1-Y3N" secondAttribute="bottom" constant="8" id="hvf-yh-RLG"/>
+                <constraint firstItem="92n-tf-LR8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="k7J-xc-OmO"/>
+                <constraint firstItem="8Wb-tl-yuw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="q2R-jf-aYW"/>
+                <constraint firstItem="uQf-OW-T22" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="tWn-wK-DmI"/>
+                <constraint firstItem="Nm5-a1-Y3N" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="vLY-VM-1io"/>
+                <constraint firstItem="uQf-OW-T22" firstAttribute="top" secondItem="8Wb-tl-yuw" secondAttribute="bottom" constant="8" id="xoV-RC-6KZ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="uQf-OW-T22" secondAttribute="bottom" constant="20" id="yVv-TG-dEL"/>
             </constraints>
-            <point key="canvasLocation" x="34.5" y="53.5"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
     </objects>
 </document>
