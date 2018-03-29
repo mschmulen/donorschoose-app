@@ -16,7 +16,8 @@ class ProjectTableViewController: UITableViewController {
     var showFavorites:(()->(Void))?
     
     var locationManager:CLLocationManager = CLLocationManager()
-    var lastLocation:CLLocation? //CLLocationCoordinate2D? =  nil
+    var lastLocation:CLLocation?
+    var locality:String?
     var indexPageRequest = 0
     
     var didShowNotification = false
@@ -37,14 +38,18 @@ class ProjectTableViewController: UITableViewController {
         
         var label:String {
             switch self {
-            case .none ( let fetchModel ):
-                return "" //urgent: "//\(fetchModel.pageSize)"
-            case .location ( let fetchModel ):
-                return "Current Location: "//\(fetchModel.pageSize)"
+            case .none ( let fetchModel):
+                print( "//\(fetchModel.pageSize)")
+                return ""
+            case .location ( let fetchModel):
+                print("//\(fetchModel.pageSize)")
+                print("//\(fetchModel)")
+                return "Current Location: "
             case .keyword ( let fetchModel ):
-                return "\(fetchModel.keywords ?? "")"//" \(fetchModel.pageSize)"
+                return "\(fetchModel.keywords ?? "")"
             case .inspires ( let fetchModel ):
-                return "\(fetchModel.keywords ?? ""): \(fetchModel.sortOption.shortLabel) \(fetchModel.pageSize)"
+                return "projects: \(fetchModel.keywords ?? ""): "
+                print("\(fetchModel.sortOption.shortLabel) \(fetchModel.pageSize)")
             }
         }
         
@@ -293,6 +298,34 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
         locationManager.startUpdatingLocation()
     }
     
+    func getLocationName(latitude:Double, longitude:Double)->(state:String, city:String)? {
+        
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        print("getLocationName \(location)")
+        
+        CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
+            print(location)
+            if let error = error {
+                print("Reverse geocoder failed with error" + error.localizedDescription)
+                return
+            }
+
+            // let pm = placemarks![0] as! CLPlacemark
+            if let placemarks = placemarks {
+                    if let first = placemarks.first , let locality = first.locality {
+                        print("locality: \(locality)")
+                        print("sub locality: \(first.subLocality)")
+                        self.locality = locality
+                    }
+            }
+            else {
+                print("Problem with the data received from geocoder")
+                return
+            }
+        })
+        return nil
+    }
+    
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let newLocation:CLLocation = locations.first {
             
@@ -310,6 +343,10 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
             guard let location = lastLocation  else {
                 return
             }
+            
+            //reverse geo lookup the name
+            getLocationName(latitude:location.coordinate.latitude, longitude:location.coordinate.longitude)
+            
             var locationSearchModel = SearchDataModel(type: .locationLatLong, keywordString: nil)
             locationSearchModel.locationLat = "\(location.coordinate.latitude)"
             locationSearchModel.locationLng = "\(location.coordinate.longitude)"

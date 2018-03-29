@@ -11,7 +11,8 @@ public protocol ProjectSearchDelegate {
 open class ProjectSearchViewController: UIViewController {
     
     var viewData:ViewData
-    // fileprivate var currentSearchModel:SearchDataModel
+    fileprivate let callbackDelegate: ProjectSearchDelegate
+    
     @IBOutlet weak var tableViewResults: UITableView!
     @IBOutlet weak var buttonSearch: UIButton!
     
@@ -37,28 +38,18 @@ open class ProjectSearchViewController: UIViewController {
             )
             self.viewData = newViewData
             
-//            self.currentSearchModel.keywords = newSearchString
-//            var newSearchStruct = SearchDataModel( type: .keyword, keywordString:newSearchString )
-//            newSearchStruct.sortOption = SearchDataModel.SearchSortOption.enumFromRowValue(pickerSortOrder.selectedRow(inComponent: 0))
-            callbackDelegate.searchUpdate(viewData.searchModel)
-            _ = self.navigationController?.popViewController(animated: true)            
+            saveToFavorites()
         }
     }
     
-    func actionSave() {
-        favoriteAlertController()
-    }
-    
-    @IBAction func actionShare( _ sender:AnyObject ) {
-        favoriteAlertController()
-    }
-    
-    fileprivate let callbackDelegate: ProjectSearchDelegate
-    
-    func favoriteAlertController() {
+    func saveToFavorites() {
         
         guard let searchString = textFieldSearchTopics.text else { return }
         if (searchString.isEmpty) == true { return }
+        
+        //            self.currentSearchModel.keywords = newSearchString
+        //            var newSearchStruct = SearchDataModel( type: .keyword, keywordString:newSearchString )
+        //            newSearchStruct.sortOption = SearchDataModel.SearchSortOption.enumFromRowValue(pickerSortOrder.selectedRow(inComponent: 0))
         
         let newViewData = ViewData(
             searchModel: SearchDataModel(
@@ -82,7 +73,10 @@ open class ProjectSearchViewController: UIViewController {
         else {
             watchAction = UIAlertAction(title: "Add To My Favorites", style: .default, handler: {
                 (alert:UIAlertAction!) -> Void in
+                
                 WatchList.addToWatchList( self.viewData.searchModel)
+                self.callbackDelegate.searchUpdate(self.viewData.searchModel)
+                _ = self.navigationController?.popViewController(animated: true)
             })
         }
         
@@ -104,8 +98,8 @@ open class ProjectSearchViewController: UIViewController {
         //analytics
         //viewDidLoadEvent(String(describing: self))
         
-        let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProjectSearchViewController.actionShare(_:)))
-        self.navigationItem.rightBarButtonItem = buttonShare
+//        let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProjectSearchViewController.actionShare(_:)))
+//        self.navigationItem.rightBarButtonItem = buttonShare
         
         textFieldSearchTopics.delegate = self
         textFieldSearchTopics.text = viewData.searchModel.keywords
