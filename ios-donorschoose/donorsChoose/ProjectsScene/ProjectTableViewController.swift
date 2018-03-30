@@ -36,7 +36,7 @@ class ProjectTableViewController: UITableViewController {
         
         var label:String {
             switch self {
-            case .none ( let fetchModel):
+            case .none ( _ ):
                 return ""
             case .location ( let fetchModel):
                 if let locationInfo = fetchModel.locationInfo {
