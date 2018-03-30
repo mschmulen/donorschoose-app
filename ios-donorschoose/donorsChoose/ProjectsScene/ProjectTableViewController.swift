@@ -300,7 +300,6 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
         let location = CLLocation(latitude: latitude, longitude: longitude)
         
         CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
-            print(location)
             
             if let error = error {
                 print("Reverse geocoder failed with error" + error.localizedDescription)
@@ -342,7 +341,6 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
             
             getLocationInfo(latitude:location.coordinate.latitude, longitude:location.coordinate.longitude, callback: { locationInfo in
                 if let info = locationInfo {
-                    print( "info: \(info) ")
                     var locationSearchModel = ProjectSearchDataModel(type: .locationLatLong, keywordString: nil)
                     locationSearchModel.latitude = location.coordinate.latitude
                     locationSearchModel.longitude = location.coordinate.longitude
@@ -372,12 +370,10 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
             updateLocation()
         case .authorizedWhenInUse:
             updateLocation()
-        case .denied:
-            print(".Denied")
-        case .notDetermined:
-            print(".notDetermined")
-        case .restricted:
-            print( "restricted")
+        case .denied, .notDetermined, .restricted:
+            if let alertVC = AlertFactory.AlertFromLocationStatus(status) {
+                self.present(alertVC, animated: true, completion: nil)
+            }
         }
     }
 }

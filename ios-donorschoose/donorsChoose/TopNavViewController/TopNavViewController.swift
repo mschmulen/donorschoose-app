@@ -148,31 +148,7 @@ open class TopNavViewController: UITabBarController {
     
 }
 
-// MARK: - ProjectDataAPIDelegate
-//extension TopNavViewController : ProjectAPIDelegate {
-//
-//    public func dataUpdateCallback( _ dataAPI: ProjectAPIProtocol, didChangeData data:[ProposalModel]?, error:APIError? ) {
-//
-//        if let error = error {
-//            //MAS TODO Alert Error
-//            print( "error \(error)")
-//        }
-//        else {
-//            if let newData = data {
-//                if newData.count > 0 {
-//                    let model = newData[0]
-//                    showHighlightProjectID(model)
-//                }
-//                else {
-//                    //MAS TODO Alert Error
-//                }
-//            }
-//        }
-//
-//    }
-//}
-
-extension TopNavViewController {    
+extension TopNavViewController {
     struct ViewData {
         let apiConfig = APIConfig()
         let devMode = false
