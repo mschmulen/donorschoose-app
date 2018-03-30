@@ -15,7 +15,7 @@ public class FavoriteListViewController: UITableViewController {
     
     @IBAction func actionAddFavorite(_ sender: AnyObject) {
         let searchModel = ProjectSearchDataModel(type: .keyword, keywordString: "")
-        let vc = ProjectSearchViewController(searchModel: searchModel , callbackDelegate:self)
+        let vc = ProjectSearchViewController(searchModel: searchModel)// , callbackDelegate:self)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -30,7 +30,6 @@ public class FavoriteListViewController: UITableViewController {
         var label:String {
             switch self {
             case .favorite: return "favorite"
-                
                 // case .proposal: return "Search Projects"
                 // case .teachers: return "Search Projects (New)"
                 // case .schools: return "Search Schools"
@@ -73,7 +72,7 @@ public class FavoriteListViewController: UITableViewController {
         
         let buttonAddFavorite : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(FavoriteListViewController.actionAddFavorite(_:)))
         self.navigationItem.rightBarButtonItem = buttonAddFavorite
-
+        
     }
     
     override open func viewWillAppear(_ animated: Bool) {
@@ -127,25 +126,25 @@ public class FavoriteListViewController: UITableViewController {
         case .UNKNOWN:
             cell.detailTextLabel?.text = "~"
         }
-            
-//        if item is WatchItemProposal {
-//            cell.detailTextLabel?.text = "Proposal"
-//        }
-//        else if item is WatchItemTeacher {
-//
-//        }
-//        else if item is WatchItemSchool {
-//        }
-//
-//        else if item is WatchItemCustomSearch {
-//
-//        }
-//        else if item is WatchItemUnknown {
-//            cell.detailTextLabel?.text = "UNKNOWN"
-//        }
-//        else {
-//            cell.detailTextLabel?.text = "UNKNOWN"
-//        }
+        
+        //        if item is WatchItemProposal {
+        //            cell.detailTextLabel?.text = "Proposal"
+        //        }
+        //        else if item is WatchItemTeacher {
+        //
+        //        }
+        //        else if item is WatchItemSchool {
+        //        }
+        //
+        //        else if item is WatchItemCustomSearch {
+        //
+        //        }
+        //        else if item is WatchItemUnknown {
+        //            cell.detailTextLabel?.text = "UNKNOWN"
+        //        }
+        //        else {
+        //            cell.detailTextLabel?.text = "UNKNOWN"
+        //        }
         return cell
     }
     
@@ -210,18 +209,6 @@ public class FavoriteListViewController: UITableViewController {
         }
     }
 }
-
-extension FavoriteListViewController : ProjectSearchDelegate {
-    public func searchUpdate( _ newSearchModel: ProjectSearchDataModel ) {
-        let searchModel = newSearchModel
-        print( "searchModel \(String(describing: searchModel.keywords))")
-        // print( "searchModel \(searchModel.subject1)")
-        print( "searchModel \(searchModel.type.rawValue)")
-        print( "searchModel \(searchModel.sortOption.pickerLabel)")
-        // fetchData()
-    }
-}
-
 
 extension FavoriteListViewController {
     

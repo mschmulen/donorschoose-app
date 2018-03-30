@@ -46,7 +46,7 @@ public struct ProjectSearchDataModel : Codable, UserDefaultStorable {
     public enum SearchSortOption:Int, Codable {
         case urgency = 0
         case poverty = 1
-        case lowest_COST = 2
+        case lowestCost = 2
         case popularity = 4
         case expiration = 5
         case newest = 7
@@ -55,7 +55,7 @@ public struct ProjectSearchDataModel : Codable, UserDefaultStorable {
             switch ( self ) {
             case .urgency : return 0
             case .poverty: return 1
-            case .lowest_COST: return 2
+            case .lowestCost: return 2
             case .popularity: return 4
             case .expiration: return 5
             case .newest: return 7
@@ -68,7 +68,7 @@ public struct ProjectSearchDataModel : Codable, UserDefaultStorable {
             switch row {
             case 1: return .urgency
             case 2: return .poverty
-            case 3: return .lowest_COST
+            case 3: return .lowestCost
             case 4: return .popularity
             case 5: return .expiration
             default: return .newest
@@ -77,12 +77,12 @@ public struct ProjectSearchDataModel : Codable, UserDefaultStorable {
         
         var shortLabel: String {
             switch self {
-            case .urgency: return "urgency first"
-            case .poverty: return "poverty first"
-            case .lowest_COST: return "lowest cost to complete"
+            case .urgency: return "urgency"
+            case .poverty: return "poverty"
+            case .lowestCost: return "lowest cost to complete"
             case .popularity: return "popularity"
-            case .expiration: return "expiring first"
-            case .newest: return "newest first"
+            case .expiration: return "expiring"
+            case .newest: return "newest"
             }
         }
         
@@ -90,7 +90,7 @@ public struct ProjectSearchDataModel : Codable, UserDefaultStorable {
             switch self {
             case .urgency: return "Show high urgency first" // shows projects with higher urgency
             case .poverty: return "Show highest poverty first" //Poverty shows projects from schools with the highest levels of poverty at the top
-            case .lowest_COST: return "Show by lowest cost to complete" //Cost shows projects with the lowest cost to complete at the top
+            case .lowestCost: return "Show by lowest cost to complete" //Cost shows projects with the lowest cost to complete at the top
             case .popularity: return "Show by popularity"//Popularity shows projects with higher numbers of donors at the top
             case .expiration: return "Show expiring first" //Expiration shows projects that are closest to expiring
             case .newest: return "Show newest first" //Newest shows projects that were created most recently

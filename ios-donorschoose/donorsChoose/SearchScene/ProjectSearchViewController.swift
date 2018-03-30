@@ -9,18 +9,22 @@
 import UIKit
 import Firebase
 
-public protocol ProjectSearchDelegate {
-    func searchUpdate( _ newSearchModel: ProjectSearchDataModel )
-}
+//public protocol ProjectSearchDelegate {
+//    func searchUpdate( _ newSearchModel: ProjectSearchDataModel )
+//}
 
 open class ProjectSearchViewController: UIViewController {
     
-    var viewData:ViewData
+    var viewData:ViewData {
+        didSet {
+            fetch(viewData.searchModel)
+        }
+    }
     var dataAPI:ProjectAPIProtocol?
     
     var results:[ProposalModel] = [ProposalModel]()
     
-    fileprivate let callbackDelegate: ProjectSearchDelegate
+    // fileprivate let callbackDelegate: ProjectSearchDelegate
     
     @IBOutlet weak var tableViewResults: UITableView! {
         didSet {
@@ -30,15 +34,29 @@ open class ProjectSearchViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var sortControl: UISegmentedControl! {
+        didSet {
+            sortControl.removeAllSegments()
+            let items = viewData.sortOptions.map({ $0.shortLabel})
+            for (index,item) in items.enumerated() {
+                sortControl.insertSegment(withTitle: item, at: index, animated: true)
+            }
+        }
+    }
+    
+    @IBAction func sortChanged(_ sender: UISegmentedControl) {
+        var newViewData = ViewData(
+            searchModel: ProjectSearchDataModel(
+                type: viewData.searchModel.type,
+                keywordString: viewData.searchModel.keywords
+            )
+        )
+        newViewData.searchModel.sortOption = viewData.sortOptions[sender.selectedSegmentIndex]
+        
+        self.viewData = newViewData
+    }
+    
     @IBOutlet weak var textFieldSearchTopics: UITextField!
-    
-//    @IBOutlet weak var textFieldLocation: UITextField! {
-//        didSet {
-//            textFieldLocation.isHidden = !viewData.showLocationSearch
-//        }
-//    }
-    
-    @IBOutlet weak var pickerSortOrder: UIPickerView!
     
     @IBAction func actionSaveSearch(_ sender: AnyObject) {
         
@@ -57,13 +75,9 @@ open class ProjectSearchViewController: UIViewController {
     }
     
     func fetch(_ searchModel:ProjectSearchDataModel) {
-        print( "fetchRecords.type \(searchModel.type.rawValue)")
-        print( "fetchRecords.keywords \(searchModel.keywords ?? "~" )")
-        
         dataAPI?.getData(searchModel, pageIndex: 0, callback: { (data, error) in
             if let someError = error {
                 print( "\(someError)")
-                // self.processError(someError)
             }
             else {
                 DispatchQueue.main.async(execute: {
@@ -74,18 +88,6 @@ open class ProjectSearchViewController: UIViewController {
                 })
             }
         })
-        
-        //        guard let viewData = viewData else { return }
-        // MAS TODO support page index Loading
-        //        if searchModel.type == .locationLatLong {
-        //            if let searchLocation  = self.currentLocation {
-        //                dataAPI?.getDataWithSearchModelAndLocation( searchModel, location: searchLocation, pageSize: searchModel.maxPageSize, pageIndex: indexPageRequest) //indexPageRequest default to zero )
-        //            }
-        //        }
-        //        else {
-        // MAS TODO support the pageIndex for secondary requests
-        //            dataAPI?.getDataWithSearchModel(searchModel, pageSize:searchModel.maxPageSize, pageIndex: indexPageRequest)
-        //        }
     }
     
     func saveToFavorites() {
@@ -120,9 +122,7 @@ open class ProjectSearchViewController: UIViewController {
         else {
             watchAction = UIAlertAction(title: "Add To My Favorites", style: .default, handler: {
                 (alert:UIAlertAction!) -> Void in
-                
                 WatchList.addToWatchList( self.viewData.searchModel)
-                self.callbackDelegate.searchUpdate(self.viewData.searchModel)
                 _ = self.navigationController?.popViewController(animated: true)
             })
         }
@@ -161,73 +161,49 @@ open class ProjectSearchViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!, searchModel:ProjectSearchDataModel , callbackDelegate:ProjectSearchDelegate ) {
-        self.callbackDelegate = callbackDelegate
+    init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!, searchModel:ProjectSearchDataModel) {
         viewData = ViewData(searchModel:searchModel)
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    public convenience init( searchModel:ProjectSearchDataModel , callbackDelegate:ProjectSearchDelegate)
-    {
-        self.init(nibName: "ProjectSearchViewController", bundle: Bundle(for: ProjectSearchViewController.self), searchModel:searchModel , callbackDelegate:callbackDelegate )
+    public convenience init( searchModel:ProjectSearchDataModel ) {
+        self.init(nibName: "ProjectSearchViewController", bundle: Bundle(for: ProjectSearchViewController.self), searchModel:searchModel)
     }
 }
 
 extension ProjectSearchViewController : UITextFieldDelegate {
     
-    //    public func textFieldDidEndEditing(_ textField: UITextField) {
-    //        print( "did end")
-    //    }
-    //
-    //    public func textFieldDidBeginEditing(_ textField: UITextField) {
-    //        print( "did begine")
-    //    }
-    
-    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textFieldSearchTopics.resignFirstResponder()
-        if let newSearchString = textField.text , (newSearchString.isEmpty == false) {
-            let newViewData = ViewData(
-                searchModel: ProjectSearchDataModel(
-                    type: viewData.searchModel.type,
-                    keywordString: newSearchString
-                )
-            )
-            self.viewData = newViewData
-            fetch(viewData.searchModel)
-        }
-        return true
-    }
-}
-
-extension ProjectSearchViewController : UIPickerViewDataSource {
-    
-    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return ProjectSearchDataModel.SearchSortOption.pickerOptions.count
-    }
-    
-}
-
-extension ProjectSearchViewController : UIPickerViewDelegate {
-    
-    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return ProjectSearchDataModel.SearchSortOption.enumFromRowValue(row).pickerLabel
-    }
-    
-    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        var newViewData = ViewData(
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text , !text.isEmpty else { return }
+        let newViewData = ViewData(
             searchModel: ProjectSearchDataModel(
                 type: viewData.searchModel.type,
-                keywordString: viewData.searchModel.keywords
+                keywordString: text
             )
         )
-        newViewData.searchModel.sortOption = ProjectSearchDataModel.SearchSortOption.enumFromRowValue(row)
-        
         self.viewData = newViewData
+    }
+    
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        if (text.count > 3) {
+            print( "\(text)")
+            print("search on did begin editing ")
+        }
+    }
+    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //        textFieldSearchTopics.resignFirstResponder()
+        //        if let text = textField.text , !text.isEmpty {
+        //            let newViewData = ViewData(
+        //                searchModel: ProjectSearchDataModel(
+        //                    type: viewData.searchModel.type,
+        //                    keywordString: text
+        //                )
+        //            )
+        //            self.viewData = newViewData
+        //        }
+        return true
     }
 }
 
@@ -242,7 +218,6 @@ extension ProjectSearchViewController : UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //        let cell: ProposalTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
         let cell = UITableViewCell()
         cell.textLabel?.text = results[ indexPath.row ].title
         return cell
@@ -250,35 +225,29 @@ extension ProjectSearchViewController : UITableViewDataSource {
 }
 
 extension ProjectSearchViewController : UITableViewDelegate {
-    
-    //    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //        let detailVC = ProposalDetailViewController(apiConfig:apiConfig, model: tableData[(indexPath as NSIndexPath).row] )
-    //        if let nav = self.navigationController {
-    //            nav.pushViewController(detailVC, animated: true)
-    //        }
-    //        else
-    //        {
-    //            self.present(detailVC, animated: true, completion: nil)
-    //        }
-    //    }
-    
-    //    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    //        if((indexPath as NSIndexPath).row < tableData.count)
-    //        {
-    //            if let atvc:AnimatedTableViewCellProtocol = cell as? AnimatedTableViewCellProtocol {
-    //                atvc.startAnimation()
-    //            }
-    //        }
-    //    }
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = ProposalDetailViewController(apiConfig: viewData.apiConfig, model: results[indexPath.row])
+        if let nav = self.navigationController {
+            nav.pushViewController(vc, animated: true)
+        }
+        else
+        {
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
 }
 
 
 extension ProjectSearchViewController {
-    
     struct ViewData {
         let showLocationSearch = false
         var searchModel:ProjectSearchDataModel
         let apiConfig:APIConfig = APIConfig()
+        let sortOptions = [
+            ProjectSearchDataModel.SearchSortOption.urgency,
+            ProjectSearchDataModel.SearchSortOption.newest,
+            ProjectSearchDataModel.SearchSortOption.expiration
+        ]
     }
     
 }

@@ -120,7 +120,7 @@ class ToolsTableViewController: UITableViewController {
                 }
             case .searchProjects: // Legacy
                 let searchModel = ProjectSearchDataModel(type: .keyword, keywordString: "")
-                let vc = ProjectSearchViewController(searchModel: searchModel , callbackDelegate:self)
+                let vc = ProjectSearchViewController(searchModel: searchModel)
                 navigationController?.pushViewController(vc, animated: true)
                 // self.present(vc, animated: true, completion: nil)
             }
@@ -136,16 +136,16 @@ class ToolsTableViewController: UITableViewController {
 
 }
 
-extension ToolsTableViewController : ProjectSearchDelegate {
-    public func searchUpdate( _ newSearchModel: ProjectSearchDataModel ) {
-        let searchModel = newSearchModel
-        print( "searchModel \(searchModel.keywords)")
-//        print( "searchModel \(searchModel.subject1)")
-        print( "searchModel \(searchModel.type.rawValue)")
-        print( "searchModel \(searchModel.sortOption.pickerLabel)")
-//        fetchData()
-    }
-}
+//extension ToolsTableViewController : ProjectSearchDelegate {
+//    public func searchUpdate( _ newSearchModel: ProjectSearchDataModel ) {
+//        let searchModel = newSearchModel
+//        print( "searchModel \(searchModel.keywords)")
+////        print( "searchModel \(searchModel.subject1)")
+//        print( "searchModel \(searchModel.type.rawValue)")
+//        print( "searchModel \(searchModel.sortOption.pickerLabel)")
+////        fetchData()
+//    }
+//}
 
 extension ToolsTableViewController {
     struct ViewData {

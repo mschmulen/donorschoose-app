@@ -37,11 +37,8 @@ class ProjectTableViewController: UITableViewController {
         var label:String {
             switch self {
             case .none ( let fetchModel):
-                print( "//\(fetchModel.pageSize)")
                 return ""
             case .location ( let fetchModel):
-                print("//\(fetchModel.pageSize)")
-                print("//\(fetchModel)")
                 if let locationInfo = fetchModel.locationInfo {
                     return "Projects near: \(locationInfo.city), \(locationInfo.state)"
                 }
@@ -385,14 +382,14 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
     }
 }
 
-extension ProjectTableViewController : ProjectSearchDelegate {
-    public func searchUpdate( _ newSearchModel: ProjectSearchDataModel ) {
-        // MAS TODO Update SearchUpdate
-        // currentSearchModel = newSearchModel
-        // fetch()
-//        print("searchUpdate \(newSearchModel.keywords)")
-    }
-}
+//extension ProjectTableViewController : ProjectSearchDelegate {
+//    public func searchUpdate( _ newSearchModel: ProjectSearchDataModel ) {
+//        // MAS TODO Update SearchUpdate
+//        // currentSearchModel = newSearchModel
+//        // fetch()
+////        print("searchUpdate \(newSearchModel.keywords)")
+//    }
+//}
 
 extension ProjectTableViewController {
     
