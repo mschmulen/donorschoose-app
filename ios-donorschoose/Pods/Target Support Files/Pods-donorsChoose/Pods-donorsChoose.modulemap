@@ -1,0 +1,6 @@
+framework module Pods_donorsChoose {
+  umbrella header "Pods-donorsChoose-umbrella.h"
+
+  export *
+  module * { export * }
+}
