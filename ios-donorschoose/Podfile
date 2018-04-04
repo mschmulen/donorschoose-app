@@ -7,7 +7,7 @@ target 'donorsChoose' do
 
   # Pods for donorsChoose
   pod 'Fabric'
-  pod 'Answers'
+#  pod 'Answers'
   pod 'Crashlytics'
   pod 'Firebase/Core'
 	

@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 import Fabric
-import Answers
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,9 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-        Fabric.with([Crashlytics.self,Answers.self])
-        // Fabric.with([Answers.self])
-        
+
+//        Fabric.with([Crashlytics.self])//, Answers.self])
+
         WatchList.registerNotificationSettings( application )
         
         if let user = userInfo {
