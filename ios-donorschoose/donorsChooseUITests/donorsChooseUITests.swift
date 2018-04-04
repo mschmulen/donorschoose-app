@@ -33,6 +33,8 @@ class donorsChooseUITests: XCTestCase {
         
         let app = XCUIApplication()
         print( "app.state \(app.state)")
+
+      // MAS TODO handle the enable services pop up notice
         
         moreTab(app)
         

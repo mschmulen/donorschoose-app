@@ -6,7 +6,7 @@
 //  Copyright © 2018 jumptack. All rights reserved.
 //
 
-import Foundation
+import XCTest
 
 func inNeedTab(_ app: XCUIApplication) {
     
