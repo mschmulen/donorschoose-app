@@ -61,7 +61,9 @@ open class TopNavViewController: UITabBarController {
     
     func injectNav(vc:UIViewController, title:String, image:UIImage) -> UINavigationController {
         let nvc = UINavigationController(rootViewController: vc)
-        nvc.tabBarItem = UITabBarItem(title: title, image: image, tag:4)
+        let tabItem =  UITabBarItem(title: title, image: image, tag:4)
+        tabItem.accessibilityIdentifier = "\(title)TabButton"
+        nvc.tabBarItem = tabItem
         vc.title = title
         return nvc
     }
