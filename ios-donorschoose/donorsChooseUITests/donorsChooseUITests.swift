@@ -11,7 +11,7 @@ import XCTest
 let defaultExistanceTimeout: TimeInterval = 1.5
 
 class donorsChooseUITests: XCTestCase {
-        
+
     override func setUp() {
         super.setUp()
         
@@ -29,17 +29,19 @@ class donorsChooseUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        
+    func testBasic() {
+
         let app = XCUIApplication()
         print( "app.state \(app.state)")
 
-      // MAS TODO handle the enable services pop up notice
-        
-        moreTab(app)
-        
-        favoritesTab(app)
+        // MAS TODO handle the enable geo services pop up notice
+
         inNeedTab(app)
+        nearMeTab(app)
+        inspriesMeTab(app)
+        favoritesTab(app)
+        moreTab(app)
+
     }
-    
+
 }
