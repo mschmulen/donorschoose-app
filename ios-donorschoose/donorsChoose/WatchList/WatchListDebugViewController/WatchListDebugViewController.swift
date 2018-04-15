@@ -60,7 +60,7 @@ public class WatchListDebugViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("todoCell", forIndexPath: indexPath) // retrieve the prototype cell (subtitle style)
         let todoItem = todoItems[indexPath.row] as Oppertunity
         
-        cell.textLabel?.text = todoItem.title as String!
+        cell.textLabel?.text = todoItem.title as String
         if (todoItem.isOverdue) { // the current time is later than the to-do item's deadline
             cell.detailTextLabel?.textColor = UIColor.redColor()
         } else {

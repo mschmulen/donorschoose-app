@@ -93,7 +93,7 @@ open class LocationDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!, locationState:String? , locationCity:String?, locationZip:String? ) {
+    init(nibName nibNameOrNil: String, bundle nibBundleOrNil: Bundle, locationState:String? , locationCity:String?, locationZip:String? ) {
         viewData = ViewData(locationState:locationState, locationCity:locationCity, locationZip:locationZip)
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }

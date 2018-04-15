@@ -1,5 +1,6 @@
 
 import Foundation
+import UIKit
 
 public struct ProposalModel :Codable {
     
@@ -40,7 +41,7 @@ public struct ProposalModel :Codable {
     
     public init(from decoder:Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         id = try values.decode(String.self, forKey: .id)
         
         title = try values.decode(String.self, forKey: .title)

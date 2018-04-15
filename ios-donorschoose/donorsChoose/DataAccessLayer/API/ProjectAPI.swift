@@ -90,6 +90,7 @@ class ProjectAPI : ProjectAPIProtocol
         
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let task = session.dataTask(with: requestURL, completionHandler: { (data, response, error) -> Void in
+
             if let networkError = error {
                 callback(nil, APIError.generateFromNetworkError(networkError))
             }
@@ -121,6 +122,7 @@ class ProjectAPI : ProjectAPIProtocol
         
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let task = session.dataTask(with: requestURL, completionHandler: { (data, response, error) -> Void in
+
             if let networkError = error {
                 callback([ProposalModel](), APIError.generateFromNetworkError(networkError))
             }
@@ -132,6 +134,8 @@ class ProjectAPI : ProjectAPIProtocol
                         return
                 }
                 do {
+//                    let printResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+//                    print( "result \(printResult)")
                     let projectModel = try JSONDecoder().decode(ProjectNetworkModel.self, from: data)
                     callback(projectModel.proposals, nil)
                 } catch let error {

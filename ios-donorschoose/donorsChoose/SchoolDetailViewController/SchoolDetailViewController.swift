@@ -99,7 +99,7 @@ open class SchoolDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!, schoolID:String , schoolName:String? , schoolCity:String?) {
+    init(nibName nibNameOrNil: String, bundle nibBundleOrNil: Bundle, schoolID:String , schoolName:String? , schoolCity:String?) {
         viewData = ViewData(schoolID:schoolID, schoolName:schoolName, schoolCity:schoolCity, model:nil)
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }

@@ -32,35 +32,35 @@ public class WatchList {
                     return WatchItemProposal(
                         title: dictItem["title"] as! String,
                         modelID: dictItem["modelID"] as! String,
-                        UUID: dictItem["UUID"] as! String!,
+                        UUID: dictItem["UUID"] as! String,
                         deadline: dictItem["deadline"] as? Date)
                 case .TEACHER:
                     return WatchItemTeacher(
                         title: dictItem["title"] as! String,
                         modelID: dictItem["modelID"] as! String,
-                        UUID: dictItem["UUID"] as! String! )
+                        UUID: dictItem["UUID"] as! String )
                 case .SCHOOL:
                     return WatchItemSchool(
                         title: dictItem["title"] as! String,
                         modelID: dictItem["modelID"] as! String,
-                        UUID: dictItem["UUID"] as! String! )
+                        UUID: dictItem["UUID"] as! String )
                 case .CUSTOM_SEARCH :
                     return WatchItemCustomSearch(
                         title: dictItem["title"] as! String,
                         modelID: dictItem["modelID"] as! String,
-                        searchString: dictItem["searchString"] as! String! )
+                        searchString: dictItem["searchString"] as! String )
                 case .UNKNOWN :
                     return WatchItemUnknown(
                         title: dictItem["title"] as! String,
                         modelID: dictItem["modelID"] as! String,
-                        UUID: dictItem["UUID"] as! String!)
+                        UUID: dictItem["UUID"] as! String)
                 }
             }
             else {
                 return WatchItemUnknown(
                     title: dictItem["title"] as! String,
                     modelID: dictItem["modelID"] as! String,
-                    UUID: dictItem["UUID"] as! String!)
+                    UUID: dictItem["UUID"] as! String)
             }
         })
         

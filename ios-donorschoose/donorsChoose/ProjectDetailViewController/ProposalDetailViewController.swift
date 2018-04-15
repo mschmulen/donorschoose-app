@@ -355,7 +355,7 @@ open class ProposalDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle! , apiConfig:APIConfig ,model:ProposalModel? , proposalID:String? ) {
+    init(nibName nibNameOrNil: String, bundle nibBundleOrNil: Bundle , apiConfig:APIConfig ,model:ProposalModel? , proposalID:String? ) {
         self.apiConfig = apiConfig
         self.model = model
         self.proposalID = proposalID
