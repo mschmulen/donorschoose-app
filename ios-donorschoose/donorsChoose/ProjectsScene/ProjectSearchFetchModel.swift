@@ -4,10 +4,17 @@ import CoreLocation
 
 
 public struct LocationInfo : Codable, UserDefaultStorable {
-    let city:String
     let state:String
-    let zip:String
-    let countryCode:String
+    let city:String?
+    let zip:String?
+    let countryCode:String?
+
+    var shortLabel: String {
+        if let city = city {
+            return "\(city), \(state)"
+        }
+        return "\(state)"
+    }
 }
 
 public struct ProjectSearchDataModel : Codable, UserDefaultStorable {
@@ -37,7 +44,7 @@ public struct ProjectSearchDataModel : Codable, UserDefaultStorable {
             self.sortOption = .newest
         case .keyword:
             self.sortOption = .newest
-        case .locationLatLong:
+        case .locationLatLong, .locationInfo:
             self.sortOption = .newest
         }
     }
@@ -159,6 +166,7 @@ public struct ProjectSearchDataModel : Codable, UserDefaultStorable {
         case keyword = 2
         // MAS TOOD Remove ( use the keyword )
         case inspiresUser
+        case locationInfo
     }
     
 }

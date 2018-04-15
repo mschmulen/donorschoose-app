@@ -38,9 +38,9 @@ class ProjectTableViewController: UITableViewController {
             switch self {
             case .none ( _ ):
                 return ""
-            case .location ( let fetchModel):
-                if let locationInfo = fetchModel.locationInfo {
-                    return "Projects near: \(locationInfo.city), \(locationInfo.state)"
+            case .location ( let fetchModel ):
+                if let locationInfo = fetchModel.locationInfo , let city = locationInfo.city {
+                    return "Projects near: \(city), \(locationInfo.state)"
                 }
                 return "Projects near me:"
             case .keyword ( let fetchModel ):
@@ -313,7 +313,7 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
                 let countryCode = addressDictionary["CountryCode"] as? String,
                 let zip = addressDictionary["ZIP"] as? String
             {
-                let locationInfo = LocationInfo(city: city, state: state, zip: zip, countryCode: countryCode)
+                let locationInfo = LocationInfo(state: state, city: city, zip: zip, countryCode: countryCode)
                 callback?(locationInfo)
             }
             else {

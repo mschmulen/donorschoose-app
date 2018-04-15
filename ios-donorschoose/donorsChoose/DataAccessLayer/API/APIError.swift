@@ -20,7 +20,8 @@ public enum APIError: Error {
     
     case unknown(String)
     case silent(String)
-    
+    case dev(String)
+
     var messageTitle:String {
         switch self {
         case .deviceInternetOffline:
@@ -39,7 +40,10 @@ public enum APIError: Error {
             return "Error"
         case .silent:
             return "Error"
+        case .dev:
+            return "devError"
         }
+        
     }
     
     var messageBody:String {
@@ -60,6 +64,8 @@ public enum APIError: Error {
             print("error \(self.localizedDescription)")
         case .silent:
             return "Unknown Error"
+        case .dev:
+            return "Dev Error"
         }
         return self.localizedDescription
     }

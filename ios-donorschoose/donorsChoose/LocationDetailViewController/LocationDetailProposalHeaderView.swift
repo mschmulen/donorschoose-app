@@ -5,7 +5,13 @@
 import UIKit
 
 class LocationDetailProposalHeaderView: UICollectionReusableView {
-    
+
+    @IBOutlet weak var labelMajor: UILabel!
+
+    public func configure( major:String ) {
+        labelMajor.text = major
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }

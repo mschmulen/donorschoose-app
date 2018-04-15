@@ -58,6 +58,17 @@ class ProjectAPI : ProjectAPIProtocol
             } else {
                 components.queryItems = [maxQueryItem, sortByQueryItem, apiKeyQueryItem, partnerIdQueryItem]
             }
+        case .locationInfo:
+            if let locationInfo = searchModel.locationInfo {
+                print( "locationInfo \(locationInfo)")
+                print( "locationInfo \(locationInfo.city)")
+                print( "locationInfo \(locationInfo.state)")
+                let stateQueryItem = URLQueryItem(name: "state", value: locationInfo.state)
+//                let communityQueryItem = URLQueryItem(name: "community", value: "10007")
+                // MAS TODO
+                // https://api.donorschoose.org/common/json_feed.html?state=NC&community=10007:3&APIKey=DONORSCHOOSE
+                components.queryItems = [apiKeyQueryItem, stateQueryItem, partnerIdQueryItem ]
+            }
         case .urgent:
             components.queryItems = [maxQueryItem, sortByQueryItem, apiKeyQueryItem, partnerIdQueryItem]
         }

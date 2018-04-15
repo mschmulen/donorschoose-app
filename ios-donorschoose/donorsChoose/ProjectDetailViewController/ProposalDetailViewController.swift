@@ -74,6 +74,7 @@ open class ProposalDetailViewController: UIViewController {
             
             if let url:URL = URL(string: giveURL) {
                 UIApplication.shared.openURL(url)
+
             }
         }
     }
@@ -120,6 +121,17 @@ open class ProposalDetailViewController: UIViewController {
         }
     }
     
+    @IBAction func actionLocationInfo(_ sender: AnyObject) {
+
+        guard let state = self.model?.state,
+            let city = self.model?.city else {
+                return
+        }
+
+        let vc = LocationDetailViewController(locationState: state, locationCity: city, locationZip: self.model?.zip )
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
     @IBOutlet weak var imageHeaderThumbnail: UIImageView!    {
         didSet {
             //imageHeaderThumbnail.layer.borderWidth = 1.0
@@ -234,8 +246,8 @@ open class ProposalDetailViewController: UIViewController {
     }
     
     func confgureUI() {
+
         if let model = self.model {
-            
             DispatchQueue.main.async {
                 self.descriptionList.removeAll()
                 self.descriptionList.append((model.title,model.fulfillmentTrailer))
@@ -402,11 +414,12 @@ extension ProposalDetailViewController : UICollectionViewDataSource {
                 
                 headerView.buttonTeacher.setTitle(model.teacherName, for: UIControlState())
                 headerView.buttonSchool.setTitle( model.schoolName, for: UIControlState())
-                
+                headerView.buttonLocation.setTitle( "\(model.city), \(model.state)", for:UIControlState())
+
                 headerView.buttonTeacher.addTarget(self, action: #selector(actionTeacherInfo(_:)), for: .touchUpInside)
                 headerView.buttonSchool.addTarget(self, action: #selector(actionSchoolInfo(_:)), for: .touchUpInside)
-                
-                headerView.labelLocation.text = "\(model.city), \(model.state)"
+                headerView.buttonLocation.addTarget(self, action: #selector(actionLocationInfo(_:)), for: .touchUpInside)
+
                 //headerView.labelPovertyStatus.text = model.povertyLevel
                 
                 if let imageURLString = model.imageURL {
@@ -465,48 +478,4 @@ extension ProposalDetailViewController : UICollectionViewDelegate {
         return true
     }
 }
-
-//extension ProposalDetailViewController : ProjectAPIDelegate {
-
-//    public func dataUpdateCallback( _ dataAPI: ProjectAPIProtocol, didChangeData data:[ProposalModel]?, error:APIError? ) {
-    
-//        if let someError = error {
-//            //tableView.hidden = true
-//            //alert the user
-//
-//            // MAS TODO Move over to NotificationViewController
-//            if let alertVC = AlertFactory.AlertFromError(someError) {
-//                self.present(alertVC, animated: true, completion: nil)
-//            }
-//        }
-//        else {
-//            if let newData = data {
-//                if newData.count > 0 {
-//                    let newDataModel = newData[0]
-//                    self.model = newDataModel
-//                    confgureUI()
-//                }
-//                else {
-//                    print( "Alert , model was not found")
-//                    /*
-//                     if let alertVC = AlertFactory.AlertFromError(someError) {
-//                     self.presentViewController(alertVC, animated: true, completion: nil)
-//                     }
-//                     */
-//                }
-//            }
-//
-//            /*
-//             tableView.hidden = false
-//             if let newTableData = data {
-//             tableData = newTableData
-//             dispatch_async(dispatch_get_main_queue(), {
-//             self.tableView.reloadData()
-//             })
-//             }
-//             */
-//        }
-        //self.refreshControl.endRefreshing()
-//    }
-//}
 

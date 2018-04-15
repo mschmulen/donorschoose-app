@@ -1,4 +1,3 @@
-//
 //  LocationDetailViewController.swift
 
 import UIKit
@@ -12,13 +11,12 @@ open class LocationDetailViewController: UIViewController {
     var calculatedCellWidth: CGFloat = 0
     
     let apiConfig = APIConfig()
-
-    var dataAPI:SchoolDataAPIProtocol?
+    
+    var dataAPI:ProjectAPIProtocol?
     var statList:[StatType] = [StatType]()
-    var backgroundImageURL:URL? = nil
-    
     var proposals:[ProposalModel] = []
-    
+    var backgroundImageURL:URL? = nil
+
     enum section {
         case info
         case proposals
@@ -35,6 +33,7 @@ open class LocationDetailViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             collectionView.register(StatViewCell.nib, forCellWithReuseIdentifier: StatViewCell.reuseIdentifier)
+            collectionView.register(ProposalViewCell.nib, forCellWithReuseIdentifier: ProposalViewCell.reuseIdentifier)
             collectionView.register(LocationViewCell.nib, forCellWithReuseIdentifier: LocationViewCell.reuseIdentifier)
 
             collectionView.register(LoadingCollectionViewCell.nib, forCellWithReuseIdentifier: LoadingCollectionViewCell.reuseIdentifier )
@@ -47,48 +46,7 @@ open class LocationDetailViewController: UIViewController {
             collectionView.dataSource = self
         }
     }
-    
-    @IBAction func actionShare( _ sender:AnyObject ) {
-        // MAS TODO
-//        if self.viewData.model != nil {
-//            shareAsAlertController()
-//        }
-    }
-    
-    func shareAsAlertController( ) {
-        // MAS TODO
-//        if let model = self.viewData.model {
-//            let optionMenu = UIAlertController(title: nil, message: "Favorite this Location", preferredStyle: .actionSheet)
-//
-//            var watchAction: UIAlertAction? = nil
-//
-//            let doesExist =  WatchList.doesWatchListItemExist(model)
-//            if doesExist == true {
-//                watchAction = UIAlertAction(title: "Remove From My Favorites", style: .default, handler: {
-//                    (alert:UIAlertAction!) -> Void in
-//                    WatchList.removeFromWatchList(model)
-//                })
-//            }
-//            else {
-//                watchAction = UIAlertAction(title: "Add To My Favorites", style: .default, handler: {
-//                    (alert:UIAlertAction!) -> Void in
-//                    WatchList.addToWatchList(model)
-//                })
-//            }
-//
-//            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-//                (alert: UIAlertAction!) -> Void in
-//
-//            })
-//
-//            if let saveAction = watchAction {
-//                optionMenu.addAction(saveAction)
-//            }
-//            optionMenu.addAction(cancelAction)
-//            self.present(optionMenu, animated: true, completion: nil)
-//        }
-    }
-    
+
     required public init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -120,42 +78,48 @@ open class LocationDetailViewController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
 
-        let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(LocationDetailViewController.actionShare(_:)))
-        self.navigationItem.rightBarButtonItem = buttonShare
-        
+        // MAS TODO Add Share Button back
+//        let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(LocationDetailViewController.actionShare(_:)))
+//        self.navigationItem.rightBarButtonItem = buttonShare
+
+        dataAPI = ProjectAPI(config: viewData.apiConfig,user: "matt")
+        guard let state = viewData.locationState else { return }
+
+        var searchModel = ProjectSearchDataModel(
+            type: .locationInfo,
+            keywordString: ""
+        )
+        searchModel.locationInfo = LocationInfo(state: state, city: viewData.locationCity,  zip:nil, countryCode: nil)
+
+        dataAPI?.getData(searchModel, pageIndex: 0, callback: { (data, error) in
+            if let someError = error {
+                print( "\(someError)")
+            }
+            else {
+                DispatchQueue.main.async {
+                    switch searchModel.type {
+                    case .locationInfo:
+                        if let locationSearch = searchModel.locationInfo {
+                            self.statList.append(StatType("Location:","\(locationSearch.shortLabel) "))
+                        }
+                    case .locationLatLong:
+                        if let lat = searchModel.latitude, let lng = searchModel.longitude {
+                            self.statList.append(StatType("Location:","\(lat),\(lng)  "))
+                        }
+                    default:
+                        break
+                    }
+
+                    self.proposals = data
+                    self.collectionView.reloadData()
+                }
+            }
+        })
     }
-    
+
     override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-}
-
-extension LocationDetailViewController : SchoolDataAPIDelegate {
-    
-    public func dataUpdateCallback( _ dataAPI: SchoolDataAPIProtocol, didChangeData data:SchoolModel?, error:APIError? ) {
-        
-        // MAS TODO LocationDetail
-        
-//        if let someError = error {
-//            if let alertVC = AlertFactory.AlertFromError(someError) {
-//                self.present(alertVC, animated: true, completion: nil)
-//            }
-//        }
-//
-//        if let dataModel = data {
-//            viewData = ViewData( schoolID: viewData.schoolID, schoolName: viewData.schoolName, schoolCity: viewData.schoolCity, model: dataModel)
-//            let model = dataModel
-//
-//            DispatchQueue.main.async {
-//                self.statList.append(StatType("School:","\(model.name) "))
-//                self.statList.append(StatType("City:","\(model.city) "))
-//                self.statList.append(StatType("State:","\(model.state) "))
-//                self.statList.append(StatType("Poverty Level:","\(model.povertyLevel) "))
-//                self.proposals = model.proposals
-//                self.collectionView.reloadData()
-//            }
-//        }
-    }//end func
 }
 
 extension LocationDetailViewController : UICollectionViewDataSource {
@@ -190,15 +154,13 @@ extension LocationDetailViewController : UICollectionViewDataSource {
             }
         case .proposals:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProposalViewCell.reuseIdentifier, for: indexPath) as! ProposalViewCell
-                        cell.configure(name: proposals[indexPath.row].title, description: proposals[indexPath.row].shortDescription)
+            cell.configure(name: proposals[indexPath.row].title, description: proposals[indexPath.row].shortDescription)
             return cell
         }
     }
     
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        // MAS TODO SchoolDetailProposalHeaderView
-        
+
         switch sections[indexPath.section] {
         case .info:
             switch kind {
@@ -215,8 +177,9 @@ extension LocationDetailViewController : UICollectionViewDataSource {
             switch kind {
             case UICollectionElementKindSectionHeader:
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: LocationDetailProposalHeaderView.reuseIdentifier, for: indexPath) as! LocationDetailProposalHeaderView
-//                headerView.labelName.text = schoolName ?? ""
-//                headerView.labelCity.text = schoolCity ?? ""
+                if let state = viewData.locationState , (proposals.count > 0) {
+                    headerView.configure(major: "Proposals in \(state)")
+                }
                 return headerView
             case UICollectionElementKindSectionFooter:
                 assert(false, "Unexpected element kind")
@@ -257,15 +220,6 @@ extension LocationDetailViewController : UICollectionViewDelegateFlowLayout {
                 return CGSize(width: 300, height: 300)
         case .proposals:
                 if proposals.count <= 0 { return CGSize.zero }
-//                if let cell = ProposalViewCell.fromNib() {
-//                    let cellMargins = cell.layoutMargins.left + cell.layoutMargins.right
-//                    //cell.configure(name: proposals[indexPath.row].Name, value: proposals[indexPath.row].Value)
-//                    let width = calculatedCellWidth - cellMargins
-//                    cell.labelStatName.preferredMaxLayoutWidth = width
-//                    cell.labelStatValue.preferredMaxLayoutWidth = width
-//                    cell.constraintWidth.constant = width
-//                    return cell.contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
-//                }
                 return CGSize(width: self.view.frame.width - 30, height: 100)
         }
     }
@@ -304,7 +258,6 @@ extension LocationDetailViewController {
         let locationState:String?
         let locationCity:String?
         let locationZip:String?
-//        let model:SchoolModel?
         let apiConfig = APIConfig()
     }
 }

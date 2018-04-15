@@ -1,51 +1,55 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="ProposalHeaderView" customModule="DonorsChooseCommon" customModuleProvider="target">
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="ProposalHeaderView" customModule="donorsChoose" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="558" height="259"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yVL-hY-pGZ"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yVL-hY-pGZ">
+                    <rect key="frame" x="0.0" y="0.0" width="558" height="259"/>
+                </imageView>
                 <view opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="elt-6u-KUx" userLabel="viewContainer">
+                    <rect key="frame" x="4" y="195" width="550" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yz5-50-tfx">
+                            <rect key="frame" x="8" y="-2" width="96" height="34"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" title="Mrs Wright"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yDd-Xm-e1b">
+                            <rect key="frame" x="8" y="27" width="152" height="30"/>
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" title="Donna Park Elementry"/>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dallas, TX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0L-RR-den">
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qwv-kB-P9V">
+                            <rect key="frame" x="483" y="2" width="59" height="30"/>
+                            <state key="normal" title="Location">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.18297281430635837" green="0.18297281430635837" blue="0.18297281430635837" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="G0L-RR-den" firstAttribute="top" secondItem="elt-6u-KUx" secondAttribute="top" constant="6" id="0Vq-r5-7Wd"/>
+                        <constraint firstAttribute="trailing" secondItem="Qwv-kB-P9V" secondAttribute="trailing" constant="8" id="1Hr-Vq-8Qs"/>
                         <constraint firstItem="yDd-Xm-e1b" firstAttribute="leading" secondItem="elt-6u-KUx" secondAttribute="leading" constant="8" id="1cs-CL-YkD"/>
+                        <constraint firstItem="Qwv-kB-P9V" firstAttribute="top" secondItem="elt-6u-KUx" secondAttribute="top" constant="2" id="DXx-KP-81f"/>
                         <constraint firstAttribute="height" constant="60" id="NGt-xz-120"/>
                         <constraint firstItem="Yz5-50-tfx" firstAttribute="leading" secondItem="elt-6u-KUx" secondAttribute="leading" constant="8" id="U1t-64-ECN"/>
-                        <constraint firstAttribute="trailing" secondItem="G0L-RR-den" secondAttribute="trailing" constant="8" id="gTU-V7-Sf8"/>
                         <constraint firstAttribute="bottom" secondItem="yDd-Xm-e1b" secondAttribute="bottom" constant="3" id="nIi-Nn-T5v"/>
                         <constraint firstItem="Yz5-50-tfx" firstAttribute="top" secondItem="elt-6u-KUx" secondAttribute="top" constant="-2" id="sKr-5e-9fm"/>
                     </constraints>
                 </view>
-                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePicEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="qT4-lk-Jia">
-                    <constraints>
-                        <constraint firstAttribute="height" constant="80" id="aq1-L5-sBE"/>
-                        <constraint firstAttribute="width" constant="80" id="wc0-0H-FjQ"/>
-                    </constraints>
-                </imageView>
             </subviews>
             <constraints>
                 <constraint firstItem="yVL-hY-pGZ" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="35s-2B-w3p"/>
@@ -53,23 +57,17 @@
                 <constraint firstItem="yVL-hY-pGZ" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="8vT-wa-YAe"/>
                 <constraint firstAttribute="trailing" secondItem="elt-6u-KUx" secondAttribute="trailing" constant="4" id="KIL-lh-AYY"/>
                 <constraint firstAttribute="bottom" secondItem="yVL-hY-pGZ" secondAttribute="bottom" id="MdY-P3-6J5"/>
-                <constraint firstAttribute="bottom" secondItem="qT4-lk-Jia" secondAttribute="bottom" constant="30" id="Rwu-fR-S6P"/>
                 <constraint firstItem="elt-6u-KUx" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="4" id="bhl-L4-qan"/>
-                <constraint firstAttribute="trailing" secondItem="qT4-lk-Jia" secondAttribute="trailing" constant="40" id="bqM-ob-eP6"/>
                 <constraint firstAttribute="trailing" secondItem="yVL-hY-pGZ" secondAttribute="trailing" id="iw1-wQ-rKh"/>
             </constraints>
             <connections>
+                <outlet property="buttonLocation" destination="Qwv-kB-P9V" id="zN9-y9-LaP"/>
                 <outlet property="buttonSchool" destination="yDd-Xm-e1b" id="hnD-bX-6R6"/>
                 <outlet property="buttonTeacher" destination="Yz5-50-tfx" id="txa-D5-Acf"/>
                 <outlet property="imageBackground" destination="yVL-hY-pGZ" id="ZLT-xW-L5F"/>
-                <outlet property="imageTeacherPic" destination="qT4-lk-Jia" id="PEy-Cv-v5D"/>
-                <outlet property="labelLocation" destination="G0L-RR-den" id="0fV-ss-vqR"/>
                 <outlet property="viewTextContainer" destination="elt-6u-KUx" id="Ano-47-Xcm"/>
             </connections>
             <point key="canvasLocation" x="284" y="375.5"/>
         </collectionReusableView>
     </objects>
-    <resources>
-        <image name="profilePicEmpty" width="150" height="150"/>
-    </resources>
 </document>
