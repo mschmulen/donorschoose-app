@@ -10,9 +10,9 @@ class DescriptionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var constraintWidth: NSLayoutConstraint!
     
-    func configure( _ model:(String , String) ) {
-        labelTitle.text = model.0
-        labelDescription.text = model.1
+    func configure( title:String , description:String ) {
+        labelTitle.text = title
+        labelDescription.text = description
     }
     
     override func awakeFromNib() {

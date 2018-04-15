@@ -33,8 +33,14 @@ open class ProposalDetailViewController: UIViewController {
     var proposalID:String?
     
     var dataAPI:ProjectAPIProtocol?
-    var descriptionList:[(title:String, description:String)] = [(title:String, description:String)]()
-    
+
+    enum Cell {
+        case text(title:String, description:String)
+        case fundingStatus(model:ProposalModel)
+    }
+
+    var cells:[Cell] = [Cell]()
+
     @IBOutlet weak var buttonModalDismiss: UIButton! {
         didSet {
             buttonModalDismiss.isHidden = true
@@ -48,6 +54,8 @@ open class ProposalDetailViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             collectionView.register(DescriptionViewCell.nib, forCellWithReuseIdentifier: DescriptionViewCell.reuseIdentifier)
+            collectionView.register(FundingStatusViewCell.nib, forCellWithReuseIdentifier: FundingStatusViewCell.reuseIdentifier)
+
             collectionView.register(ProposalHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: ProposalHeaderView.reuseIdentifier)
             collectionView.register(ProposalFooterView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: ProposalFooterView.reuseIdentifier)
             collectionView.dataSource = self
@@ -120,7 +128,7 @@ open class ProposalDetailViewController: UIViewController {
             self.present(vc, animated: true, completion: nil)
         }
     }
-    
+
     @IBAction func actionLocationInfo(_ sender: AnyObject) {
 
         guard let state = self.model?.state,
@@ -249,16 +257,20 @@ open class ProposalDetailViewController: UIViewController {
 
         if let model = self.model {
             DispatchQueue.main.async {
-                self.descriptionList.removeAll()
-                self.descriptionList.append((model.title,model.fulfillmentTrailer))
-                self.descriptionList.append(("My Students:",model.shortDescription))
+                self.cells.removeAll()
+
+                // MAS TODO Funding Status
+                self.cells.append( Cell.fundingStatus(model:model))
+
+                self.cells.append( Cell.text(title: model.title, description: model.fulfillmentTrailer))
+                self.cells.append( Cell.text(title: "My Students:", description: model.shortDescription))
+
                 if let synopsis = model.synopsis {
                     // synopsis.htmlUnescape() results in: All our students receive free breakfast.<br/><br/>The materials will make a difference in my students' learning and improve their school lives because they will be able to use it interactively and productively.
-                    
+
                     //MAS TODO scrub the <br/> or support in textview
-                    // MAS TODO
-                    //                    self.descriptionList.append(("My Project:", synopsis.htmlUnescape()))
-                    self.descriptionList.append(("My Project:", synopsis))
+                    // self.descriptionList.append(("My Project:", synopsis.htmlUnescape()))
+                    self.cells.append( Cell.text(title: "My Project:", description:synopsis))
                 }
                 
                 // MAS TODO
@@ -391,15 +403,25 @@ extension ProposalDetailViewController : UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return descriptionList.count
+        return cells.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DescriptionViewCell.reuseIdentifier, for: indexPath) as! DescriptionViewCell
-        cell.configure(descriptionList[(indexPath as NSIndexPath).row])
-        let cellMargins = cell.layoutMargins.left + cell.layoutMargins.right
-        cell.labelTitle.preferredMaxLayoutWidth = cellWidth - cellMargins
-        return cell
+        switch cells[indexPath.row] {
+        case .fundingStatus(let model):
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FundingStatusViewCell.reuseIdentifier, for: indexPath) as! FundingStatusViewCell
+            cell.configure(model:model)
+            let cellMargins = cell.layoutMargins.left + cell.layoutMargins.right
+            cell.labelTitle.preferredMaxLayoutWidth = cellWidth - cellMargins
+            return cell
+        case .text(let title, let description) :
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DescriptionViewCell.reuseIdentifier, for: indexPath) as! DescriptionViewCell
+            cell.configure(title:title, description: description)
+            let cellMargins = cell.layoutMargins.left + cell.layoutMargins.right
+            cell.labelTitle.preferredMaxLayoutWidth = cellWidth - cellMargins
+            return cell
+        }
+
     }
     
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -448,14 +470,19 @@ extension ProposalDetailViewController : UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView,
                                layout collectionViewLayout: UICollectionViewLayout,
                                sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        
+
         if let cell = DescriptionViewCell.fromNib() {
             
             let cellMargins = cell.layoutMargins.left + cell.layoutMargins.right
-            
-            cell.configure(descriptionList[(indexPath as NSIndexPath).row])
-            
+
+            switch cells[indexPath.row] {
+            case .text(let title, let description):
+                cell.configure(title:title, description: description)
+            case .fundingStatus( let model):
+                cell.configure(title: model.fundingStatus, description: model.costToComplete)
+                break
+            }
+
             let width = cellWidth - cellMargins
             cell.labelTitle.preferredMaxLayoutWidth = width
             cell.constraintWidth.constant = width //adjust the width to be correct for the number of columns

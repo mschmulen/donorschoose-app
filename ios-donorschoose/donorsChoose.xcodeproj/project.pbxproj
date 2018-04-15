@@ -135,6 +135,8 @@
 		AC469FC19F77AE4007764FF0 /* Pods_donorsChoose.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E58E6AFFBF715A390FD701EA /* Pods_donorsChoose.framework */; };
 		C5FBA0B621667725D3CE8030 /* Pods_donorsChooseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC5AA5C2A8EB2CE740961E6 /* Pods_donorsChooseUITests.framework */; };
 		C986198120838DDE0072DAC0 /* LocationResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C986198020838DDE0072DAC0 /* LocationResultsModel.swift */; };
+		C98619842083B8CC0072DAC0 /* FundingStatusViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98619822083B8CB0072DAC0 /* FundingStatusViewCell.swift */; };
+		C98619852083B8CC0072DAC0 /* FundingStatusViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C98619832083B8CC0072DAC0 /* FundingStatusViewCell.xib */; };
 		C9B4E5F5207582F3007503B1 /* inspiresMeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B4E5F4207582F3007503B1 /* inspiresMeTab.swift */; };
 		C9B4E5FA20758300007503B1 /* nearMeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B4E5F920758300007503B1 /* nearMeTab.swift */; };
 /* End PBXBuildFile section */
@@ -336,6 +338,8 @@
 		A817E92858C7D9DDE223FE3C /* Pods-donorsChooseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-donorsChooseUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-donorsChooseUITests/Pods-donorsChooseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BFC5AA5C2A8EB2CE740961E6 /* Pods_donorsChooseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_donorsChooseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C986198020838DDE0072DAC0 /* LocationResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationResultsModel.swift; sourceTree = "<group>"; };
+		C98619822083B8CB0072DAC0 /* FundingStatusViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundingStatusViewCell.swift; sourceTree = "<group>"; };
+		C98619832083B8CC0072DAC0 /* FundingStatusViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FundingStatusViewCell.xib; sourceTree = "<group>"; };
 		C9B4E5F4207582F3007503B1 /* inspiresMeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inspiresMeTab.swift; sourceTree = "<group>"; };
 		C9B4E5F920758300007503B1 /* nearMeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nearMeTab.swift; sourceTree = "<group>"; };
 		CB6C388998773ED2DF159579 /* Pods-donorsChoose.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-donorsChoose.release.xcconfig"; path = "Pods/Target Support Files/Pods-donorsChoose/Pods-donorsChoose.release.xcconfig"; sourceTree = "<group>"; };
@@ -559,6 +563,8 @@
 		108E303F20346F7D00567895 /* ProjectDetailViewController */ = {
 			isa = PBXGroup;
 			children = (
+				C98619822083B8CB0072DAC0 /* FundingStatusViewCell.swift */,
+				C98619832083B8CC0072DAC0 /* FundingStatusViewCell.xib */,
 				108E304020346F7D00567895 /* EmptyCollectionReusableView.swift */,
 				108E304120346F7D00567895 /* DescriptionViewCell.xib */,
 				108E304420346F7D00567895 /* DescriptionViewCell.swift */,
@@ -890,6 +896,7 @@
 			files = (
 				108E30DF20348BFF00567895 /* About.html in Resources */,
 				108E310A2034906800567895 /* apiKeys.plist in Resources */,
+				C98619852083B8CC0072DAC0 /* FundingStatusViewCell.xib in Resources */,
 				108E305320346F7D00567895 /* ProposalListViewController.xib in Resources */,
 				107FF5532066ABD60083F4DA /* Favorites.storyboard in Resources */,
 				108E30FF20348E0600567895 /* StatsViewController.xib in Resources */,
@@ -1154,6 +1161,7 @@
 				108E30E120348BFF00567895 /* AboutInfoViewController.swift in Sources */,
 				10786FBC2067E48C00CDE960 /* Formatter+Int+Float.swift in Sources */,
 				108F9522206D95110012CF08 /* ProjectSearchViewController.swift in Sources */,
+				C98619842083B8CC0072DAC0 /* FundingStatusViewCell.swift in Sources */,
 				10786FBA2067E0F600CDE960 /* Environment.swift in Sources */,
 				108E30B62034713300567895 /* TeacherDetailVC.swift in Sources */,
 				108E305F20346F7D00567895 /* ProposalDetailViewController.swift in Sources */,
