@@ -60,9 +60,6 @@ class ProjectAPI : ProjectAPIProtocol
             }
         case .locationInfo:
             if let locationInfo = searchModel.locationInfo {
-                print( "locationInfo \(locationInfo)")
-                print( "locationInfo \(locationInfo.city)")
-                print( "locationInfo \(locationInfo.state)")
                 let stateQueryItem = URLQueryItem(name: "state", value: locationInfo.state)
 //                let communityQueryItem = URLQueryItem(name: "community", value: "10007")
                 // MAS TODO
@@ -145,8 +142,6 @@ class ProjectAPI : ProjectAPIProtocol
                         return
                 }
                 do {
-//                    let printResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-//                    print( "result \(printResult)")
                     let projectModel = try JSONDecoder().decode(ProjectNetworkModel.self, from: data)
                     callback(projectModel.proposals, nil)
                 } catch let error {

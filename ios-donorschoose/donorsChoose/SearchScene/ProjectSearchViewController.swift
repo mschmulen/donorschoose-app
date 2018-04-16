@@ -187,8 +187,7 @@ extension ProjectSearchViewController : UITextFieldDelegate {
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         guard let text = textField.text else { return }
         if (text.count > 3) {
-            print( "\(text)")
-            print("search on did begin editing ")
+            print("search on did begin editing \(text)")
         }
     }
     

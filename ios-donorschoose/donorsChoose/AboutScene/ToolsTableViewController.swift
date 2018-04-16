@@ -19,10 +19,12 @@ class ToolsTableViewController: UITableViewController {
         case searchProjects
         case searchProjectsKeyword
         case searchSchools
+        case searchLocation
         
         var label:String {
             switch self {
-            case .searchProjects: return "Search Projects"
+            case .searchProjects: return "Search by keyword"
+            case .searchLocation: return "Search by location"
             case .searchProjectsKeyword: return "Search Projects (New)"
             case .searchSchools: return "Search Schools"
             }
@@ -118,6 +120,14 @@ class ToolsTableViewController: UITableViewController {
                     vc.viewData = ProjectKeywordSearchTableViewController.ViewData()
                     navigationController?.pushViewController(vc, animated: true)
                 }
+
+            case .searchLocation:
+                // MAS TODO
+                if let vc = UIStoryboard(name: "ProjectSearch", bundle: nil).instantiateInitialViewController() as? ProjectKeywordSearchTableViewController {
+                    vc.viewData = ProjectKeywordSearchTableViewController.ViewData()
+                    navigationController?.pushViewController(vc, animated: true)
+                }
+
             case .searchProjects: // Legacy
                 let searchModel = ProjectSearchDataModel(type: .keyword, keywordString: "")
                 let vc = ProjectSearchViewController(searchModel: searchModel)

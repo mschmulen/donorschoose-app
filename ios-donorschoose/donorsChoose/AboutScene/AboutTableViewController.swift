@@ -36,7 +36,7 @@ class AboutTableViewController: UITableViewController {
                 
             // Stats
             case .challengeStat( let name, let value) : return "\(name): \(value)"
-            case .moreStats: return "More Stats"
+            case .moreStats: return "More stats about this app"
                 
             // WIP
             case .login: return "Login"
@@ -83,7 +83,7 @@ class AboutTableViewController: UITableViewController {
         var label:String {
             switch self {
             case .about: return "ABOUT"
-            case .stats: return "APP STATS"
+            case .stats: return "STATS ABOUT THIS APP"
             case .dev: return "DEV"
             }
         }
