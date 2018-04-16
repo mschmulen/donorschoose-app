@@ -12,15 +12,15 @@ class AboutTableViewController: UITableViewController {
     
     var viewData:ViewData?
     var dataAPI:DonorPageDataAPIProtocol!
-    
+
+    var buildString = ""
     // MAS TODO Move this to a <Set>
     var records:[Section:[Row]] = [Section: [Row]]()
     
     enum Row {
-        case header
+        case header ( String )
         case aboutInfo
-        case buildInfo
-        
+
         // Stats
         case challengeStat (name:String, value:String)
         case moreStats
@@ -30,10 +30,9 @@ class AboutTableViewController: UITableViewController {
         case login
         var label:String {
             switch self {
-            case .header: return "Donors Choose App"
+            case .header(let buildString): return "Donors Choose App (\(buildString))"
             case .aboutInfo: return "About This App"
-            case .buildInfo: return "build: \("x.x.x")"
-                
+
             // Stats
             case .challengeStat( let name, let value) : return "\(name): \(value)"
             case .moreStats: return "More stats about this app"
@@ -88,13 +87,19 @@ class AboutTableViewController: UITableViewController {
             }
         }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String { // "CFBundleVersion"
+            buildString = version
+            print( "build \(buildString)")
+        }
+
         records[.about] = []
         records[.stats] = []
         switch env {
@@ -104,7 +109,7 @@ class AboutTableViewController: UITableViewController {
         }
         
         guard let viewData = viewData else { return }
-        records[.about] = [.header, .aboutInfo, .tools]
+        records[.about] = [.header(buildString), .aboutInfo, .tools]
         records[.stats] = []
         
         dataAPI = DonorPageDataAPI(config: viewData.apiConfig, user: "matt", delegate: self)
