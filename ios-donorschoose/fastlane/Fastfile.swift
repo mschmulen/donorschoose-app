@@ -20,6 +20,11 @@ import Foundation
 
 class Fastfile: LaneFile {
 
+	func buildLane() {
+		buildIosApp(scheme: "donorsChoose")
+	}
+
+
 	func testLane() {
     	buildIosApp(scheme: "donorsChoose")
 	}
