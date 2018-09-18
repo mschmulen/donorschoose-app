@@ -5,11 +5,11 @@ iOS Project finder app for [donorsChoose.org](http://donorsChoose.org)
 
 Available on iTunes app store! [DonorsChoose Project Finder App](https://itunes.apple.com/us/app/donors-choose-project-finder/id1074056163?mt=8) 
 
-![Tour One](resources/screenshots/InNeed.png)
-![Tour Two](resources/screenshots/ProjectDetail.png)
-![Tour Three](resources/screenshots/CustomSearch.png)
-![Tour Four](resources/screenshots/NearMe.png)
-![Tour Five](resources/screenshots/Favorites.png)
+![Tour One](resources/screenshots-iPhone-5_5/InNeed.png)
+![Tour Two](resources/screenshots-iPhone-5_5/ProjectDetail.png)
+![Tour Three](resources/screenshots-iPhone-5_5/CustomSearch.png)
+![Tour Four](resources/screenshots-iPhone-5_5/NearMe.png)
+![Tour Five](resources/screenshots-iPhone-5_5/Favorites.png)
 
 ## Features
 
