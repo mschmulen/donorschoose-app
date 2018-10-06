@@ -95,4 +95,22 @@ Donors Choose links:
 [DonrosChoose.org Terms of service ](https://www.donorschoose.org/user-agreement)
 
 
+## Release Notes:
+
+#### Future
+
+- (Eng) Evaluate Swift 4.2 Migration ( Consider forking or rewriting )
+- (Eng) Evaluate use of LocalNotifications for watched Projects
+- (Eng) Evaluate Automatic build number in based on git commit count ( possible fastlane integration )
+- (Feature) iPhone XR, XS, XS-Max
+- (Feature) Push via Apple CloudKit ( preserves privacy and no cost )
+
+
+#### Version 1.17
+
+- iOS12 Support ( xCode10 )
+- Removed references to Fabric.io , Google Firebase as I don't think the application needs it and it adds increased questions regarding privacy and use. Why add additional complexity if the value does not contribute to the users success. 
+
+
+
 
