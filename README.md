@@ -39,7 +39,6 @@ Help a DonorsChoose classroom project in need today and bring their classroom dr
 - open the XCode Project form the `donorschoose-app/ios-donorschoose` folder `open donorsChoose.xcworkspace/`
 - build and run from XCode 
 
-
 ## Automation
 
 Screenshots
