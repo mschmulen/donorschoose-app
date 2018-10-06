@@ -24,6 +24,14 @@ Making it easy for you to find DonorsChoose.org projects, teachers and schools t
 
 Help a DonorsChoose classroom project in need today and bring their classroom dreams to life !
 
+
+## Build Requirments
+
+- xCode10
+- CocoaPods
+- Carthage
+- fastlane
+
 ## Getting Started
 
 - get the code: `git clone ` 
