@@ -13,13 +13,14 @@ class AboutTableViewController: UITableViewController {
     var viewData:ViewData?
     var dataAPI:DonorPageDataAPIProtocol!
 
-    var buildString = ""
+    var fullVersionBuildString = "UNKNOWN"
     // MAS TODO Move this to a <Set>
     var records:[Section:[Row]] = [Section: [Row]]()
     
     enum Row {
         case header ( String )
         case aboutInfo
+        case aboutPrivacyPolicy
 
         // Stats
         case challengeStat (name:String, value:String)
@@ -30,9 +31,9 @@ class AboutTableViewController: UITableViewController {
         case login
         var label:String {
             switch self {
-            case .header(let buildString): return "Donors Choose App (\(buildString))"
+            case .header(let buildString): return "Donors Choose Project Finder \(buildString)"
             case .aboutInfo: return "About This App"
-
+            case .aboutPrivacyPolicy: return "Privacy Policy"
             // Stats
             case .challengeStat( let name, let value) : return "\(name): \(value)"
             case .moreStats: return "More stats about this app"
@@ -46,6 +47,7 @@ class AboutTableViewController: UITableViewController {
         var accessoryType: UITableViewCellAccessoryType {
             switch self {
             case .aboutInfo: return .disclosureIndicator
+            case .aboutPrivacyPolicy: return .disclosureIndicator
             case .login: return .disclosureIndicator
             case .moreStats: return .disclosureIndicator
             case .tools: return .disclosureIndicator
@@ -56,6 +58,7 @@ class AboutTableViewController: UITableViewController {
         var selectionStyle: UITableViewCellSelectionStyle {
             switch self {
             case .aboutInfo: return .default
+            case .aboutPrivacyPolicy: return .default
             case .login: return .default
             case .moreStats: return .default
             case .tools: return .default
@@ -66,6 +69,8 @@ class AboutTableViewController: UITableViewController {
         var showSegue: String? {
             switch self {
             case .aboutInfo: return "showAboutInfo"
+                // MAS TODO , impliment ShowPrivacyPolicy Segue
+            case .aboutPrivacyPolicy: return "showPrivacyPolicy"
             case .login: return "showLogin"
             case .tools: return "showTools"
             case .moreStats: return "showMoreStats"
@@ -95,9 +100,11 @@ class AboutTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String { // "CFBundleVersion"
-            buildString = version
-            print( "build \(buildString)")
+        if let shortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            fullVersionBuildString = shortVersion
+            if let buildString = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+                fullVersionBuildString = "\(shortVersion)(\(buildString))"
+            }
         }
 
         records[.about] = []
@@ -109,7 +116,7 @@ class AboutTableViewController: UITableViewController {
         }
         
         guard let viewData = viewData else { return }
-        records[.about] = [.header(buildString), .aboutInfo, .tools]
+        records[.about] = [.header(fullVersionBuildString), .aboutInfo, .tools]
         records[.stats] = []
         
         dataAPI = DonorPageDataAPI(config: viewData.apiConfig, user: "matt", delegate: self)
