@@ -2,7 +2,7 @@
 
 import UIKit
 import MessageUI
-import Firebase
+//import Firebase
 import Crashlytics
 
 public enum ShareActionType {
@@ -73,12 +73,13 @@ open class ProposalDetailViewController: UIViewController {
         
         if let model = self.model {
             let giveURL = model.proposalURL
-            
-            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                AnalyticsParameterItemID: "id-\(model.id)" as NSObject,
-                AnalyticsParameterItemName: "actionGive" as NSObject,
-                AnalyticsParameterContentType: "Proposal" as NSObject
-                ])
+
+            // MAS TODO Removed all references to Google/Fabric Analytics.
+//            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+//                AnalyticsParameterItemID: "id-\(model.id)" as NSObject,
+//                AnalyticsParameterItemName: "actionGive" as NSObject,
+//                AnalyticsParameterContentType: "Proposal" as NSObject
+//                ])
             
             if let url:URL = URL(string: giveURL) {
                 UIApplication.shared.openURL(url)

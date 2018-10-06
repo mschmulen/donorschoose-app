@@ -3,7 +3,7 @@
 //
 
 import Foundation
-import Firebase
+//import Firebase
 
 // MAS TODO UserDefaults config
 
@@ -134,7 +134,8 @@ open class UserDataModel {
     public init() {
         name = "~"
         userType = .anonymous
-        Analytics.setUserProperty(userType.label, forName: "userType")
+        // MAS TODO Removed all references to Google/Fabric Analytics.
+//        Analytics.setUserProperty(userType.label, forName: "userType")
         // customSearchModel = SearchDataModel(pListName: customSearchModelPListName)
     }
     

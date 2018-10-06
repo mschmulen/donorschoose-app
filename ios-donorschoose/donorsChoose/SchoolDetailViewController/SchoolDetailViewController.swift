@@ -2,7 +2,7 @@
 //  SchoolDetailViewController.swift
 
 import UIKit
-import Firebase
+//import Firebase
 import Crashlytics
 
 open class SchoolDetailViewController: UIViewController {
@@ -57,12 +57,13 @@ open class SchoolDetailViewController: UIViewController {
     
     func shareAsAlertController( ) {
         if let model = self.viewData.model {
-            
-            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                AnalyticsParameterItemID: "id-\(model.id)",
-                AnalyticsParameterItemName: "actionFavorite",
-                AnalyticsParameterContentType: "School"
-                ])
+
+            // MAS TODO Removed all references to Google/Fabric Analytics.
+//            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+//                AnalyticsParameterItemID: "id-\(model.id)",
+//                AnalyticsParameterItemName: "actionFavorite",
+//                AnalyticsParameterContentType: "School"
+//                ])
             
             let optionMenu = UIAlertController(title: nil, message: "Favorite this School", preferredStyle: .actionSheet)
             

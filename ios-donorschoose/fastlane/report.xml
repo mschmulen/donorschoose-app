@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: build_ios_app" time="270.660806">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>
