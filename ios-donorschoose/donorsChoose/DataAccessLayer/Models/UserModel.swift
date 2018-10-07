@@ -3,20 +3,6 @@
 //
 
 import Foundation
-//import Firebase
-
-// MAS TODO UserDefaults config
-
-//open class DefaultsKeys {
-//    fileprivate init() {}
-//}
-//
-//extension DefaultsKeys {
-//  static let launchCount = DefaultsKey<Int>("launchCount")
-//  static let didShowIntro = DefaultsKey<Bool>("didShowIntro")
-//  static let didShowCustomSearchIntro = DefaultsKey<Bool>("didShowCustomSearchIntro")
-//  static let didShowInNeedIntro = DefaultsKey<Bool>("didShowInNeedIntro")
-//}
 
 struct LocalUserData: Codable, UserDefaultStorable {
     
@@ -24,9 +10,6 @@ struct LocalUserData: Codable, UserDefaultStorable {
     let didShowIntro:Bool
     let didShowCustomSearchIntro:Bool
     let didShowInNeedIntro:Bool
-    
-    //    let themeName: String
-    //    let backgroundImageURL: URL?
 }
 
 open class UserDataModel {

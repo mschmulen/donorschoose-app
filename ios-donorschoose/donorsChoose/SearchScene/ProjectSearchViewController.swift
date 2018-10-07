@@ -7,11 +7,6 @@
 //
 
 import UIKit
-//import Firebase
-
-//public protocol ProjectSearchDelegate {
-//    func searchUpdate( _ newSearchModel: ProjectSearchDataModel )
-//}
 
 open class ProjectSearchViewController: UIViewController {
     
@@ -102,13 +97,6 @@ open class ProjectSearchViewController: UIViewController {
             )
         )
         self.viewData = newViewData
-        
-        // MAS TODO Removed all references to Google/Fabric Analytics.
-//        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-//            AnalyticsParameterItemID: "keywords-\(viewData.searchModel.keywords ?? "")",
-//            AnalyticsParameterItemName: "actionFavorite",
-//            AnalyticsParameterContentType: "Search"
-//            ])
         
         let optionMenu = UIAlertController(title: nil, message: "Add This Search to Favorites: \(searchString) \(viewData.searchModel.sortOption.pickerLabel)", preferredStyle: .actionSheet)
         

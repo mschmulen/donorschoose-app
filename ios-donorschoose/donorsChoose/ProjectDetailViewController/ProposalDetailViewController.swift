@@ -2,8 +2,6 @@
 
 import UIKit
 import MessageUI
-//import Firebase
-import Crashlytics
 
 public enum ShareActionType {
     case email
@@ -73,13 +71,6 @@ open class ProposalDetailViewController: UIViewController {
         
         if let model = self.model {
             let giveURL = model.proposalURL
-
-            // MAS TODO Removed all references to Google/Fabric Analytics.
-//            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-//                AnalyticsParameterItemID: "id-\(model.id)" as NSObject,
-//                AnalyticsParameterItemName: "actionGive" as NSObject,
-//                AnalyticsParameterContentType: "Proposal" as NSObject
-//                ])
             
             if let url:URL = URL(string: giveURL) {
                 UIApplication.shared.openURL(url)
@@ -339,15 +330,6 @@ open class ProposalDetailViewController: UIViewController {
         
         confgureUI()
         
-        if let model = self.model {
-            
-            Answers.logContentView(withName: "Proposal", contentType: "ProposalDetail", contentId: model.id, customAttributes: [
-                "TeacherID":model.teacherId,
-                "costToComplete":model.costToComplete,
-                "totalPrice":model.totalPrice,
-                "Screen Orientation":"Landscape"
-                ])
-        }
         if let proposalIDFromModel = self.model?.id {
             self.proposalID = proposalIDFromModel
         }

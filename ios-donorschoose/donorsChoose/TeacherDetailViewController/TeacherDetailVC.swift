@@ -3,8 +3,6 @@
 //
 
 import UIKit
-//import Firebase
-import Crashlytics
 
 open class TeacherDetailVC: UIViewController {
     
@@ -36,13 +34,6 @@ open class TeacherDetailVC: UIViewController {
         
         if let model = self.viewData.model {
 
-            // MAS TODO Removed all references to Google/Fabric Analytics.
-//            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-//                AnalyticsParameterItemID: "id-\(model.id)",
-//                AnalyticsParameterItemName: "actionFavorite",
-//                AnalyticsParameterContentType: "Teacher"
-//                ])
-            
             let optionMenu = UIAlertController(title: nil, message: "Favorite this Teacher", preferredStyle: .actionSheet)
             var watchAction: UIAlertAction? = nil
             let doesExist =  WatchList.sharedInstance.doesExistInItemDictionary(model.id , type: .TEACHER)
@@ -102,24 +93,12 @@ open class TeacherDetailVC: UIViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        
-                // MAS TODO
-//        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-//            AnalyticsParameterItemID: "id-\(teacherID)" as NSObject,
-//            AnalyticsParameterItemName: teacherName as NSObject,
-//            AnalyticsParameterContentType: "teacher" as NSObject
-//            ])
-        
+                
         let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(TeacherDetailVC.actionShare(_:)))
         self.navigationItem.rightBarButtonItem = buttonShare
         
         dataAPI = TeacherDataAPI(apiConfig: viewData.apiConfig, user: "matt", delegate: self)
         dataAPI?.getTeacherInfo(viewData.teacherID)
-        
-        Answers.logContentView(withName: "Teacher", contentType: "TeacherDetail", contentId: viewData.teacherID, customAttributes: [
-            "teacherID":viewData.teacherID,
-            "Screen Orientation":"Landscape"
-            ])
         
     }
     

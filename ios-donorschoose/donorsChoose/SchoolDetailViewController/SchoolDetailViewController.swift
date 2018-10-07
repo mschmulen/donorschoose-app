@@ -2,8 +2,6 @@
 //  SchoolDetailViewController.swift
 
 import UIKit
-//import Firebase
-import Crashlytics
 
 open class SchoolDetailViewController: UIViewController {
 
@@ -57,13 +55,6 @@ open class SchoolDetailViewController: UIViewController {
     
     func shareAsAlertController( ) {
         if let model = self.viewData.model {
-
-            // MAS TODO Removed all references to Google/Fabric Analytics.
-//            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-//                AnalyticsParameterItemID: "id-\(model.id)",
-//                AnalyticsParameterItemName: "actionFavorite",
-//                AnalyticsParameterContentType: "School"
-//                ])
             
             let optionMenu = UIAlertController(title: nil, message: "Favorite this School", preferredStyle: .actionSheet)
             
@@ -131,12 +122,7 @@ open class SchoolDetailViewController: UIViewController {
         dataAPI?.getSchoolInfo(viewData.schoolID)
         
         let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(SchoolDetailViewController.actionShare(_:)))
-        self.navigationItem.rightBarButtonItem = buttonShare
-        
-        Answers.logContentView(withName: "School", contentType: "SchoolDetail", contentId: viewData.schoolID, customAttributes: [
-            "schoolID":viewData.schoolID,
-            "Screen Orientation":"Landscape"
-            ])
+        self.navigationItem.rightBarButtonItem = buttonShare        
     }
     
     override open func didReceiveMemoryWarning() {

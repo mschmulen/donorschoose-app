@@ -1,7 +1,6 @@
 //  LocationDetailViewController.swift
 
 import UIKit
-import Crashlytics
 
 open class LocationDetailViewController: UIViewController {
 
