@@ -113,7 +113,6 @@ class ProjectAPI : ProjectAPIProtocol
                     let projectModel = try JSONDecoder().decode(ProjectNetworkModel.self, from: data)
                     callback(projectModel.proposals.first, nil)
                 } catch let error {
-                    print("error in JSONSerialization \(error)")
                     callback(nil, APIError.networkSerialize)
                 }
             }

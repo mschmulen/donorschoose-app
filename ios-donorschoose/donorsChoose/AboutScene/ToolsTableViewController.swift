@@ -35,30 +35,14 @@ class ToolsTableViewController: UITableViewController {
             default: return .disclosureIndicator
             }
         }
-        
-//        var showSegue: String? {
-//            switch self {
-//            case .searchProjects: return "showSearchProjects"
-//            case .searchSchools: return "showSearchSchools"
-//            case .searchProjectsKeyword: return "search"
-//            case .search: return "showSearchSchools"
-//            }
-//        }
-        
     }
     
     enum Section:Int {
         case searchTools
-//        case stats
-//        case messages
-//        case proposals
-        
+
         var label:String {
             switch self {
             case .searchTools: return "SEARCH TOOLS"
-//            case .stats: return "STATS"
-//            case .messages: return "MESSAGES"
-//            case .proposals: return "PROPOSALS"
             }
         }
     }
@@ -69,7 +53,6 @@ class ToolsTableViewController: UITableViewController {
         searchTools = [
 //            .searchSchools,
             .searchProjects
-//            .searchProjectsKeyword
         ]
         self.tableView.reloadData()
     }
@@ -93,7 +76,6 @@ class ToolsTableViewController: UITableViewController {
         switch ( sections[indexPath.section]) {
             case .searchTools:
                 cell.textLabel?.text =  searchTools[indexPath.row].label
-                // cell.detailTextLabel?.text = tools[indexPath.row].detail
         }
         return cell
     }
@@ -103,13 +85,7 @@ class ToolsTableViewController: UITableViewController {
         case .searchTools:
             
             switch searchTools[indexPath.row] {
-//            case .search(let name):
-//                if let vc = UIStoryboard(name: "Search", bundle: nil).instantiateInitialViewController() as? SchoolSearchTableViewController {
-//                    vc.viewData = SchoolSearchTableViewController.ViewData()
-//                    // navigationController?.show(vc, sender: self)
-//                    navigationController?.pushViewController(vc, animated: true)
-////                    self.present(vc, animated: true, completion: nil)
-//                }
+
             case .searchSchools:
                 if let vc = UIStoryboard(name: "SchoolSearch", bundle: nil).instantiateInitialViewController() as? SchoolSearchTableViewController {
                     vc.viewData = SchoolSearchTableViewController.ViewData()
@@ -122,40 +98,18 @@ class ToolsTableViewController: UITableViewController {
                 }
 
             case .searchLocation:
-                // MAS TODO
                 if let vc = UIStoryboard(name: "ProjectSearch", bundle: nil).instantiateInitialViewController() as? ProjectKeywordSearchTableViewController {
                     vc.viewData = ProjectKeywordSearchTableViewController.ViewData()
                     navigationController?.pushViewController(vc, animated: true)
                 }
-
             case .searchProjects: // Legacy
                 let searchModel = ProjectSearchDataModel(type: .keyword, keywordString: "")
                 let vc = ProjectSearchViewController(searchModel: searchModel)
                 navigationController?.pushViewController(vc, animated: true)
-                // self.present(vc, animated: true, completion: nil)
             }
         }
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let vc = segue.destination as? SchoolSearchTableViewController {
-//            vc.viewData = SchoolSearchTableViewController.ViewData()
-//            print( "configure School Search")
-//        }
-//    }
-
 }
-
-//extension ToolsTableViewController : ProjectSearchDelegate {
-//    public func searchUpdate( _ newSearchModel: ProjectSearchDataModel ) {
-//        let searchModel = newSearchModel
-//        print( "searchModel \(searchModel.keywords)")
-////        print( "searchModel \(searchModel.subject1)")
-//        print( "searchModel \(searchModel.type.rawValue)")
-//        print( "searchModel \(searchModel.sortOption.pickerLabel)")
-////        fetchData()
-//    }
-//}
 
 extension ToolsTableViewController {
     struct ViewData {

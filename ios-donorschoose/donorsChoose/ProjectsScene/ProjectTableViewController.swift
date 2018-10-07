@@ -46,7 +46,6 @@ class ProjectTableViewController: UITableViewController {
             case .keyword ( let fetchModel ):
                 return "\(fetchModel.keywords ?? "")"
             case .inspires ( let fetchModel ):
-                print("\(fetchModel.sortOption.shortLabel) \(fetchModel.pageSize)")
                 if let keywords = fetchModel.keywords{
                     return "Search: \(keywords)"
                 }
@@ -132,7 +131,6 @@ class ProjectTableViewController: UITableViewController {
     func fetchAll() {
         self.tableData.removeAll()
         for (index,section) in sections.enumerated() {
-            print( "fetchSectionData \(index) : \(section.label)")
             self.tableData.append( (section,[]) )
             switch section {
             case .none(let searchModel):
@@ -148,9 +146,7 @@ class ProjectTableViewController: UITableViewController {
     }
     
     func fetchSection(_ searchModel:ProjectSearchDataModel, section:Section, index:Int) {
-        print( "fetchRecords.type \(searchModel.type.rawValue)")
-        print( "fetchRecords.keywords \(searchModel.keywords ?? "~" )")
-        
+
         dataAPI?.getData(searchModel, pageIndex: indexPageRequest, callback: { (data, error) in
             if let someError = error {
                 self.processError(someError)
@@ -326,7 +322,6 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
         if let newLocation:CLLocation = locations.first {
             if let lastKnownLocation = lastLocation {
                 let distanceInMeters = newLocation.distance(from: lastKnownLocation)
-//                print( "distanceInMeters: \(distanceInMeters) < 100 = early out")
                 if distanceInMeters < 100 {
                     return
                 }
@@ -377,15 +372,6 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
         }
     }
 }
-
-//extension ProjectTableViewController : ProjectSearchDelegate {
-//    public func searchUpdate( _ newSearchModel: ProjectSearchDataModel ) {
-//        // MAS TODO Update SearchUpdate
-//        // currentSearchModel = newSearchModel
-//        // fetch()
-////        print("searchUpdate \(newSearchModel.keywords)")
-//    }
-//}
 
 extension ProjectTableViewController {
     

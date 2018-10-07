@@ -48,11 +48,9 @@ open class SchoolDataAPI : SchoolDataAPIProtocol
                         return
                 }
                 do {
-//                    print( try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) )
                     let results = try JSONDecoder().decode(SchoolModel.self, from: data)
                     self.callbackDelegate?.dataUpdateCallback(self, didChangeData: results , error: nil)
                 } catch let error {
-                    print("error in JSONSerialization \(error)")
                     self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.networkSerialize)
                 }
             }

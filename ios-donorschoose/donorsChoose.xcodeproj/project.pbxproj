@@ -50,7 +50,6 @@
 		108E305320346F7D00567895 /* ProposalListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E303620346F7D00567895 /* ProposalListViewController.xib */; };
 		108E305420346F7D00567895 /* ProposalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E303720346F7D00567895 /* ProposalTableViewCell.swift */; };
 		108E305520346F7D00567895 /* ProposalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E303820346F7D00567895 /* ProposalTableViewCell.xib */; };
-		108E305620346F7D00567895 /* ProposalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E303920346F7D00567895 /* ProposalListViewController.swift */; };
 		108E305720346F7D00567895 /* WatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E303B20346F7D00567895 /* WatchList.swift */; };
 		108E305820346F7D00567895 /* WatchListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E303C20346F7D00567895 /* WatchListModels.swift */; };
 		108E305920346F7D00567895 /* WatchListDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E303E20346F7D00567895 /* WatchListDebugViewController.swift */; };
@@ -63,7 +62,6 @@
 		108E306020346F7D00567895 /* ProposalFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E304620346F7D00567895 /* ProposalFooterView.swift */; };
 		108E306120346F7D00567895 /* ProposalFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E304720346F7D00567895 /* ProposalFooterView.xib */; };
 		108E306220346F7D00567895 /* ProposalDetailViewController+MFMailComposeViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E304820346F7D00567895 /* ProposalDetailViewController+MFMailComposeViewControllerDelegate.swift */; };
-		108E306320346F7D00567895 /* ProposalDetailViewController+ProjectDataAPIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E304920346F7D00567895 /* ProposalDetailViewController+ProjectDataAPIDelegate.swift */; };
 		108E306420346F7D00567895 /* ProposalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E304A20346F7D00567895 /* ProposalHeaderView.swift */; };
 		108E307620346FA900567895 /* TeacherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E306820346FA900567895 /* TeacherAPI.swift */; };
 		108E307720346FA900567895 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E306920346FA900567895 /* APIConfig.swift */; };
@@ -254,7 +252,6 @@
 		108E303620346F7D00567895 /* ProposalListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProposalListViewController.xib; sourceTree = "<group>"; };
 		108E303720346F7D00567895 /* ProposalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProposalTableViewCell.swift; sourceTree = "<group>"; };
 		108E303820346F7D00567895 /* ProposalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProposalTableViewCell.xib; sourceTree = "<group>"; };
-		108E303920346F7D00567895 /* ProposalListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProposalListViewController.swift; sourceTree = "<group>"; };
 		108E303B20346F7D00567895 /* WatchList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchList.swift; sourceTree = "<group>"; };
 		108E303C20346F7D00567895 /* WatchListModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchListModels.swift; sourceTree = "<group>"; };
 		108E303E20346F7D00567895 /* WatchListDebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchListDebugViewController.swift; sourceTree = "<group>"; };
@@ -267,7 +264,6 @@
 		108E304620346F7D00567895 /* ProposalFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProposalFooterView.swift; sourceTree = "<group>"; };
 		108E304720346F7D00567895 /* ProposalFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProposalFooterView.xib; sourceTree = "<group>"; };
 		108E304820346F7D00567895 /* ProposalDetailViewController+MFMailComposeViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProposalDetailViewController+MFMailComposeViewControllerDelegate.swift"; sourceTree = "<group>"; };
-		108E304920346F7D00567895 /* ProposalDetailViewController+ProjectDataAPIDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProposalDetailViewController+ProjectDataAPIDelegate.swift"; sourceTree = "<group>"; };
 		108E304A20346F7D00567895 /* ProposalHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProposalHeaderView.swift; sourceTree = "<group>"; };
 		108E306820346FA900567895 /* TeacherAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherAPI.swift; sourceTree = "<group>"; };
 		108E306920346FA900567895 /* APIConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
@@ -371,7 +367,6 @@
 			children = (
 				108F9520206D95110012CF08 /* ProjectSearchViewController.swift */,
 				108F9521206D95110012CF08 /* ProjectSearchViewController.xib */,
-				108E303920346F7D00567895 /* ProposalListViewController.swift */,
 				10128C4B2068266100AA060E /* SchoolSearch.storyboard */,
 				1056F9CE2067F23300D5D11F /* SchoolSearchTableViewController.swift */,
 				10128C4D2068268700AA060E /* ProjectSearch.storyboard */,
@@ -559,7 +554,6 @@
 				108E304420346F7D00567895 /* DescriptionViewCell.swift */,
 				108E304220346F7D00567895 /* ProposalDetailViewController.xib */,
 				108E304520346F7D00567895 /* ProposalDetailViewController.swift */,
-				108E304920346F7D00567895 /* ProposalDetailViewController+ProjectDataAPIDelegate.swift */,
 				108E304820346F7D00567895 /* ProposalDetailViewController+MFMailComposeViewControllerDelegate.swift */,
 				108E304320346F7D00567895 /* ProposalHeaderView.xib */,
 				108E304A20346F7D00567895 /* ProposalHeaderView.swift */,
@@ -977,7 +971,6 @@
 				108E30C32034715500567895 /* SchoolDetailProposalHeaderView.swift in Sources */,
 				10128C442068123B00AA060E /* ViewController+Nav.swift in Sources */,
 				107FF55B2067BDA40083F4DA /* ProjectNetworkModel.swift in Sources */,
-				108E305620346F7D00567895 /* ProposalListViewController.swift in Sources */,
 				108E308F20346FDF00567895 /* UITableViewCell+getDataFromUrl.swift in Sources */,
 				108E305720346F7D00567895 /* WatchList.swift in Sources */,
 				108E305920346F7D00567895 /* WatchListDebugViewController.swift in Sources */,
@@ -1014,7 +1007,6 @@
 				108E305F20346F7D00567895 /* ProposalDetailViewController.swift in Sources */,
 				1056F9D3206805F000D5D11F /* APIError.swift in Sources */,
 				108E307620346FA900567895 /* TeacherAPI.swift in Sources */,
-				108E306320346F7D00567895 /* ProposalDetailViewController+ProjectDataAPIDelegate.swift in Sources */,
 				10786FB52067DA5B00CDE960 /* ChallengeStatsTableViewController.swift in Sources */,
 				108E30C42034715500567895 /* ProposalViewCell.swift in Sources */,
 				76F45A6021512A510021C803 /* LocalNotificationManager.swift in Sources */,

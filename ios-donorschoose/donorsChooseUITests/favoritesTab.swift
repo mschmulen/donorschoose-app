@@ -16,7 +16,5 @@ func favoritesTab(_ app: XCUIApplication) {
     
     let tabButton = app.buttons[tabButtonText]
     tabButton.tap()
-    
-    print( "tap")
 }
 

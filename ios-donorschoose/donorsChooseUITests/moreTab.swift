@@ -17,11 +17,9 @@ func moreTab(_ app: XCUIApplication) {
     
     let tabButton = app.buttons[tabButtonText]
     tabButton.tap()
-    
-    print( "tap")
 
     let tablesQuery = app.tables
-
+    
     //  tablesQuery.staticTexts["Donors Choose App"].tap()
     tablesQuery.staticTexts["About This App"].tap()
 

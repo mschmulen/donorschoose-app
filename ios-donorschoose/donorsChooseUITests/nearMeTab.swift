@@ -19,8 +19,7 @@ func nearMeTab(_ app: XCUIApplication) {
 
     let tabButton = app.buttons[tabButtonText]
     tabButton.tap()
-
-    print( "tap")
+    
 
     //  let tablesQuery = app.tables
     //

@@ -38,7 +38,6 @@ open class TeacherDataAPI : TeacherDataAPIProtocol
             (data, response, error) -> Void in
             
             if let networkError = error {
-                // print( networkError.localizedDescription)
                 self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.generateFromNetworkError(networkError))
             }
             else {
@@ -49,51 +48,14 @@ open class TeacherDataAPI : TeacherDataAPIProtocol
                         return
                 }
                 do {
-                    print( try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) )
                     let results = try JSONDecoder().decode(TeacherModel.self, from: data)
                     self.callbackDelegate?.dataUpdateCallback(self, didChangeData: results , error: nil)
                 } catch let error {
-                    print("error in JSONSerialization \(error)")
                     self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.networkSerialize)
                 }
             }
-            
-//            if let networkError = error {
-//                self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.generateFromNetworkError(networkError))
-//            }
-//            else {
-//                guard let statusCode = (response as? HTTPURLResponse)?.statusCode,// != 200,
-//                    statusCode == 200,
-//                    let data = data
-//                    else {
-//                        self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.genericNetwork)
-//                        return
-//                }
-//
-//                do {
-////                    let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
-////                    let results = self.deSerializeContent(json)
-//                    let m = try? JSONDecoder().decode(TeacherDataModel.self, from: data)
-//                    let results = m
-//
-//                    self.callbackDelegate?.dataUpdateCallback(self, didChangeData: results, error: nil)
-//                } catch {
-//                    self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.genericNetwork)
-//                }
-//            }
         })
         task.resume()
     }
-    
-//    fileprivate func deSerializeContent( _ jsonObj:Any? ) -> TeacherDataModel?
-//    {
-//        guard
-//            let dict = jsonObj as? [String:AnyObject],
-//
-//            let m = TeacherDataModel.obtainModel(from: dict as JSONObjectBase)
-//            else { return nil }
-//        return m
-//    }
-    
 }
 

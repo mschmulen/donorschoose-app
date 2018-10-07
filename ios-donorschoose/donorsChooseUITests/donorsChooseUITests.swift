@@ -30,11 +30,8 @@ class donorsChooseUITests: XCTestCase {
     }
     
     func testBasic() {
-
+        
         let app = XCUIApplication()
-        print( "app.state \(app.state)")
-
-        // MAS TODO handle the enable geo services pop up notice
 
         inNeedTab(app)
         nearMeTab(app)

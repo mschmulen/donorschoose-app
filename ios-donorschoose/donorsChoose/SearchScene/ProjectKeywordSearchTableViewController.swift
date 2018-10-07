@@ -9,11 +9,7 @@
 import UIKit
 
 class SearchFooterView : UIView {
-    var itemCount:Int = 0 {
-        didSet {
-            print( "SearchFooterView itemCount \(itemCount)")
-        }
-    }
+    var itemCount:Int = 0
 }
 
 class ProjectKeywordSearchTableViewController: UITableViewController {
@@ -153,12 +149,6 @@ extension ProjectKeywordSearchTableViewController : UISearchResultsUpdating {
         
         guard let searchBarText = searchController.searchBar.text else { return }
         filteredData.removeAll(keepingCapacity: false)
-        print(  "updateSearchResults \(searchBarText)")
-        
-        // MAS TODO Use NSPredicate
-        //        let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchBarText)
-        //        let array = (data as NSArray).filteredArrayUsingPredicate(searchPredicate)
-        //        filteredData = array as! [String]
         
         let filteredArray = data.filter() { $0.label == searchBarText }
         filteredData = filteredArray

@@ -54,51 +54,16 @@ open class DonorPageDataAPI : DonorPageDataAPIProtocol
                     }
                     
                     do {
-                        print( try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) )
                         let results = try JSONDecoder().decode(DonorPageDataModel.self, from: data)
                         self.callbackDelegate?.dataUpdateCallback(self, didChangeData: results , error: nil)
                     } catch let error {
-                        print("error in JSONSerialization \(error)")
                         self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.networkSerialize)
                     }
                 }
-                
-                
-                
-//                else {
-//                    if (statusCode == 200 && data != nil ) {
-//                        print( try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) )
-////                        let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions())
-////                        let results = self.deSerializeContent(json)
-//
-//                        let m = try? JSONDecoder().decode(DonorPageDataModel.self, from: data!)
-//                        let results = m
-//
-//                        self.callbackDelegate?.dataUpdateCallback(self, didChangeData: results , error: nil)
-//                    }
-//                    else {
-//                        self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.genericNetwork)
-//                    }
-//                }
-                
-            }) 
+            })
             task.resume()
         }
     }
-    
-//    fileprivate func deSerializeContent( _ jsonObj:Any? ) -> DonorPageDataModel?
-//    {
-//        if ( jsonObj != nil )
-//        {
-//            if let dictionary = jsonObj as? [String: Any] {
-//
-//                let m = try? DonorPageDataModel(json: dictionary)
-//                return m
-//            }
-//        }
-//        return nil
-//    }
-    
 }
 
 

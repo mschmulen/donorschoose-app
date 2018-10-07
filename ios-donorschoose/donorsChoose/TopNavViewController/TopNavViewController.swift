@@ -9,31 +9,7 @@ open class TopNavViewController: UITabBarController {
     var viewData:ViewData = ViewData()
     var activity:NSUserActivity?
     var tabViewControllers = [UIViewController]()
-    
-    // MAS TODO this will leverage the app routing to correctly display the appropriate tab and viewController
-    func startWithActivity( _ activity:NSUserActivity ) {
-        //    guard let appRoute = AppRoute.route(activity:activity ) else {
-        //      return
-        //    }
-        //present(appRoute)
-    }
-    
-    open func loadAndShowProposal(_ proposalID:String)
-    {
-        print("fetch specific proposal")
-//        let dataAPI = ProjectAPI(config: viewData.apiConfig,user: "matt", delegate: self)
-//        dataAPI.getDataWithProposalID(proposalID)
-    }
-    
-    open func showHighlightProjectID( _ proposal: ProposalModel ){
-        let notificationVC = NotificationProposalViewController(title: "Checkout \(proposal.id) ", message: "Top Notification \(proposal.title)  ", proposal: proposal)
-        self.present(notificationVC, animated: true)
-    }
-    
-    open static func showAuthChallenge(_ parentVC:UIViewController) {
-        // MAS TODO , auth challenge if needed , to support authentication
-    }
-    
+
     open func authUser() {
     }
     
@@ -107,7 +83,7 @@ open class TopNavViewController: UITabBarController {
         }
         
         UITabBar.appearance().tintColor = UIColor(red: 13, green: 127, blue: 25)
-        
+
         // MAS TODO Consume the activity link if it was initialized with one
         //    guard let userActivity = activity,
         //      let appRoute = AppRoute.route(activity:userActivity ) else {
@@ -136,18 +112,40 @@ open class TopNavViewController: UITabBarController {
          }
          */
     }
-    
-    /*
-     func toggleTabBar(showTabBar:Bool) {
-     var newFrame = self.tabBar.frame
-     newFrame.origin.y = showTabBar ? ScreenHeight - TabBarHeight : ScreenHeight + TabBarHeight
-     
-     UIView.animateWithDuration(0.3, animations: { () -> Void in
-     self.tabBar.frame = newFrame
-     })
-     }
-     */
-    
+
+    //    public static func showAuthChallenge(_ parentVC:UIViewController) {
+    //        // MAS TODO , auth challenge if needed , to support authentication
+    //    }
+
+    //    open func showHighlightProjectID( _ proposal: ProposalModel ){
+    //        let notificationVC = NotificationProposalViewController(title: "Checkout \(proposal.id) ", message: "Top Notification \(proposal.title)  ", proposal: proposal)
+    //        self.present(notificationVC, animated: true)
+    //    }
+
+
+
+    //    func startWithActivity( _ activity:NSUserActivity ) {
+    //        //    guard let appRoute = AppRoute.route(activity:activity ) else {
+    //        //      return
+    //        //    }
+    //        //present(appRoute)
+    //    }
+
+    //    open func loadAndShowProposal(_ proposalID:String)
+    //    {
+    ////        let dataAPI = ProjectAPI(config: viewData.apiConfig,user: "matt", delegate: self)
+    ////        dataAPI.getDataWithProposalID(proposalID)
+    //    }
+
+//    func toggleTabBar(showTabBar:Bool) {
+//        var newFrame = self.tabBar.frame
+//        newFrame.origin.y = showTabBar ? ScreenHeight - TabBarHeight : ScreenHeight + TabBarHeight
+//
+//        UIView.animateWithDuration(0.3, animations: { () -> Void in
+//            self.tabBar.frame = newFrame
+//        })
+//    }
+
 }
 
 extension TopNavViewController {

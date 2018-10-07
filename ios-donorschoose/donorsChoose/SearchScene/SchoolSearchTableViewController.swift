@@ -129,12 +129,6 @@ extension SchoolSearchTableViewController : UISearchResultsUpdating {
         
         guard let searchBarText = searchController.searchBar.text else { return }
         filteredData.removeAll(keepingCapacity: false)
-        print( "\(searchBarText)")
-        
-        // MAS TODO Use NSPredicate
-//        let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchBarText)
-//        let array = (data as NSArray).filteredArrayUsingPredicate(searchPredicate)
-//        filteredData = array as! [String]
         
         let filteredArray = data.filter() { $0.label == searchBarText }
         filteredData = filteredArray
