@@ -97,8 +97,6 @@ public enum APIError: Error {
         }
     }
     
-    // MAS TODO Clean up
-
     public static func generateFromNetworkError( _ networkError:Error) -> APIError
     {
         // MAS TODO Swift 3 , broke

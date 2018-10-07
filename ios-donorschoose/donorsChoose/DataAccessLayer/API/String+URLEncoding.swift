@@ -1,6 +1,5 @@
 //
 //  String+URLEncoding.swift
-//  donorsChoose
 //
 //  Created by Matt Schmulen on 3/25/18.
 //  Copyright © 2018 jumptack. All rights reserved.
