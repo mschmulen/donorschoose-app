@@ -73,8 +73,7 @@ open class ProposalDetailViewController: UIViewController {
             let giveURL = model.proposalURL
             
             if let url:URL = URL(string: giveURL) {
-                UIApplication.shared.openURL(url)
-
+                UIApplication.shared.open(url, options: [:])
             }
         }
     }
@@ -206,7 +205,7 @@ open class ProposalDetailViewController: UIViewController {
             
             let webAction = UIAlertAction(title: "Web", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
-                UIApplication.shared.openURL(url)
+                UIApplication.shared.open(url, options: [:])
             })
             
             let copyAction = UIAlertAction(title: "Copy URL", style: .default, handler: {

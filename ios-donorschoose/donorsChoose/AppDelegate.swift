@@ -18,9 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var userInfo:UserDataModel? = UserDataModel()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        WatchList.registerNotificationSettings( application )
-        
+                
         if let user = userInfo {
             topNav = TopNavViewController(user: user, activity: nil)
         } else  {

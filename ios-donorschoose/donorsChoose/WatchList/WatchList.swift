@@ -3,6 +3,7 @@
 import UIKit
 
 // MAS TODO , lock down public and prive accessors
+
 public class WatchList {
     
     public static let RefreshEventName = "WatchRefreshEvent"
@@ -289,16 +290,5 @@ public class WatchList {
         return WatchList.sharedInstance.doesExistInItemDictionary(model)
     }
     
-    public class func registerNotificationSettings(_ application: UIApplication)
-    {
-        //config the local notifications
-        let notificationSettings = UIUserNotificationSettings(types: [UIUserNotificationType.alert, UIUserNotificationType.badge], categories: nil)
-        
-        //application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
-        
-        application.registerUserNotificationSettings(notificationSettings)
-    }
-    
 }
-
 
