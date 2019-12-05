@@ -95,7 +95,7 @@ class ChallengeStatsTableViewController: UITableViewController {
             .challengeStat(name:"Schools Reached", value: model.numSchools.withCommas() ),
             .challengeStat(name:"Students Reached", value: model.studentsReached.withCommas() ),
             .challengeStat(name:"Amount Donated", value: Float( model.amountDonated)?.asCurrency() ?? "\(model.amountDonated)"),
-            .challengeStat(name:"Donors Reached", value: model.numDonors),
+            .challengeStat(name:"Donors Reached", value: Int(model.numDonors)?.withCommas() ?? model.numDonors),
             .challengeStat(name:"Funded Proposals", value: model.numFundedProposals.withCommas() )
         ]
         

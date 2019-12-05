@@ -51,7 +51,8 @@ import CoreLocation
     }
     
     private class func isLocalNotificationScheduled( key: AppLocalNotification ) -> Bool {
-        var notificationScheduled = false
+        // MAS TODO dead code
+//        var notificationScheduled = false
         
 //        guard let scheduledLocalNotifications = UIApplication.shared.scheduledLocalNotifications else { return dripScheduled }
 //
@@ -61,7 +62,8 @@ import CoreLocation
 //                dripScheduled = true
 //            }
 //        }
-        return notificationScheduled
+//        return notificationScheduled
+        return false
     }
     
     private class func scheduleNotification( key: AppLocalNotification, startIntervalForTesting:TimeInterval ) {
@@ -110,6 +112,7 @@ import CoreLocation
         center.add(request, withCompletionHandler: { (error) in
             if let error = error {
                 // Something went wrong
+                print("UNUserNotificationCenter error \(error)")
             }
         })
 

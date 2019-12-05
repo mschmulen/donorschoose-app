@@ -15,7 +15,7 @@ public protocol DefaultCompatible {
 }
 
 public extension DefaultCompatible {
-    public var df: Default<Self> {
+    var df: Default<Self> {
         return Default(self)
     }
 }
