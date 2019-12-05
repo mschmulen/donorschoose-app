@@ -9,9 +9,6 @@ open class TopNavViewController: UITabBarController {
     var viewData:ViewData = ViewData()
     var activity:NSUserActivity?
     var tabViewControllers = [UIViewController]()
-
-    open func authUser() {
-    }
     
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +20,6 @@ open class TopNavViewController: UITabBarController {
     
     override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        authUser()
     }
     
     required public init(coder aDecoder: NSCoder) {
@@ -112,18 +108,7 @@ open class TopNavViewController: UITabBarController {
          }
          */
     }
-
-    //    public static func showAuthChallenge(_ parentVC:UIViewController) {
-    //        // MAS TODO , auth challenge if needed , to support authentication
-    //    }
-
-    //    open func showHighlightProjectID( _ proposal: ProposalModel ){
-    //        let notificationVC = NotificationProposalViewController(title: "Checkout \(proposal.id) ", message: "Top Notification \(proposal.title)  ", proposal: proposal)
-    //        self.present(notificationVC, animated: true)
-    //    }
-
-
-
+    
     //    func startWithActivity( _ activity:NSUserActivity ) {
     //        //    guard let appRoute = AppRoute.route(activity:activity ) else {
     //        //      return
@@ -136,15 +121,6 @@ open class TopNavViewController: UITabBarController {
     ////        let dataAPI = ProjectAPI(config: viewData.apiConfig,user: "matt", delegate: self)
     ////        dataAPI.getDataWithProposalID(proposalID)
     //    }
-
-//    func toggleTabBar(showTabBar:Bool) {
-//        var newFrame = self.tabBar.frame
-//        newFrame.origin.y = showTabBar ? ScreenHeight - TabBarHeight : ScreenHeight + TabBarHeight
-//
-//        UIView.animateWithDuration(0.3, animations: { () -> Void in
-//            self.tabBar.frame = newFrame
-//        })
-//    }
 
 }
 
