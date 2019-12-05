@@ -205,7 +205,7 @@ class ProjectTableViewController: UITableViewController {
         tableView.backgroundView = ProjectsEmptyBackgroundView(frame: tableView.frame, config: viewData.viewConfig)
         
         refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(ProjectTableViewController.refresh(_:)), for: UIControlEvents.valueChanged)
+        refreshControl?.addTarget(self, action: #selector(ProjectTableViewController.refresh(_:)), for: UIControl.Event.valueChanged)
         tableView.refreshControl = refreshControl
         
         switch ( viewData.viewConfig ) {
@@ -213,7 +213,7 @@ class ProjectTableViewController: UITableViewController {
             sections = []
             loadWatchItems()
             
-            let buttonAddFavorite : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(ProjectTableViewController.actionAddFavorite(_:)))
+            let buttonAddFavorite : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(ProjectTableViewController.actionAddFavorite(_:)))
             self.navigationItem.rightBarButtonItem = buttonAddFavorite
             
             NotificationCenter.default.addObserver(self, selector: #selector(ProjectTableViewController.refreshWatchItemsFromNotificationEvent), name: NSNotification.Name(rawValue: WatchList.RefreshEventName), object: nil)

@@ -37,9 +37,9 @@ open class LocationDetailViewController: UIViewController {
 
             collectionView.register(LoadingCollectionViewCell.nib, forCellWithReuseIdentifier: LoadingCollectionViewCell.reuseIdentifier )
             
-            collectionView.register(LocationHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: LocationHeaderView.reuseIdentifier)
+            collectionView.register(LocationHeaderView.nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: LocationHeaderView.reuseIdentifier)
             
-            collectionView.register(LocationDetailProposalHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: LocationDetailProposalHeaderView.reuseIdentifier)
+            collectionView.register(LocationDetailProposalHeaderView.nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: LocationDetailProposalHeaderView.reuseIdentifier)
             
             collectionView.delegate = self
             collectionView.dataSource = self
@@ -163,24 +163,24 @@ extension LocationDetailViewController : UICollectionViewDataSource {
         switch sections[indexPath.section] {
         case .info:
             switch kind {
-            case UICollectionElementKindSectionHeader:
+            case UICollectionView.elementKindSectionHeader:
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: LocationHeaderView.reuseIdentifier, for: indexPath) as! LocationHeaderView
                 headerView.labelName.text = viewData.locationState ?? viewData.locationCity ?? ""
                 return headerView
-            case UICollectionElementKindSectionFooter:
+            case UICollectionView.elementKindSectionFooter:
                 assert(false, "Unexpected element kind")
             default:
                 assert(false, "Unexpected element kind")
             }
         case .proposals:
             switch kind {
-            case UICollectionElementKindSectionHeader:
+            case UICollectionView.elementKindSectionHeader:
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: LocationDetailProposalHeaderView.reuseIdentifier, for: indexPath) as! LocationDetailProposalHeaderView
                 if let state = viewData.locationState , (proposals.count > 0) {
                     headerView.configure(major: "Proposals in \(state)")
                 }
                 return headerView
-            case UICollectionElementKindSectionFooter:
+            case UICollectionView.elementKindSectionFooter:
                 assert(false, "Unexpected element kind")
             default:
                 assert(false, "Unexpected element kind")
@@ -214,7 +214,7 @@ extension LocationDetailViewController : UICollectionViewDelegateFlowLayout {
                     cell.labelStatName.preferredMaxLayoutWidth = width
                     cell.labelStatValue.preferredMaxLayoutWidth = width
                     cell.constraintWidth.constant = width
-                    return cell.contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+                    return cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
                 }
                 return CGSize(width: 300, height: 300)
         case .proposals:

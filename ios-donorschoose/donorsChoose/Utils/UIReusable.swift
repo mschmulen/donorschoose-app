@@ -14,14 +14,14 @@ extension UIReusable {
 
   static var reuseIdentifier: String {
     let stringFromClass = NSStringFromClass( self )
-    let nameComponents = stringFromClass.characters.split{$0 == "."}.map(String.init)
+    let nameComponents = stringFromClass.split{$0 == "."}.map(String.init)
     let prefix = nameComponents[1]
     return prefix
   }
 
   static var nibFileNameFromReuseIdentifier: String {
     let stringFromClass = NSStringFromClass( self )
-    let compArr =  stringFromClass.characters.split{$0 == "."}.map(String.init)
+    let compArr =  stringFromClass.split{$0 == "."}.map(String.init)
     let fileName = compArr[1]
     return fileName
   }

@@ -43,7 +43,7 @@ public class WatchListDebugViewController: UITableViewController {
     
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "DiogenesCell")
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "DiogenesCell")
         
         let opty = items[(indexPath as NSIndexPath).row] //as WatchItemProposal
         
@@ -79,7 +79,7 @@ public class WatchListDebugViewController: UITableViewController {
         return true // all cells are editable
     }
     
-    override public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete { // the only editing style we'll support
             // Delete the row from the data source
             let item = items.remove(at: (indexPath as NSIndexPath).row) // remove TodoItem from notifications array, assign removed item to 'item'

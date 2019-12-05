@@ -23,9 +23,9 @@ public class AboutInfoViewController: UIViewController {
 
 extension AboutInfoViewController: UIWebViewDelegate {
     
-    public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
         
-        if navigationType == UIWebViewNavigationType.linkClicked {
+        if navigationType == UIWebView.NavigationType.linkClicked {
             UIApplication.shared.openURL(request.url!)
             return false
         }

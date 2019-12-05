@@ -32,7 +32,7 @@ class SchoolSearchTableViewController: UITableViewController {
             }
         }
         
-        var accessoryType: UITableViewCellAccessoryType {
+        var accessoryType: UITableViewCell.AccessoryType {
             switch self {
             default: return .none
             }

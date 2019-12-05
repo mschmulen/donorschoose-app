@@ -74,7 +74,7 @@ public struct ProposalModel :Codable {
         // MAS TODO codable
         freeShipping = false // try values.decode(Bool.self, forKey: .freeShipping)
         
-        if let synopsisString = try? values.decode(String?.self, forKey: .synopsis) {
+        if let synopsisString = ((try? values.decode(String?.self, forKey: .synopsis)) as String??) {
             synopsis = synopsisString
         } else {
             synopsis = shortDescription

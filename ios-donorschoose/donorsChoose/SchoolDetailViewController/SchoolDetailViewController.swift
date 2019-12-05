@@ -38,9 +38,9 @@ open class SchoolDetailViewController: UIViewController {
 
             collectionView.register(LoadingCollectionViewCell.nib, forCellWithReuseIdentifier: LoadingCollectionViewCell.reuseIdentifier )
             
-            collectionView.register(SchoolHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: SchoolHeaderView.reuseIdentifier)
+            collectionView.register(SchoolHeaderView.nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SchoolHeaderView.reuseIdentifier)
             
-            collectionView.register(SchoolDetailProposalHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: SchoolDetailProposalHeaderView.reuseIdentifier)
+            collectionView.register(SchoolDetailProposalHeaderView.nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SchoolDetailProposalHeaderView.reuseIdentifier)
             
             collectionView.delegate = self
             collectionView.dataSource = self
@@ -121,7 +121,7 @@ open class SchoolDetailViewController: UIViewController {
         dataAPI = SchoolDataAPI(config: apiConfig, user: "matt", delegate: self)
         dataAPI?.getSchoolInfo(viewData.schoolID)
         
-        let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(SchoolDetailViewController.actionShare(_:)))
+        let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(SchoolDetailViewController.actionShare(_:)))
         self.navigationItem.rightBarButtonItem = buttonShare        
     }
     
@@ -198,21 +198,21 @@ extension SchoolDetailViewController : UICollectionViewDataSource {
         switch sections[indexPath.section] {
         case .info:
             switch kind {
-            case UICollectionElementKindSectionHeader:
+            case UICollectionView.elementKindSectionHeader:
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SchoolHeaderView.reuseIdentifier, for: indexPath) as! SchoolHeaderView
                 headerView.labelName.text = viewData.schoolName ?? viewData.schoolCity ?? ""
                 return headerView
-            case UICollectionElementKindSectionFooter:
+            case UICollectionView.elementKindSectionFooter:
                 assert(false, "Unexpected element kind")
             default:
                 assert(false, "Unexpected element kind")
             }
         case .proposals:
             switch kind {
-            case UICollectionElementKindSectionHeader:
+            case UICollectionView.elementKindSectionHeader:
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SchoolDetailProposalHeaderView.reuseIdentifier, for: indexPath) as! SchoolDetailProposalHeaderView
                 return headerView
-            case UICollectionElementKindSectionFooter:
+            case UICollectionView.elementKindSectionFooter:
                 assert(false, "Unexpected element kind")
             default:
                 assert(false, "Unexpected element kind")
@@ -246,7 +246,7 @@ extension SchoolDetailViewController : UICollectionViewDelegateFlowLayout {
                     cell.labelStatName.preferredMaxLayoutWidth = width
                     cell.labelStatValue.preferredMaxLayoutWidth = width
                     cell.constraintWidth.constant = width
-                    return cell.contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+                    return cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
                 }
                 return CGSize(width: 300, height: 300)
         case .proposals:

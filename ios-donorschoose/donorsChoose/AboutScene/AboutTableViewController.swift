@@ -44,7 +44,7 @@ class AboutTableViewController: UITableViewController {
             }
         }
         
-        var accessoryType: UITableViewCellAccessoryType {
+        var accessoryType: UITableViewCell.AccessoryType {
             switch self {
             case .aboutInfo: return .disclosureIndicator
             case .aboutPrivacyPolicy: return .disclosureIndicator
@@ -55,7 +55,7 @@ class AboutTableViewController: UITableViewController {
             }
         }
         
-        var selectionStyle: UITableViewCellSelectionStyle {
+        var selectionStyle: UITableViewCell.SelectionStyle {
             switch self {
             case .aboutInfo: return .default
             case .aboutPrivacyPolicy: return .default
