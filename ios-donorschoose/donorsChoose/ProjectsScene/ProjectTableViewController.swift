@@ -53,7 +53,7 @@ class ProjectTableViewController: UITableViewController {
             }
         }
         
-        // MAS TODO Warning
+        // MAS TODO Warning : 'Hashable.hashValue' is deprecated as a protocol requirement; conform type 'ProjectTableViewController.Section' to 'Hashable' by implementing 'hash(into:)' instead
         var hashValue: Int {
             switch self {
             case .none(let model): return model.hashValue

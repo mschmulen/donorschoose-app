@@ -45,8 +45,6 @@
 		108E30172033A77100567895 /* donorsChooseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E30162033A77100567895 /* donorsChooseUITests.swift */; };
 		108E304D20346F7D00567895 /* FavoriteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E302C20346F7C00567895 /* FavoriteListViewController.swift */; };
 		108E304E20346F7D00567895 /* TopNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E302E20346F7C00567895 /* TopNavViewController.swift */; };
-		108E304F20346F7D00567895 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E303020346F7C00567895 /* SplashViewController.swift */; };
-		108E305020346F7D00567895 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E303120346F7C00567895 /* SplashViewController.xib */; };
 		108E305320346F7D00567895 /* ProposalListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E303620346F7D00567895 /* ProposalListViewController.xib */; };
 		108E305420346F7D00567895 /* ProposalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E303720346F7D00567895 /* ProposalTableViewCell.swift */; };
 		108E305520346F7D00567895 /* ProposalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E303820346F7D00567895 /* ProposalTableViewCell.xib */; };
@@ -69,7 +67,6 @@
 		108E307920346FA900567895 /* ProjectAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E306B20346FA900567895 /* ProjectAPI.swift */; };
 		108E307A20346FA900567895 /* SchoolAPIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E306C20346FA900567895 /* SchoolAPIDelegate.swift */; };
 		108E307B20346FA900567895 /* ProjectSearchFetchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E306E20346FA900567895 /* ProjectSearchFetchModel.swift */; };
-		108E307C20346FA900567895 /* SerializationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E306F20346FA900567895 /* SerializationError.swift */; };
 		108E307D20346FA900567895 /* Model+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E307020346FA900567895 /* Model+Identifiable.swift */; };
 		108E307E20346FA900567895 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E307120346FA900567895 /* UserModel.swift */; };
 		108E307F20346FA900567895 /* TeacherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E307220346FA900567895 /* TeacherModel.swift */; };
@@ -111,8 +108,6 @@
 		108E30E120348BFF00567895 /* AboutInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E30DE20348BFF00567895 /* AboutInfoViewController.swift */; };
 		108E30F120348CB200567895 /* FontAwesome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108E30EA20348C7900567895 /* FontAwesome.framework */; };
 		108E30F220348CB200567895 /* FontAwesome.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 108E30EA20348C7900567895 /* FontAwesome.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		108E30FF20348E0600567895 /* StatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E30FD20348E0600567895 /* StatsViewController.xib */; };
-		108E310020348E0600567895 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E30FE20348E0600567895 /* StatsViewController.swift */; };
 		108E310420348EB100567895 /* NotificationProposalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E310220348EB000567895 /* NotificationProposalViewController.xib */; };
 		108E310520348EB100567895 /* NotificationProposalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E310320348EB000567895 /* NotificationProposalViewController.swift */; };
 		108E310A2034906800567895 /* apiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 108E31092034906800567895 /* apiKeys.plist */; };
@@ -244,8 +239,6 @@
 		108E30182033A77100567895 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		108E302C20346F7C00567895 /* FavoriteListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteListViewController.swift; sourceTree = "<group>"; };
 		108E302E20346F7C00567895 /* TopNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopNavViewController.swift; sourceTree = "<group>"; };
-		108E303020346F7C00567895 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
-		108E303120346F7C00567895 /* SplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
 		108E303620346F7D00567895 /* ProposalListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProposalListViewController.xib; sourceTree = "<group>"; };
 		108E303720346F7D00567895 /* ProposalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProposalTableViewCell.swift; sourceTree = "<group>"; };
 		108E303820346F7D00567895 /* ProposalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProposalTableViewCell.xib; sourceTree = "<group>"; };
@@ -268,7 +261,6 @@
 		108E306B20346FA900567895 /* ProjectAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectAPI.swift; sourceTree = "<group>"; };
 		108E306C20346FA900567895 /* SchoolAPIDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolAPIDelegate.swift; sourceTree = "<group>"; };
 		108E306E20346FA900567895 /* ProjectSearchFetchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSearchFetchModel.swift; sourceTree = "<group>"; };
-		108E306F20346FA900567895 /* SerializationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerializationError.swift; sourceTree = "<group>"; };
 		108E307020346FA900567895 /* Model+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Model+Identifiable.swift"; sourceTree = "<group>"; };
 		108E307120346FA900567895 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		108E307220346FA900567895 /* TeacherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherModel.swift; sourceTree = "<group>"; };
@@ -309,8 +301,6 @@
 		108E30DC20348BFF00567895 /* About.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = About.html; sourceTree = "<group>"; };
 		108E30DE20348BFF00567895 /* AboutInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutInfoViewController.swift; sourceTree = "<group>"; };
 		108E30E220348C7900567895 /* FontAwesome.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FontAwesome.xcodeproj; path = VendorCarthage/Carthage/Checkouts/FontAwesome.swift/FontAwesome.xcodeproj; sourceTree = "<group>"; };
-		108E30FD20348E0600567895 /* StatsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatsViewController.xib; sourceTree = "<group>"; };
-		108E30FE20348E0600567895 /* StatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		108E310220348EB000567895 /* NotificationProposalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationProposalViewController.xib; sourceTree = "<group>"; };
 		108E310320348EB000567895 /* NotificationProposalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationProposalViewController.swift; sourceTree = "<group>"; };
 		108E31092034906800567895 /* apiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = apiKeys.plist; sourceTree = "<group>"; };
@@ -438,7 +428,6 @@
 				108E30982034700A00567895 /* Views */,
 				108E308320346FDF00567895 /* Utils */,
 				108E306620346FA900567895 /* DataAccessLayer */,
-				108E302F20346F7C00567895 /* Archive */,
 				108E302D20346F7C00567895 /* TopNavViewController */,
 				108E2FF62033A77100567895 /* AppDelegate.swift */,
 				108E2FF82033A77100567895 /* ViewController.swift */,
@@ -492,18 +481,6 @@
 				10128C432068123B00AA060E /* ViewController+Nav.swift */,
 			);
 			path = TopNavViewController;
-			sourceTree = "<group>";
-		};
-		108E302F20346F7C00567895 /* Archive */ = {
-			isa = PBXGroup;
-			children = (
-				108E30FD20348E0600567895 /* StatsViewController.xib */,
-				108E30FE20348E0600567895 /* StatsViewController.swift */,
-				108E306F20346FA900567895 /* SerializationError.swift */,
-				108E303020346F7C00567895 /* SplashViewController.swift */,
-				108E303120346F7C00567895 /* SplashViewController.xib */,
-			);
-			path = Archive;
 			sourceTree = "<group>";
 		};
 		108E303520346F7D00567895 /* ProjectsScene */ = {
@@ -855,7 +832,6 @@
 				C98619852083B8CC0072DAC0 /* FundingStatusViewCell.xib in Resources */,
 				108E305320346F7D00567895 /* ProposalListViewController.xib in Resources */,
 				107FF5532066ABD60083F4DA /* Favorites.storyboard in Resources */,
-				108E30FF20348E0600567895 /* StatsViewController.xib in Resources */,
 				108E305C20346F7D00567895 /* ProposalDetailViewController.xib in Resources */,
 				108E30C72034715500567895 /* SchoolDetailProposalHeaderView.xib in Resources */,
 				106E7F1F2068911700B1AAC1 /* LocationViewCell.xib in Resources */,
@@ -879,7 +855,6 @@
 				107FF5432065A7860083F4DA /* Project.storyboard in Resources */,
 				108E2FFC2033A77100567895 /* Main.storyboard in Resources */,
 				108E30B72034713300567895 /* TeacherDetailVC.xib in Resources */,
-				108E305020346F7D00567895 /* SplashViewController.xib in Resources */,
 				108E310420348EB100567895 /* NotificationProposalViewController.xib in Resources */,
 				10128C4E2068268700AA060E /* ProjectSearch.storyboard in Resources */,
 				107FF54E2065B0FF0083F4DA /* About.storyboard in Resources */,
@@ -944,7 +919,6 @@
 				10786FBE2067ECAF00CDE960 /* ToolsTableViewController.swift in Sources */,
 				108E308220346FA900567895 /* SchoolModel.swift in Sources */,
 				108E307D20346FA900567895 /* Model+Identifiable.swift in Sources */,
-				108E310020348E0600567895 /* StatsViewController.swift in Sources */,
 				108E30E120348BFF00567895 /* AboutInfoViewController.swift in Sources */,
 				10786FBC2067E48C00CDE960 /* Formatter+Int+Float.swift in Sources */,
 				108F9522206D95110012CF08 /* ProjectSearchViewController.swift in Sources */,
@@ -956,7 +930,6 @@
 				108E307620346FA900567895 /* TeacherAPI.swift in Sources */,
 				10786FB52067DA5B00CDE960 /* ChallengeStatsTableViewController.swift in Sources */,
 				108E30C42034715500567895 /* ProposalViewCell.swift in Sources */,
-				108E304F20346F7D00567895 /* SplashViewController.swift in Sources */,
 				108E305A20346F7D00567895 /* EmptyCollectionReusableView.swift in Sources */,
 				10128C47206825F100AA060E /* ProjectKeywordSearchTableViewController.swift in Sources */,
 				108E307920346FA900567895 /* ProjectAPI.swift in Sources */,
@@ -971,7 +944,6 @@
 				108E309320346FDF00567895 /* AlertFactory.swift in Sources */,
 				106E7F1B2068911700B1AAC1 /* LocationViewCell.swift in Sources */,
 				108E309120346FDF00567895 /* UIImage+FadeInOut.swift in Sources */,
-				108E307C20346FA900567895 /* SerializationError.swift in Sources */,
 				107FF5592066EE920083F4DA /* Models+Codable.swift in Sources */,
 				108E307E20346FA900567895 /* UserModel.swift in Sources */,
 				108E307B20346FA900567895 /* ProjectSearchFetchModel.swift in Sources */,
