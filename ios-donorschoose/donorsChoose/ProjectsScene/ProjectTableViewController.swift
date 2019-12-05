@@ -53,6 +53,7 @@ class ProjectTableViewController: UITableViewController {
             }
         }
         
+        // MAS TODO Warning
         var hashValue: Int {
             switch self {
             case .none(let model): return model.hashValue

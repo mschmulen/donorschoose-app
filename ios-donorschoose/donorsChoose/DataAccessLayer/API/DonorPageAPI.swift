@@ -56,7 +56,7 @@ open class DonorPageDataAPI : DonorPageDataAPIProtocol
                     do {
                         let results = try JSONDecoder().decode(DonorPageDataModel.self, from: data)
                         self.callbackDelegate?.dataUpdateCallback(self, didChangeData: results , error: nil)
-                    } catch let _ {
+                    } catch {
                         self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.networkSerialize)
                     }
                 }

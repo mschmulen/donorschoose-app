@@ -50,7 +50,7 @@ open class TeacherDataAPI : TeacherDataAPIProtocol
                 do {
                     let results = try JSONDecoder().decode(TeacherModel.self, from: data)
                     self.callbackDelegate?.dataUpdateCallback(self, didChangeData: results , error: nil)
-                } catch let error {
+                } catch {
                     self.callbackDelegate?.dataUpdateCallback(self, didChangeData: nil , error: APIError.networkSerialize)
                 }
             }
