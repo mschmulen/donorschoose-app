@@ -64,11 +64,63 @@ open class TopNavViewController: UITabBarController {
             let inspiresMe = vcInspiresMe
             else { return }
         
-        let urgentNav = urgent.navWrapper( title:"In Need", image:UIImage.fontAwesomeIcon(name: .hourglass3, textColor: .blue, size: CGSize(width: 35, height: 35)))
-        let nearMeNav = nearMe.navWrapper( title:"Near Me", image:UIImage.fontAwesomeIcon(name: .compass, textColor: .blue, size: CGSize(width: 35, height: 35)))
-        let inspiresMeNav = inspiresMe.navWrapper( title:"Inspires Me", image:UIImage.fontAwesomeIcon(name: .lightbulbO, textColor: .blue, size: CGSize(width: 35, height: 35)))
-        let favNav = fav.navWrapper( title:"Favorites", image:UIImage.fontAwesomeIcon(name: .heart, textColor: .blue, size: CGSize(width: 35, height: 35)))
-        let aboutNav = about.navWrapper( title:"More", image:UIImage.fontAwesomeIcon(name: .home, textColor: .blue, size: CGSize(width: 35, height: 35)))
+        // MAS TODO font awesome cruft
+//        let urgentNav = urgent.navWrapper( title:"In Need", image:UIImage.fontAwesomeIcon(name: .hourglass3, style: .regular, textColor: .blue, size: CGSize(width: 35, height: 35)))
+//        let nearMeNav = nearMe.navWrapper( title:"Near Me", image:UIImage.fontAwesomeIcon(name: .compass, textColor: .blue, size: CGSize(width: 35, height: 35)))
+//        let inspiresMeNav = inspiresMe.navWrapper( title:"Inspires Me", image:UIImage.fontAwesomeIcon(name: .lightbulbO, textColor: .blue, size: CGSize(width: 35, height: 35)))
+//        let favNav = fav.navWrapper( title:"Favorites", image:UIImage.fontAwesomeIcon(name: .heart, textColor: .blue, size: CGSize(width: 35, height: 35)))
+//        let aboutNav = about.navWrapper( title:"More", image:UIImage.fontAwesomeIcon(name: .home, textColor: .blue, size: CGSize(width: 35, height: 35)))
+        
+        let urgentNav = urgent.navWrapper(
+            title:"In Need",
+            image:UIImage.fontAwesomeIcon(
+                name: .hourglass,
+                style: .regular,
+                textColor: .blue,
+                size: CGSize(width: 35, height: 35)
+            )
+        )
+        let nearMeNav = nearMe.navWrapper(
+            title:"Near Me",
+            image:UIImage.fontAwesomeIcon(
+                name: .compass,
+                style: .regular,
+                textColor: .blue,
+                size: CGSize(width: 35, height: 35)
+            )
+        )
+        let inspiresMeNav = inspiresMe.navWrapper(
+            title:"Inspires Me",
+            image:UIImage.fontAwesomeIcon(
+                name: .lightbulb,
+                style: .regular,
+                textColor: .blue,
+                size: CGSize(width: 35, height: 35)
+            )
+        )
+        let favNav = fav.navWrapper(
+            title:"Favorites",
+            image:UIImage.fontAwesomeIcon(
+                name: .heart,
+                style: .regular,
+                textColor: .blue,
+                size: CGSize(width: 35, height: 35)
+            )
+        )
+        let aboutNav = about.navWrapper(
+            title:"More",
+            image:UIImage.fontAwesomeIcon(
+                name: .clone,
+                // name: .clone,    // Yes
+                // name: .addressBook,  // Yes
+                // name:  .school,      // No
+                // name: .bars,         // No
+                // name: .alignJustify, // No
+                style: .regular,
+                textColor: .blue,
+                size: CGSize(width: 35, height: 35)
+            )
+        )
         
         tabViewControllers = [urgentNav, nearMeNav, inspiresMeNav, favNav, aboutNav]
         self.viewControllers = tabViewControllers
