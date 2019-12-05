@@ -128,26 +128,6 @@ public class WatchList {
         NotificationCenter.default.post(name: Notification.Name(WatchList.RefreshEventName), object: nil)
     }
     
-    //  func removeItemFromNotification(_ item: WatchItemProtocol) {
-    //
-    //    let scheduledNotifications: [UILocalNotification]? = UIApplication.shared.scheduledLocalNotifications
-    //    // Nothing to remove, so return
-    //    guard scheduledNotifications != nil else {return}
-    //
-    //      // loop through notifications
-    //      for notification in scheduledNotifications! {
-    //          if (notification.userInfo!["UUID"] as! String == item.UUID) { // ...and cancel the notification that corresponds to this TodoItem instance (matched by UUID)
-    //              UIApplication.shared.cancelLocalNotification(notification) // there should be a maximum of one match on UUID
-    //              break
-    //          }
-    //      }
-    //
-    //      if var oppertunityItems = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) {
-    //          oppertunityItems.removeValue(forKey: item.UUID)
-    //          UserDefaults.standard.set(oppertunityItems, forKey: ITEMS_KEY) // save/overwrite todo item list
-    //      }
-    //  }
-    
     //comparison functions
     private func isEqual( _ model:ProjectSearchDataModel, watchItemDictionary:[String:Any]) -> Bool {
         

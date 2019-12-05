@@ -70,37 +70,37 @@ public enum APIError: Error {
         return self.localizedDescription
     }
     
-    public static func generateFromNetworkError( _ networkError:NSError) -> APIError
-    {
-        if (networkError.domain == NSURLErrorDomain) {
-            if (networkError.code == NSURLErrorNotConnectedToInternet) {
-                return APIError.deviceInternetOffline
-            }
-            else if (networkError.code == NSURLErrorTimedOut) {
-                return APIError.deviceTimout
-            }
-            else if (networkError.code == NSURLErrorDataNotAllowed) {
-                return APIError.deviceDataNotAllowed
-            }
-            else if (networkError.code == NSURLErrorNetworkConnectionLost) {
-                return APIError.connectionLost
-            }
-            else {
-                //NSURLErrorCannotConnectToHost
-                //NSURLErrorCannotFindHost
-                //NSURLErrorCallIsActive
-                return APIError.genericNetwork
-            }
-        }
-        else {
-            return APIError.unknown(networkError.description)
-        }
-    }
+//    public static func generateFromNetworkNSError( _ networkError:NSError) -> APIError
+//    {
+//        if (networkError.domain == NSURLErrorDomain) {
+//            if (networkError.code == NSURLErrorNotConnectedToInternet) {
+//                return APIError.deviceInternetOffline
+//            }
+//            else if (networkError.code == NSURLErrorTimedOut) {
+//                return APIError.deviceTimout
+//            }
+//            else if (networkError.code == NSURLErrorDataNotAllowed) {
+//                return APIError.deviceDataNotAllowed
+//            }
+//            else if (networkError.code == NSURLErrorNetworkConnectionLost) {
+//                return APIError.connectionLost
+//            }
+//            else {
+//                //NSURLErrorCannotConnectToHost
+//                //NSURLErrorCannotFindHost
+//                //NSURLErrorCallIsActive
+//                return APIError.genericNetwork
+//            }
+//        }
+//        else {
+//            return APIError.unknown(networkError.description)
+//        }
+//    }
     
     public static func generateFromNetworkError( _ networkError:Error) -> APIError
     {
         // MAS TODO Swift 3 , broke
-        //      show ( networkError.localizedDescription)
+        print( "** generateFromNetworkError: \(networkError.localizedDescription)")
 //         if (networkError.domain == NSURLErrorDomain) {
 //
 //         if (networkError.code == NSURLErrorNotConnectedToInternet) {

@@ -289,7 +289,7 @@ open class ProposalDetailViewController: UIViewController {
     }//end configUI
     
     open func fetchAdditionalData(_ projectIDString:String) {
-        dataAPI?.getData(projectIDString, callback: { (data, error) in
+        dataAPI?.getDetailData(projectIDString, callback: { (data, error) in
             
             if let someError = error {
                 // self.processError(someError)

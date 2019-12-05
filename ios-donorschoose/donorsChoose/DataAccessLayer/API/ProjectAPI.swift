@@ -8,7 +8,7 @@ public protocol ProjectAPIProtocol {
     init(config:APIConfig, user:String)
     
     func getData(_ searchModel:ProjectSearchDataModel, pageIndex:Int, callback: @escaping ([ProposalModel], APIError?) -> Void)
-    func getData(_ proposalID:String, callback: @escaping (ProposalModel?, APIError?) -> Void)
+    func getDetailData(_ proposalID:String, callback: @escaping (ProposalModel?, APIError?) -> Void)
 }
 
 class ProjectAPI : ProjectAPIProtocol
@@ -73,7 +73,7 @@ class ProjectAPI : ProjectAPIProtocol
         return components.url
     }
     
-    func getData(_ proposalID:String, callback: @escaping (ProposalModel?, APIError?) -> Void) {
+    func getDetailData(_ proposalID:String, callback: @escaping (ProposalModel?, APIError?) -> Void) {
         var components = URLComponents()
         components.scheme = "http"
         components.host = "api.donorschoose.org"
