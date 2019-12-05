@@ -6,15 +6,9 @@ import UIKit
 class FundingStatusViewCell: UICollectionViewCell {
     
     @IBOutlet weak var labelTitle: UILabel!
-
-    @IBOutlet weak var constraintWidth: NSLayoutConstraint!
-
+    
     @IBOutlet weak var timeLeftLabel: UILabel!
-
-    @IBOutlet weak var viewFundingStatusBar: ViewFundingStatus! {
-        didSet { viewFundingStatusBar.cornerRadius = 2 }
-    }
-
+    
     func configure( model:ProposalModel ) {
         labelTitle.text = "Funding Status:"
         

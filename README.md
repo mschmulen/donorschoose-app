@@ -27,8 +27,7 @@ Help a DonorsChoose classroom project in need today and bring their classroom dr
 
 ## Build Requirments
 
-- xCode10
-- CocoaPods
+- xCode 11.2.1
 - Carthage
 - fastlane
 
@@ -51,10 +50,10 @@ Please give feedback at [iTunes DonorsChoose Project Finder App](https://itunes.
 
 ## Version notes
 
-#### Version (next)
+#### Version 1.18
 
-- iPhone X support
-
+- swift 5 support
+- xCode 11.2.1 support
 
 #### Version 1.13
 

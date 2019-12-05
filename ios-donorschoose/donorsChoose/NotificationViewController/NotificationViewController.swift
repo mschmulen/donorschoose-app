@@ -3,6 +3,7 @@
 
 import UIKit
 
+// MAS TODO rename to ModalNotificationViewController
 open class NotificationViewController: UIViewController {
     
     // MARK: - IBOutlet IBAction
