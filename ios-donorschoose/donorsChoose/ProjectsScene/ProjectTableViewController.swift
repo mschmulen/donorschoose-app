@@ -370,6 +370,9 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
             if let alertVC = AlertFactory.AlertFromLocationStatus(status) {
                 self.present(alertVC, animated: true, completion: nil)
             }
+        @unknown default:
+//            <#fatalError#>()
+            print("CLAuthorizationStatus unknown error")
         }
     }
 }
