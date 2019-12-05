@@ -24,6 +24,9 @@ open class AlertFactory {
             messageString = "Location Access could not be determined"
         case .restricted:
             messageString = "Location Access Restricted"
+        @unknown default:
+            messageString = "Location Access unknown"
+//            <#fatalError#>()
         }
         
         messageString = messageString + "\n Please check your app settings and make sure Location Services are enabled"

@@ -15,6 +15,9 @@ extension ProposalDetailViewController : MFMailComposeViewControllerDelegate {
         print("Mail sent")
     case MFMailComposeResult.failed:
         print("Mail sent failure: \(String(describing: error?.localizedDescription))")
+    @unknown default:
+        print("Mail sent unknown")
+//        <#fatalError#>()
     }
     self.dismiss(animated: true, completion: nil)
   }
