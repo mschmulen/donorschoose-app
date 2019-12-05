@@ -9,8 +9,6 @@ class FundingStatusViewCell: UICollectionViewCell {
 
     @IBOutlet weak var constraintWidth: NSLayoutConstraint!
 
-    @IBOutlet weak var amountNeededLabel: UILabel!
-    @IBOutlet weak var donorCountLabel: UILabel!
     @IBOutlet weak var timeLeftLabel: UILabel!
 
     @IBOutlet weak var viewFundingStatusBar: ViewFundingStatus! {
@@ -19,32 +17,25 @@ class FundingStatusViewCell: UICollectionViewCell {
 
     func configure( model:ProposalModel ) {
         labelTitle.text = "Funding Status:"
-
-        amountNeededLabel.text =  "$\(model.costToComplete)"
-        donorCountLabel.text = "\(model.numDonors)"
-
+        
         let calendar: Calendar = Calendar.current
         let daysFromExpires = (calendar as NSCalendar).components(.day, from: model.expirationDate as Date)
-
-        if let daysLeft = daysFromExpires.day {
-            if (daysLeft < 30 ) {
+        
+        let daysLeftString = "days left!"
+        if let daysLeftValue = daysFromExpires.day {
+            if (daysLeftValue < 30 ) {
                 timeLeftLabel.isHidden = false
-                timeLeftLabel.text = "\(daysLeft) days left!"
+                timeLeftLabel.text = "\(daysLeftValue) \(daysLeftString)"
             }
             else {
-                timeLeftLabel.text = "\(daysLeft) days left!"
+                timeLeftLabel.text = "\(daysLeftValue) \(daysLeftString)"
                 timeLeftLabel.isHidden = true
             }
         }
         else {
-            timeLeftLabel.text = "unknown days left!"
+            timeLeftLabel.text = "unknown \(daysLeftString)"
             timeLeftLabel.isHidden = true
         }
-
-        //
-//        let percentFloat = CGFloat( CGFloat(model.percentFunded) * 0.01 )
-//        viewFundingStatusBar.percentComplete = percentFloat
-//
     }
     
     override func awakeFromNib() {
