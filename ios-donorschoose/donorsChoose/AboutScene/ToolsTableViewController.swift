@@ -30,7 +30,7 @@ class ToolsTableViewController: UITableViewController {
             }
         }
         
-        var accessoryType: UITableViewCellAccessoryType {
+        var accessoryType: UITableViewCell.AccessoryType {
             switch self {
             default: return .disclosureIndicator
             }

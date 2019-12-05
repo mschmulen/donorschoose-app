@@ -19,7 +19,7 @@ open class TeacherDetailVC: UIViewController {
         didSet {
             collectionView.register(StatViewCell.nib, forCellWithReuseIdentifier: StatViewCell.reuseIdentifier)
             collectionView.register(LoadingCollectionViewCell.nib, forCellWithReuseIdentifier: LoadingCollectionViewCell.reuseIdentifier )
-            collectionView.register(TeacherHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TeacherHeaderView.reuseIdentifier)
+            collectionView.register(TeacherHeaderView.nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TeacherHeaderView.reuseIdentifier)
             
             collectionView.dataSource = self
             collectionView.delegate = self
@@ -94,7 +94,7 @@ open class TeacherDetailVC: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
                 
-        let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(TeacherDetailVC.actionShare(_:)))
+        let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(TeacherDetailVC.actionShare(_:)))
         self.navigationItem.rightBarButtonItem = buttonShare
         
         dataAPI = TeacherDataAPI(apiConfig: viewData.apiConfig, user: "matt", delegate: self)
@@ -200,7 +200,7 @@ extension TeacherDetailVC : UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         switch kind {
-        case UICollectionElementKindSectionHeader:
+        case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: TeacherHeaderView.reuseIdentifier, for: indexPath) as! TeacherHeaderView
             
             if let backgroundImageString = viewData.model?.photoURL {
@@ -215,7 +215,7 @@ extension TeacherDetailVC : UICollectionViewDataSource {
             }
             headerView.labelName.text = viewData.teacherName
             return headerView
-        case UICollectionElementKindSectionFooter:
+        case UICollectionView.elementKindSectionFooter:
             assert(false, "Unexpected element kind")
         default:
             assert(false, "Unexpected element kind")
@@ -250,7 +250,7 @@ extension TeacherDetailVC : UICollectionViewDelegateFlowLayout {
             cell.labelStatName.preferredMaxLayoutWidth = width
             cell.labelStatValue.preferredMaxLayoutWidth = width
             cell.constraintWidth.constant = width
-            return cell.contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+            return cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         }
         return CGSize(width: 300, height: 300)
     }

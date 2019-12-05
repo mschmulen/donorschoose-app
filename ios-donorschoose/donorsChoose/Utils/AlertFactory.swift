@@ -7,8 +7,8 @@ open class AlertFactory {
     class func AlertFromAPIError(_ error:APIError) -> UIAlertController?
     {
         let messageString:String = "API Error \(error )"
-        let alert = UIAlertController(title: "Error", message: messageString, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: "Error", message: messageString, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         return alert
     }
     
@@ -24,12 +24,14 @@ open class AlertFactory {
             messageString = "Location Access could not be determined"
         case .restricted:
             messageString = "Location Access Restricted"
+        @unknown default:
+            messageString = "Location Access unknown"
         }
         
         messageString = messageString + "\n Please check your app settings and make sure Location Services are enabled"
         
-        let alert = UIAlertController(title: "Location Access", message: messageString, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: "Location Access", message: messageString, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         return alert
     }
     
@@ -63,8 +65,8 @@ open class AlertFactory {
         case .silent , .networkSerialize:
             return nil
         default:
-            let alert = UIAlertController(title: error.messageTitle, message: error.messageBody, preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil))
+            let alert = UIAlertController(title: error.messageTitle, message: error.messageBody, preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:nil))
             return alert
         }
     }

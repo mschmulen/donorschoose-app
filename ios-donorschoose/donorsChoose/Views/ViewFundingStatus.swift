@@ -43,7 +43,7 @@ open class ViewFundingStatus : UIView {
     
     fileprivate func setup() {
         chartLine              = CAShapeLayer()
-        chartLine.lineCap      = kCALineCapButt
+        chartLine.lineCap      = CAShapeLayerLineCap.butt
         chartLine.fillColor    = UIColor.white.cgColor
         chartLine.lineWidth    = frame.size.width
         chartLine.strokeEnd    = 0.0
@@ -69,7 +69,7 @@ open class ViewFundingStatus : UIView {
             
             let pathAnimation: CABasicAnimation = CABasicAnimation(keyPath: "strokeEnd")
             pathAnimation.duration = self.animationDuration
-            pathAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            pathAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
             pathAnimation.fromValue = 0.0
             pathAnimation.toValue = 1.0
             

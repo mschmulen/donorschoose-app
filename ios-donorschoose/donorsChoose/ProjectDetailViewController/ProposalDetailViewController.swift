@@ -54,8 +54,8 @@ open class ProposalDetailViewController: UIViewController {
             collectionView.register(DescriptionViewCell.nib, forCellWithReuseIdentifier: DescriptionViewCell.reuseIdentifier)
             collectionView.register(FundingStatusViewCell.nib, forCellWithReuseIdentifier: FundingStatusViewCell.reuseIdentifier)
 
-            collectionView.register(ProposalHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: ProposalHeaderView.reuseIdentifier)
-            collectionView.register(ProposalFooterView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: ProposalFooterView.reuseIdentifier)
+            collectionView.register(ProposalHeaderView.nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProposalHeaderView.reuseIdentifier)
+            collectionView.register(ProposalFooterView.nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: ProposalFooterView.reuseIdentifier)
             collectionView.dataSource = self
             collectionView.delegate = self
         }
@@ -325,7 +325,7 @@ open class ProposalDetailViewController: UIViewController {
         
         dataAPI = ProjectAPI(config: apiConfig,user: "matt")
         
-        let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProposalDetailViewController.actionShare(_:)))
+        let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(ProposalDetailViewController.actionShare(_:)))
         self.navigationItem.rightBarButtonItem = buttonShare
         
         confgureUI()
@@ -411,15 +411,15 @@ extension ProposalDetailViewController : UICollectionViewDataSource {
         
         switch kind {
             
-        case UICollectionElementKindSectionHeader:
+        case UICollectionView.elementKindSectionHeader:
             
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ProposalHeaderView.reuseIdentifier, for: indexPath) as! ProposalHeaderView
             
             if let model = self.model {
                 
-                headerView.buttonTeacher.setTitle(model.teacherName, for: UIControlState())
-                headerView.buttonSchool.setTitle( model.schoolName, for: UIControlState())
-                headerView.buttonLocation.setTitle( "\(model.city), \(model.state)", for:UIControlState())
+                headerView.buttonTeacher.setTitle(model.teacherName, for: UIControl.State())
+                headerView.buttonSchool.setTitle( model.schoolName, for: UIControl.State())
+                headerView.buttonLocation.setTitle( "\(model.city), \(model.state)", for:UIControl.State())
 
                 headerView.buttonTeacher.addTarget(self, action: #selector(actionTeacherInfo(_:)), for: .touchUpInside)
                 headerView.buttonSchool.addTarget(self, action: #selector(actionSchoolInfo(_:)), for: .touchUpInside)
@@ -434,7 +434,7 @@ extension ProposalDetailViewController : UICollectionViewDataSource {
                 }
             }
             return headerView
-        case UICollectionElementKindSectionFooter:
+        case UICollectionView.elementKindSectionFooter:
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ProposalFooterView.reuseIdentifier, for: indexPath) as! ProposalFooterView
             footerView.backgroundColor = UIColor.green;
             return footerView
@@ -471,7 +471,7 @@ extension ProposalDetailViewController : UICollectionViewDelegateFlowLayout {
             cell.constraintWidth.constant = width //adjust the width to be correct for the number of columns
             
             //apply auto layout and retrieve the size of the cell
-            return cell.contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+            return cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         }
         return CGSize.zero
     }

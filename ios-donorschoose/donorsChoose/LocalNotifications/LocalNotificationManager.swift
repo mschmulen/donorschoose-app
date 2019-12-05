@@ -102,7 +102,7 @@ import CoreLocation
         let content = UNMutableNotificationContent()
         content.title = "Don't forget"
         content.body = "Buy some milk"
-        content.sound = UNNotificationSound.default()
+        content.sound = UNNotificationSound.default
         
         // Scheduling
         let center = UNUserNotificationCenter.current()
@@ -124,7 +124,7 @@ import CoreLocation
         let content = UNMutableNotificationContent()
         content.title = "Don't forget"
         content.body = "Buy some milk"
-        content.sound = UNNotificationSound.default()
+        content.sound = UNNotificationSound.default
         
         //Calendar: Trigger at a specific date and time. The trigger is created using a date components object which makes it easier for certain repeating intervals. To convert a Date to its date components use the current calendar. For example:
         let date = Date(timeIntervalSinceNow: 3600)
@@ -154,7 +154,7 @@ import CoreLocation
         let content = UNMutableNotificationContent()
         content.title = "Don't forget"
         content.body = "Buy some milk"
-        content.sound = UNNotificationSound.default()
+        content.sound = UNNotificationSound.default
 
         //Calendar: Trigger at a specific date and time. The trigger is created using a date components object which makes it easier for certain repeating intervals. To convert a Date to its date components use the current calendar. For example:
         let date = Date(timeIntervalSinceNow: 3600)

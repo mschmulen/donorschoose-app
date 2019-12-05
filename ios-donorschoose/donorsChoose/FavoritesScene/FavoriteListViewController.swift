@@ -38,7 +38,7 @@ public class FavoriteListViewController: UITableViewController {
             }
         }
         
-        var accessoryType: UITableViewCellAccessoryType {
+        var accessoryType: UITableViewCell.AccessoryType {
             switch self {
             default: return .none
             }
@@ -70,7 +70,7 @@ public class FavoriteListViewController: UITableViewController {
         // MAS TODO remove observer
         NotificationCenter.default.addObserver(self, selector: #selector(FavoriteListViewController.refreshFromNotificationEvent), name: NSNotification.Name(rawValue: WatchList.RefreshEventName), object: nil)
         
-        let buttonAddFavorite : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(FavoriteListViewController.actionAddFavorite(_:)))
+        let buttonAddFavorite : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(FavoriteListViewController.actionAddFavorite(_:)))
         self.navigationItem.rightBarButtonItem = buttonAddFavorite
         
     }
@@ -109,7 +109,7 @@ public class FavoriteListViewController: UITableViewController {
     
     override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "WatchListCell")
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "WatchListCell")
         
         let item = items[(indexPath as NSIndexPath).row] as WatchItemProtocol
         cell.textLabel?.text =  "\(item.title)"// : \(item.modelID)"
@@ -201,7 +201,7 @@ public class FavoriteListViewController: UITableViewController {
         return true
     }
     
-    override open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let item = items.remove(at: (indexPath as NSIndexPath).row)
             tableView.deleteRows(at: [indexPath], with: .fade)
