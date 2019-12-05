@@ -371,7 +371,6 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
                 self.present(alertVC, animated: true, completion: nil)
             }
         @unknown default:
-//            <#fatalError#>()
             print("CLAuthorizationStatus unknown error")
         }
     }
