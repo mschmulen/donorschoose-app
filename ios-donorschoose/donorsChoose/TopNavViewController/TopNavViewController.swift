@@ -64,13 +64,6 @@ open class TopNavViewController: UITabBarController {
             let inspiresMe = vcInspiresMe
             else { return }
         
-        // MAS TODO font awesome cruft
-//        let urgentNav = urgent.navWrapper( title:"In Need", image:UIImage.fontAwesomeIcon(name: .hourglass3, style: .regular, textColor: .blue, size: CGSize(width: 35, height: 35)))
-//        let nearMeNav = nearMe.navWrapper( title:"Near Me", image:UIImage.fontAwesomeIcon(name: .compass, textColor: .blue, size: CGSize(width: 35, height: 35)))
-//        let inspiresMeNav = inspiresMe.navWrapper( title:"Inspires Me", image:UIImage.fontAwesomeIcon(name: .lightbulbO, textColor: .blue, size: CGSize(width: 35, height: 35)))
-//        let favNav = fav.navWrapper( title:"Favorites", image:UIImage.fontAwesomeIcon(name: .heart, textColor: .blue, size: CGSize(width: 35, height: 35)))
-//        let aboutNav = about.navWrapper( title:"More", image:UIImage.fontAwesomeIcon(name: .home, textColor: .blue, size: CGSize(width: 35, height: 35)))
-        
         let urgentNav = urgent.navWrapper(
             title:"In Need",
             image:UIImage.fontAwesomeIcon(
