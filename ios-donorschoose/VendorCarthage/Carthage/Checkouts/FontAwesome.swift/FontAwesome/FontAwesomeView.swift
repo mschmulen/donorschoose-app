@@ -1,6 +1,6 @@
 // FontAwesomeView.swift
 //
-// Copyright (c) 2016 Antony Alkmim
+// Copyright (c) 2014-present FontAwesome.swift contributors
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,6 +32,9 @@ import UIKit
         }
     }
 
+    @IBInspectable
+    public var styleName: String = "Brands"
+
     private var iconView = UILabel()
 
     override init(frame: CGRect) {
@@ -45,6 +48,7 @@ import UIKit
     }
 
     override public func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
         setupViews()
     }
 
@@ -64,7 +68,9 @@ import UIKit
     override public func layoutSubviews() {
         super.layoutSubviews()
         self.clipsToBounds = true
-        self.iconView.font = UIFont.fontAwesome(ofSize: bounds.size.width < bounds.size.height ? bounds.size.width : bounds.size.height)
+        let size = bounds.size.width < bounds.size.height ? bounds.size.width : bounds.size.height
+        let style = FontAwesomeStyle(rawValue: styleName) ?? .solid
+        self.iconView.font = UIFont.fontAwesome(ofSize: size, style: style)
         self.iconView.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: bounds.size.width, height: bounds.size.height))
     }
 }

@@ -1,8 +1,6 @@
 
 import Foundation
 
-
-// MAS TODO Remove and use Codable 
 struct Plist {
 
   enum PlistError: Error {
