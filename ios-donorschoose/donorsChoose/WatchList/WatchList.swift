@@ -2,7 +2,7 @@
 
 import UIKit
 
-// MAS TODO , lock down public and prive accessors
+// MAS TODO , this is some pretty legacy UserDefaults direct management, lets swap it out for a more modern property wrapper implimentation located in AppUserDefaults
 
 public class WatchList {
     

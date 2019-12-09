@@ -173,10 +173,14 @@ public struct ProjectSearchDataModel : Codable, UserDefaultStorable {
 
 extension ProjectSearchDataModel: Hashable {
     
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(type)
+        hasher.combine(sortOption)
+        hasher.combine(keywords ?? "")
+    }
+    
     public var hashValue: Int {
         return type.hashValue ^ sortOption.hashValue ^ (keywords ?? "").hashValue // ^ (subject1 ?? 0)
-        // return model.type.hashValue ^ (model.keywords ?? "").hashValue
-        // return [model.type, (model.keywords ?? "").hashValue ].hashValue
     }
     
     public static func == (lhs: ProjectSearchDataModel, rhs: ProjectSearchDataModel) -> Bool {
