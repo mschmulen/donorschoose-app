@@ -1,6 +1,18 @@
 DonorsChoose Project Finder App
 ====
 
+## App Strategy
+
+Make it easy and fun to donate to school projects that matter to you on your mobile device.
+
+Metrics that matter:
+
+- Donations made in app: ( total, monthly, daily)
+- Active devices: ( monthly, daily )
+- Save/Favorite actions: projects, schools, teachers, keywords. ( monthly, daily )
+
+## App Info
+
 iOS Project finder app for [donorsChoose.org](http://donorsChoose.org)
 
 Available on iTunes app store! [DonorsChoose Project Finder App](https://itunes.apple.com/us/app/donors-choose-project-finder/id1074056163?mt=8) 

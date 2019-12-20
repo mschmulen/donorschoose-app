@@ -1,3 +1,7 @@
 
-# github "Vaberer/FontAwesome.swift" "1.7.2"
 github "thii/FontAwesome.swift"
+github "jumptack/appAnalytics-iOS"
+
+# github "jumptack/userServices-iOS"
+# github "Vaberer/FontAwesome.swift" "1.7.2"
+
