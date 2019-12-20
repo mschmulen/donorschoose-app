@@ -2,6 +2,7 @@
 
 import UIKit
 import MessageUI
+import AppAnalyticsLegacy
 
 public enum ShareActionType {
     case email
@@ -71,6 +72,8 @@ open class ProposalDetailViewController: UIViewController {
         
         if let model = self.model {
             let giveURL = model.proposalURL
+            
+            AnalyticsService.dispatchAnalyticEvent(.customEvent(eventName: "GiveButtonTapped"))
             
             if let url:URL = URL(string: giveURL) {
                 UIApplication.shared.open(url, options: [:])
