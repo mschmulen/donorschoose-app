@@ -10,22 +10,22 @@ import UIKit
 
 class ChallengeStatsTableViewController: UITableViewController {
 
-    var viewData:ViewData?
+    var viewData: ViewData?
     
 
-    var sections:[Section] = [Section]()
-    var stats:[Row] = [Row]()
-    var messages:[Row] = [Row]()
-    var proposals:[Row] = [Row]()
-    var info:[Row] = [Row]()
+    var sections: [Section] = [Section]()
+    var stats: [Row] = [Row]()
+    var messages: [Row] = [Row]()
+    var proposals: [Row] = [Row]()
+    var info: [Row] = [Row]()
     
     enum Row {
-        case challengeStat (name:String, value:String)
-        case challegeName(name:String)
-        case message(message:String, tagline:String)
-        case proposal(proposal:ProposalModel)
+        case challengeStat (name: String, value: String)
+        case challegeName(name: String)
+        case message(message: String, tagline: String)
+        case proposal(proposal: ProposalModel)
         
-        var label:String {
+        var label: String {
             switch self {
             case .challegeName(let name): return "\(name)"
             case .challengeStat( _, let value) : return "\(value)"
@@ -34,7 +34,7 @@ class ChallengeStatsTableViewController: UITableViewController {
             }
         }
         
-        var detail:String? {
+        var detail: String? {
             switch self {
             case .message(let message, _): return "\(message)"
             case .challengeStat(let name, _): return "\(name)"
@@ -57,13 +57,13 @@ class ChallengeStatsTableViewController: UITableViewController {
         
     }
     
-    enum Section:Int {
+    enum Section: Int {
         case info
         case stats
         case messages
         case proposals
         
-        var label:String {
+        var label: String {
             switch self {
             case .info: return "CHALLENGE INFO"
             case .stats: return "STATS"
@@ -84,9 +84,7 @@ class ChallengeStatsTableViewController: UITableViewController {
         
         info = [
             .challegeName(name:model.challengeName),
-            // .challengeStat(name:"Challenge URL", value:"\(model.challengeURL)"),
             .challengeStat(name:"Challeng Message", value:"\(model.challengeMessage)"),
-//            .challengeStat(name:"Id", value:"\(model.challengeId)"),
             .challengeStat(name:"Type", value:"\(model.challengeType)")
             ]
         

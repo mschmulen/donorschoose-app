@@ -4,35 +4,35 @@ import UIKit
 
 public struct ProposalModel :Codable {
     
-    public let id:String
+    public let id: String
     public let title: String
     public let teacherId: String
     public let teacherName: String
     public let schoolName: String
     public let state: String
     public let city: String
-    public let costToComplete:String
-    public let numDonors:Int
-    public let percentFunded:Int
-    public let proposalURL:String
-    public let fulfillmentTrailer:String
-    public let fundingStatus:String
-    public let gradeLevel:GradeLevelModel
-    public let imageURL:String?
-    public let latitude:String
-    public let longitude:String
-    public let thumbImageURL:String?
-    public let povertyLevel:String
-    public let schoolUrl:String
-    public let extractedSchoolID:String?
-    public let totalPrice:String
-    public let zip:String
-    public let expirationDate:Date
-    // public let freeShipping:Bool
-    public let fundURL:String?
-    public let shortDescription:String
+    public let costToComplete: String
+    public let numDonors: Int
+    public let percentFunded: Int
+    public let proposalURL: String
+    public let fulfillmentTrailer: String
+    public let fundingStatus: String
+    public let gradeLevel: GradeLevelModel
+    public let imageURL: String?
+    public let latitude: String
+    public let longitude: String
+    public let thumbImageURL: String?
+    public let povertyLevel: String
+    public let schoolUrl: String
+    public let extractedSchoolID: String?
+    public let totalPrice: String
+    public let zip: String
+    public let expirationDate: Date
+    // public let freeShipping: Bool
+    public let fundURL: String?
+    public let shortDescription: String
     
-    public let synopsis:String?
+    public let synopsis: String?
     
     // codable
     enum CodingError: Error {

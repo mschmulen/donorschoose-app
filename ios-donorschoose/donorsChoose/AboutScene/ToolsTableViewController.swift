@@ -10,10 +10,10 @@ import UIKit
 
 class ToolsTableViewController: UITableViewController {
 
-    var viewData:ViewData? = ViewData()
+    var viewData: ViewData? = ViewData()
     
-    var sections:[Section] = [Section]()
-    var searchTools:[Row] = [Row]()
+    var sections: [Section] = [Section]()
+    var searchTools: [Row] = [Row]()
     
     enum Row {
         case searchProjects
@@ -37,10 +37,10 @@ class ToolsTableViewController: UITableViewController {
         }
     }
     
-    enum Section:Int {
+    enum Section: Int {
         case searchTools
 
-        var label:String {
+        var label: String {
             switch self {
             case .searchTools: return "SEARCH TOOLS"
             }
@@ -51,6 +51,7 @@ class ToolsTableViewController: UITableViewController {
         super.viewDidLoad()
         sections = [.searchTools]
         searchTools = [
+            // MAS TODO fix search schools
 //            .searchSchools,
             .searchProjects
         ]

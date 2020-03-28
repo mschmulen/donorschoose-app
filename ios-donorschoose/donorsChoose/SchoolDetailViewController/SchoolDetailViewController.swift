@@ -12,11 +12,11 @@ open class SchoolDetailViewController: UIViewController {
     
     let apiConfig = APIConfig()
 
-    var dataAPI:SchoolDataAPIProtocol?
-    var statList:[StatType] = [StatType]()
-    var backgroundImageURL:URL? = nil
+    var dataAPI: SchoolDataAPIProtocol?
+    var statList: [StatType] = [StatType]()
+    var backgroundImageURL: URL? = nil
     
-    var proposals:[ProposalModel] = []
+    var proposals: [ProposalModel] = []
     
     enum section {
         case info
@@ -29,7 +29,7 @@ open class SchoolDetailViewController: UIViewController {
             }
         }
     }
-    let sections:[section] = [.info, .proposals]
+    let sections: [section] = [.info, .proposals]
     
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
@@ -295,10 +295,10 @@ extension SchoolDetailViewController : UICollectionViewDelegate {
 
 extension SchoolDetailViewController {
     struct ViewData {
-        let schoolID:String
-        let schoolName:String?
-        let schoolCity:String?
-        let model:SchoolModel?
+        let schoolID: String
+        let schoolName: String?
+        let schoolCity: String?
+        let model: SchoolModel?
         let apiConfig = APIConfig()
     }
 }

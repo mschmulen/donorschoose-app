@@ -4,17 +4,17 @@ import UIKit
 
 open class LocationDetailViewController: UIViewController {
 
-    var viewData:ViewData
+    var viewData: ViewData
     
     fileprivate let sectionInsets = UIEdgeInsets(top: 20.0, left: 5.0, bottom: 50.0, right: 5.0)
     var calculatedCellWidth: CGFloat = 0
     
     let apiConfig = APIConfig()
     
-    var dataAPI:ProjectAPIProtocol?
-    var statList:[StatType] = [StatType]()
-    var proposals:[ProposalModel] = []
-    var backgroundImageURL:URL? = nil
+    var dataAPI: ProjectAPIProtocol?
+    var statList: [StatType] = [StatType]()
+    var proposals: [ProposalModel] = []
+    var backgroundImageURL: URL? = nil
 
     enum section {
         case info
@@ -27,7 +27,7 @@ open class LocationDetailViewController: UIViewController {
             }
         }
     }
-    let sections:[section] = [.info, .proposals]
+    let sections: [section] = [.info, .proposals]
     
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
@@ -250,9 +250,9 @@ extension LocationDetailViewController : UICollectionViewDelegate {
 
 extension LocationDetailViewController {
     struct ViewData {
-        let locationState:String?
-        let locationCity:String?
-        let locationZip:String?
+        let locationState: String?
+        let locationCity: String?
+        let locationZip: String?
         let apiConfig = APIConfig()
     }
 }

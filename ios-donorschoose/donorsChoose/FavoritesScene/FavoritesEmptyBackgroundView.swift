@@ -18,10 +18,8 @@ class FavoritesEmptyBackgroundView: UIView {
         majorLabel.textAlignment = .center
         majorLabel.text = majorText
         majorLabel.numberOfLines = 2
-        majorLabel.textColor = UIColor.lightGray //UIColor.red
+        majorLabel.textColor = UIColor.lightGray
         majorLabel.font=UIFont.systemFont(ofSize: 22)
-        // codedLabel.backgroundColor = UIColor.white
-        // self.contentView.addSubview(codedLabel)
         self.addSubview(majorLabel)
         
         majorLabel.translatesAutoresizingMaskIntoConstraints = false

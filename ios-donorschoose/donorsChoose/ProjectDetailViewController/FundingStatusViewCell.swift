@@ -9,7 +9,7 @@ class FundingStatusViewCell: UICollectionViewCell {
     
     @IBOutlet weak var timeLeftLabel: UILabel!
     
-    func configure( model:ProposalModel ) {
+    func configure( model: ProposalModel ) {
         labelTitle.text = "Funding Status:"
         
         let calendar: Calendar = Calendar.current

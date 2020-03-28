@@ -10,7 +10,7 @@ open class UserDataModel {
         case dev
         case anonymous
         
-        var label:String {
+        var label: String {
             switch self {
             case .dev:
                 return "dev"
@@ -20,8 +20,8 @@ open class UserDataModel {
         }
     }
     
-    let name:String
-    let userType:UserType
+    let name: String
+    let userType: UserType
     
     public init() {
         name = "~"

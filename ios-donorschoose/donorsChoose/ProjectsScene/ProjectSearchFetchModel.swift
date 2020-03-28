@@ -4,10 +4,10 @@ import CoreLocation
 
 
 public struct LocationInfo : Codable, UserDefaultStorable {
-    let state:String
-    let city:String?
-    let zip:String?
-    let countryCode:String?
+    let state: String
+    let city: String?
+    let zip: String?
+    let countryCode: String?
 
     var shortLabel: String {
         if let city = city {
@@ -19,19 +19,19 @@ public struct LocationInfo : Codable, UserDefaultStorable {
 
 public struct ProjectSearchDataModel : Codable, UserDefaultStorable {
     
-    var type:SearchModelType
-    var sortOption:SearchSortOption
-    var pageSize:Int
+    var type: SearchModelType
+    var sortOption: SearchSortOption
+    var pageSize: Int
     
-    var keywords:String?
-    var subject1:SearchSubject?
+    var keywords: String?
+    var subject1: SearchSubject?
     
     // location info
-    var latitude:Double?
-    var longitude:Double?
-    var locationInfo:LocationInfo?
+    var latitude: Double?
+    var longitude: Double?
+    var locationInfo: LocationInfo?
     
-    public init(type:SearchModelType,  keywordString:String? , pageSize:Int = 20) {
+    public init(type: SearchModelType,  keywordString: String? , pageSize: Int = 20) {
         self.type = type
         self.pageSize = pageSize
         self.keywords = keywordString
@@ -50,7 +50,7 @@ public struct ProjectSearchDataModel : Codable, UserDefaultStorable {
     }
 
 
-    public enum SearchSortOption:Int, Codable {
+    public enum SearchSortOption: Int, Codable {
         case urgency = 0
         case poverty = 1
         case lowestCost = 2
@@ -105,7 +105,7 @@ public struct ProjectSearchDataModel : Codable, UserDefaultStorable {
         }
     }
     
-    public enum SearchSubject:Int,Codable {
+    public enum SearchSubject: Int, Codable {
         
         case music_AND_THE_ARTS = -1
         // case PERFORMING_ARTS

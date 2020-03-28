@@ -7,11 +7,11 @@ public class FavoriteListViewController: UITableViewController {
     var selectFavorite: ((Identifier) -> Void)?
     var deleteFavorite: ((Identifier) -> Void)?
     
-    var viewData:ViewData?
+    var viewData: ViewData?
     var items: [WatchItemProtocol] = []
     
-    var sections:[Section] = [Section]()
-    var favorites:[Row] = [Row]()
+    var sections: [Section] = [Section]()
+    var favorites: [Row] = [Row]()
     
     @IBAction func actionAddFavorite(_ sender: AnyObject) {
         let searchModel = ProjectSearchDataModel(type: .keyword, keywordString: "")
@@ -45,7 +45,7 @@ public class FavoriteListViewController: UITableViewController {
         }
     }
     
-    enum Section:Int {
+    enum Section: Int {
         case proposals
         case teachers
         case schools
@@ -213,8 +213,8 @@ public class FavoriteListViewController: UITableViewController {
 extension FavoriteListViewController {
     
     struct ViewData {
-        let user:UserDataModel = UserDataModel()
-        let apiConfig:APIConfig = APIConfig()
+        let user: UserDataModel = UserDataModel()
+        let apiConfig: APIConfig = APIConfig()
     }
 }
 

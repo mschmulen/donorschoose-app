@@ -10,12 +10,13 @@ import UIKit
 
 class AboutTableViewController: UITableViewController {
     
-    var viewData:ViewData?
-    var dataAPI:DonorPageDataAPIProtocol!
-
+    var viewData: ViewData?
+    
+    var dataAPI: DonorPageDataAPIProtocol!
+    
     var fullVersionBuildString = "UNKNOWN"
-    // MAS TODO Move this to a <Set>
-    var records:[Section:[Row]] = [Section: [Row]]()
+    
+    var records: [Section:[Row]] = [Section: [Row]]()
     
     enum Row {
         case header ( String )
@@ -29,7 +30,7 @@ class AboutTableViewController: UITableViewController {
         // WIP
         case tools
         case login
-        var label:String {
+        var label: String {
             switch self {
             case .header(let buildString): return "Donors Choose Project Finder \(buildString)"
             case .aboutInfo: return "About This App"
@@ -79,12 +80,12 @@ class AboutTableViewController: UITableViewController {
         }
     }
     
-    enum Section:Int {
+    enum Section: Int {
         case about = 0
         case stats
         case dev
 
-        var label:String {
+        var label: String {
             switch self {
             case .about: return "ABOUT"
             case .stats: return "STATS ABOUT THIS APP"
@@ -171,9 +172,9 @@ class AboutTableViewController: UITableViewController {
 
 }
 
-extension AboutTableViewController : DonorPageDataAPIDelegate {
+extension AboutTableViewController: DonorPageDataAPIDelegate {
     
-    public func dataUpdateCallback( _ dataAPI: DonorPageDataAPIProtocol, didChangeData data:DonorPageDataModel?, error:APIError? ) {
+    public func dataUpdateCallback( _ dataAPI: DonorPageDataAPIProtocol, didChangeData data: DonorPageDataModel?, error:APIError? ) {
         
         if let someError = error {
             if let alertVC = AlertFactory.AlertFromError(someError) {
@@ -206,9 +207,9 @@ extension AboutTableViewController : DonorPageDataAPIDelegate {
 
 extension AboutTableViewController  {
     struct ViewData {
-        let user:UserDataModel = UserDataModel()
-        let apiConfig:APIConfig = APIConfig()
-        let model:DonorPageDataModel?
+        let user: UserDataModel = UserDataModel()
+        let apiConfig: APIConfig = APIConfig()
+        let model: DonorPageDataModel?
     }
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias ProposalViewCellType = (Name:String, Value:String)
+typealias ProposalViewCellType = (Name: String, Value: String)
 
 class ProposalViewCell: UICollectionViewCell {
 
@@ -20,7 +20,7 @@ class ProposalViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    public func configure( name:String, description:String) {
+    public func configure( name: String, description: String) {
         labelProposalName.text = name
         textViewDescription.text = description
     }

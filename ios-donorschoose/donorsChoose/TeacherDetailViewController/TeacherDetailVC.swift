@@ -6,14 +6,14 @@ import UIKit
 
 open class TeacherDetailVC: UIViewController {
     
-    var viewData:ViewData
+    var viewData: ViewData
     
     fileprivate let sectionInsets = UIEdgeInsets(top: 20.0, left: 5.0, bottom: 50.0, right: 5.0)
     var calculatedCellWidth: CGFloat = 0
     
-    var dataAPI:TeacherDataAPIProtocol?
-    var statList:[StatType] = [StatType]()
-    var backgroundImageURL:URL? = nil
+    var dataAPI: TeacherDataAPIProtocol?
+    var statList: [StatType] = [StatType]()
+    var backgroundImageURL: URL? = nil
     
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
@@ -271,9 +271,9 @@ extension TeacherDetailVC : UICollectionViewDelegate {
 
 extension TeacherDetailVC {
     struct ViewData {
-        let teacherID:String
-        let teacherName:String
-        let model:TeacherModel?
+        let teacherID: String
+        let teacherName: String
+        let model: TeacherModel?
         let apiConfig = APIConfig()
     }
 }

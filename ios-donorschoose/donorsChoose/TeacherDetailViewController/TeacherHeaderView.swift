@@ -24,11 +24,11 @@ class TeacherHeaderView: UICollectionReusableView {
         static let fadeInTime:Double = Double(1.0)
     }
     
-    func loadBackgroundImagePicture(_ imageURL:URL ) {
+    func loadBackgroundImagePicture(_ imageURL: URL ) {
         downloadBackgroundImage(imageURL)
     }
     
-    func loadImagePicture(_ imageURL:URL) {
+    func loadImagePicture(_ imageURL: URL) {
         downloadProfileImage(imageURL)
     }
     
