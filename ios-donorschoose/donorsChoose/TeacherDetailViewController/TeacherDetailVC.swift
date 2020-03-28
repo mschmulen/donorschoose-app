@@ -97,7 +97,7 @@ open class TeacherDetailVC: UIViewController {
         let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(TeacherDetailVC.actionShare(_:)))
         self.navigationItem.rightBarButtonItem = buttonShare
         
-        dataAPI = TeacherDataAPI(apiConfig: viewData.apiConfig, user: "matt", delegate: self)
+        dataAPI = TeacherDataAPI(apiConfig: viewData.apiConfig, delegate: self)
         dataAPI?.getTeacherInfo(viewData.teacherID)
         
     }

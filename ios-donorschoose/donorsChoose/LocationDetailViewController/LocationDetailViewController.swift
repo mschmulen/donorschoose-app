@@ -76,12 +76,8 @@ open class LocationDetailViewController: UIViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-
-        // MAS TODO Add Share Button back
-//        let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(LocationDetailViewController.actionShare(_:)))
-//        self.navigationItem.rightBarButtonItem = buttonShare
-
-        dataAPI = ProjectAPI(config: viewData.apiConfig,user: "matt")
+        
+        dataAPI = ProjectAPI(config: viewData.apiConfig)
         guard let state = viewData.locationState else { return }
 
         var searchModel = ProjectSearchDataModel(

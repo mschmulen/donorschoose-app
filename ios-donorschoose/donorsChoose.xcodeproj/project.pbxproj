@@ -50,7 +50,6 @@
 		108E305520346F7D00567895 /* ProposalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E303820346F7D00567895 /* ProposalTableViewCell.xib */; };
 		108E305720346F7D00567895 /* WatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E303B20346F7D00567895 /* WatchList.swift */; };
 		108E305820346F7D00567895 /* WatchListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E303C20346F7D00567895 /* WatchListModels.swift */; };
-		108E305920346F7D00567895 /* WatchListDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E303E20346F7D00567895 /* WatchListDebugViewController.swift */; };
 		108E305A20346F7D00567895 /* EmptyCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E304020346F7D00567895 /* EmptyCollectionReusableView.swift */; };
 		108E305B20346F7D00567895 /* DescriptionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E304120346F7D00567895 /* DescriptionViewCell.xib */; };
 		108E305C20346F7D00567895 /* ProposalDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E304220346F7D00567895 /* ProposalDetailViewController.xib */; };
@@ -290,7 +289,6 @@
 		108E303820346F7D00567895 /* ProposalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProposalTableViewCell.xib; sourceTree = "<group>"; };
 		108E303B20346F7D00567895 /* WatchList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchList.swift; sourceTree = "<group>"; };
 		108E303C20346F7D00567895 /* WatchListModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchListModels.swift; sourceTree = "<group>"; };
-		108E303E20346F7D00567895 /* WatchListDebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchListDebugViewController.swift; sourceTree = "<group>"; };
 		108E304020346F7D00567895 /* EmptyCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCollectionReusableView.swift; sourceTree = "<group>"; };
 		108E304120346F7D00567895 /* DescriptionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionViewCell.xib; sourceTree = "<group>"; };
 		108E304220346F7D00567895 /* ProposalDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProposalDetailViewController.xib; sourceTree = "<group>"; };
@@ -552,17 +550,8 @@
 			children = (
 				108E303B20346F7D00567895 /* WatchList.swift */,
 				108E303C20346F7D00567895 /* WatchListModels.swift */,
-				108E303D20346F7D00567895 /* WatchListDebugViewController */,
 			);
 			path = WatchList;
-			sourceTree = "<group>";
-		};
-		108E303D20346F7D00567895 /* WatchListDebugViewController */ = {
-			isa = PBXGroup;
-			children = (
-				108E303E20346F7D00567895 /* WatchListDebugViewController.swift */,
-			);
-			path = WatchListDebugViewController;
 			sourceTree = "<group>";
 		};
 		108E303F20346F7D00567895 /* ProjectDetailViewController */ = {
@@ -1004,7 +993,6 @@
 				107FF55B2067BDA40083F4DA /* ProjectNetworkModel.swift in Sources */,
 				108E308F20346FDF00567895 /* UITableViewCell+getDataFromUrl.swift in Sources */,
 				108E305720346F7D00567895 /* WatchList.swift in Sources */,
-				108E305920346F7D00567895 /* WatchListDebugViewController.swift in Sources */,
 				107FF5512065B1290083F4DA /* AboutTableViewController.swift in Sources */,
 				108E304D20346F7D00567895 /* FavoriteListViewController.swift in Sources */,
 				108E30D6203472DF00567895 /* StatView.swift in Sources */,

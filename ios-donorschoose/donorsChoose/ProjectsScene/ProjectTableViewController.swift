@@ -213,7 +213,7 @@ class ProjectTableViewController: UITableViewController {
         tableView.separatorStyle = .none
         
         guard let viewData = self.viewData else { return }
-        dataAPI = ProjectAPI(config: viewData.apiConfig,user: "matt")//, delegate: self)
+        dataAPI = ProjectAPI(config: viewData.apiConfig)
         tableView.backgroundView = ProjectsEmptyBackgroundView(frame: tableView.frame, config: viewData.viewConfig)
         
         refreshControl = UIRefreshControl()

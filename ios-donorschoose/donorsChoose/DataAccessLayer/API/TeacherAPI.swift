@@ -7,10 +7,12 @@ public protocol TeacherDataAPIDelegate {
 }
 
 public protocol TeacherDataAPIProtocol {
-    init(apiConfig:APIConfig, user:String, delegate: TeacherDataAPIDelegate?)
+    
+    init(apiConfig: APIConfig, delegate: TeacherDataAPIDelegate?)
+    
     func getCallbackDelegate() ->  TeacherDataAPIDelegate?
     
-    func getTeacherInfo(_ teacherID:String)
+    func getTeacherInfo(_ teacherID: String)
 }
 
 open class TeacherDataAPI : TeacherDataAPIProtocol
@@ -18,7 +20,7 @@ open class TeacherDataAPI : TeacherDataAPIProtocol
     fileprivate let apiConfig:APIConfig
     fileprivate var callbackDelegate: TeacherDataAPIDelegate?
     
-    public required init(apiConfig:APIConfig, user:String, delegate: TeacherDataAPIDelegate?)
+    public required init(apiConfig:APIConfig, delegate: TeacherDataAPIDelegate?)
     {
         self.apiConfig = apiConfig
         self.callbackDelegate = delegate

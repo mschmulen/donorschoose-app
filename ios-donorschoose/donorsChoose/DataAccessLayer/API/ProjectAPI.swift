@@ -5,7 +5,7 @@ import CoreLocation
 
 
 public protocol ProjectAPIProtocol {
-    init(config:APIConfig, user:String)
+    init(config:APIConfig)
     
     func getData(_ searchModel:ProjectSearchDataModel, pageIndex:Int, callback: @escaping ([ProposalModel], APIError?) -> Void)
     func getDetailData(_ proposalID:String, callback: @escaping (ProposalModel?, APIError?) -> Void)
@@ -19,7 +19,7 @@ class ProjectAPI : ProjectAPIProtocol
     
     fileprivate let queue = DispatchQueue(label: "serial queue", attributes: [])
     
-    public required init(config:APIConfig, user:String )
+    public required init( config: APIConfig )
     {
         self.apiConfig = config
     }

@@ -329,7 +329,7 @@ open class ProposalDetailViewController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        dataAPI = ProjectAPI(config: apiConfig,user: "matt")
+        dataAPI = ProjectAPI(config: apiConfig)
         
         let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(ProposalDetailViewController.actionShare(_:)))
         self.navigationItem.rightBarButtonItem = buttonShare

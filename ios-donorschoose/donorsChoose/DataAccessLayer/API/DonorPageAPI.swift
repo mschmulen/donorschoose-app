@@ -5,15 +5,16 @@
 import Foundation
 
 public protocol DonorPageDataAPIDelegate {
-    func dataUpdateCallback( _ dataAPI: DonorPageDataAPIProtocol, didChangeData data:DonorPageDataModel?, error:APIError? )
+    func dataUpdateCallback( _ dataAPI: DonorPageDataAPIProtocol, didChangeData data: DonorPageDataModel?, error: APIError? )
 }
 
 public protocol DonorPageDataAPIProtocol {
     
-    init(config:APIConfig, user:String, delegate: DonorPageDataAPIDelegate?)
+    init(config: APIConfig, delegate: DonorPageDataAPIDelegate?)
+    
     func getCallbackDelegate() ->  DonorPageDataAPIDelegate?
     
-    func getStats(_ givingPageId:String)
+    func getStats(_ givingPageId: String)
 }
 
 open class DonorPageDataAPI : DonorPageDataAPIProtocol
@@ -22,7 +23,7 @@ open class DonorPageDataAPI : DonorPageDataAPIProtocol
     fileprivate let apiConfig:APIConfig
     fileprivate var callbackDelegate: DonorPageDataAPIDelegate?
     
-    public required init(config:APIConfig, user:String, delegate: DonorPageDataAPIDelegate?)
+    public required init(config: APIConfig, delegate: DonorPageDataAPIDelegate?)
     {
         self.apiConfig = config
         self.callbackDelegate = delegate
@@ -33,7 +34,7 @@ open class DonorPageDataAPI : DonorPageDataAPIProtocol
         return callbackDelegate
     }
     
-    open func getStats(_ givingPageId:String)
+    open func getStats(_ givingPageId: String)
     {
         let requestURL = "https://api.donorschoose.org/common/json_challenge.html?APIKey=\(apiConfig.apiKey)&id=\(givingPageId)"
         if let requestURL: URL = URL(string: requestURL) {
