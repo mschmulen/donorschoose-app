@@ -3,8 +3,7 @@
 
 import UIKit
 
-// MAS TODO rename to ModalNotificationViewController
-open class NotificationViewController: UIViewController {
+open class ModalNotificationViewController: UIViewController {
     
     // MARK: - IBOutlet IBAction
     
@@ -59,7 +58,7 @@ open class NotificationViewController: UIViewController {
     
     public convenience init( title:String, message:String)
     {
-        self.init(nibName: "NotificationViewController", bundle: Bundle(for: NotificationViewController.self), title:title, message:message )
+        self.init(nibName: "ModalNotificationViewController", bundle: Bundle(for: ModalNotificationViewController.self), title:title, message:message )
     }
 
 }

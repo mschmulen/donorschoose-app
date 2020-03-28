@@ -2,7 +2,7 @@
 import UIKit
 
 @IBDesignable
-open class ViewFundingStatus : UIView {
+open class ViewFundingStatus: UIView {
     
     var chartLine: CAShapeLayer!
     
@@ -10,7 +10,7 @@ open class ViewFundingStatus : UIView {
     open var barColor: UIColor = UIColor.green
     
     @IBInspectable
-    open var animationDuration:Double = 1.0
+    open var animationDuration: Double = 1.0
     
     open var borderColor: UIColor = UIColor.clear {
         didSet {

@@ -34,7 +34,13 @@ class donorsChooseUITests: XCTestCase {
         let app = XCUIApplication()
 
         inNeedTab(app)
-        nearMeTab(app)
+        switch appTestEnvironment {
+        case .simulator:
+            print("skip near me tab")
+        case .device:
+            nearMeTab(app)
+        }
+        
         inspriesMeTab(app)
         favoritesTab(app)
         moreTab(app)

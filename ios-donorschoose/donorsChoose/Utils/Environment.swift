@@ -11,37 +11,26 @@ import Foundation
 import Foundation
 
 #if DEBUG
-var env:Environment = .production
+var env: Environment = .production
 #else
-var env:Environment = .production
+var env: Environment = .production
 #endif
 
 enum Environment {
     case dev
     case production
     
-    var displayString:String {
+    var displayString: String {
         switch ( self ) {
         case .dev: return "dev"
         case .production: return "production"
         }
     }
     
-    func log(_ message:String) {
+    func log(_ message: String) {
         switch ( self ) {
         case .dev: print( message)
         default: break
         }
     }
 }
-
-struct Platform {
-    static let isSimulator: Bool = {
-        var isSim = false
-        #if arch(i386) || arch(x86_64)
-            isSim = true
-        #endif
-        return isSim
-    }()
-}
-

@@ -130,7 +130,7 @@ open class ProjectSearchViewController: UIViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        dataAPI = ProjectAPI(config: viewData.apiConfig,user: "matt")
+        dataAPI = ProjectAPI(config: viewData.apiConfig)
         
         // let buttonSave : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProjectSearchViewController.actionSaveSearch(_:)))
         let buttonSave = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(ProjectSearchViewController.actionSaveSearch(_:)))

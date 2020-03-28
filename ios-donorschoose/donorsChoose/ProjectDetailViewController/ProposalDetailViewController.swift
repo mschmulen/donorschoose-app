@@ -2,7 +2,10 @@
 
 import UIKit
 import MessageUI
-import AppAnalyticsLegacy
+
+
+// MAS TODO Analytics
+//import AppAnalyticsLegacy
 
 public enum ShareActionType {
     case email
@@ -73,7 +76,8 @@ open class ProposalDetailViewController: UIViewController {
         if let model = self.model {
             let giveURL = model.proposalURL
             
-            AnalyticsService.dispatchAnalyticEvent(.customEvent(eventName: "GiveButtonTapped"))
+            // MAS TODO Analytics
+//            AnalyticsService.dispatchAnalyticEvent(.customEvent(eventName: "GiveButtonTapped"))
             
             if let url:URL = URL(string: giveURL) {
                 UIApplication.shared.open(url, options: [:])
@@ -325,7 +329,7 @@ open class ProposalDetailViewController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        dataAPI = ProjectAPI(config: apiConfig,user: "matt")
+        dataAPI = ProjectAPI(config: apiConfig)
         
         let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(ProposalDetailViewController.actionShare(_:)))
         self.navigationItem.rightBarButtonItem = buttonShare

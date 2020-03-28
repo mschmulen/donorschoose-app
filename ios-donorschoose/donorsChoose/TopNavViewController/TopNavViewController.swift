@@ -65,8 +65,8 @@ open class TopNavViewController: UITabBarController {
             else { return }
         
         let urgentNav = urgent.navWrapper(
-            title:"In Need",
-            image:UIImage.fontAwesomeIcon(
+            title: "In Need",
+            image: UIImage.fontAwesomeIcon(
                 name: .hourglass,
                 style: .regular,
                 textColor: .blue,
@@ -74,8 +74,8 @@ open class TopNavViewController: UITabBarController {
             )
         )
         let nearMeNav = nearMe.navWrapper(
-            title:"Near Me",
-            image:UIImage.fontAwesomeIcon(
+            title: "Near Me",
+            image: UIImage.fontAwesomeIcon(
                 name: .compass,
                 style: .regular,
                 textColor: .blue,
@@ -83,8 +83,8 @@ open class TopNavViewController: UITabBarController {
             )
         )
         let inspiresMeNav = inspiresMe.navWrapper(
-            title:"Inspires Me",
-            image:UIImage.fontAwesomeIcon(
+            title: "Inspires Me",
+            image: UIImage.fontAwesomeIcon(
                 name: .lightbulb,
                 style: .regular,
                 textColor: .blue,
@@ -92,8 +92,8 @@ open class TopNavViewController: UITabBarController {
             )
         )
         let favNav = fav.navWrapper(
-            title:"Favorites",
-            image:UIImage.fontAwesomeIcon(
+            title: "Favorites",
+            image: UIImage.fontAwesomeIcon(
                 name: .heart,
                 style: .regular,
                 textColor: .blue,
@@ -101,14 +101,9 @@ open class TopNavViewController: UITabBarController {
             )
         )
         let aboutNav = about.navWrapper(
-            title:"More",
-            image:UIImage.fontAwesomeIcon(
+            title: "More",
+            image: UIImage.fontAwesomeIcon(
                 name: .clone,
-                // name: .clone,    // Yes
-                // name: .addressBook,  // Yes
-                // name:  .school,      // No
-                // name: .bars,         // No
-                // name: .alignJustify, // No
                 style: .regular,
                 textColor: .blue,
                 size: CGSize(width: 35, height: 35)
@@ -124,7 +119,7 @@ open class TopNavViewController: UITabBarController {
         }
         
         UITabBar.appearance().tintColor = UIColor(red: 13, green: 127, blue: 25)
-
+        
         // MAS TODO Consume the activity link if it was initialized with one
         //    guard let userActivity = activity,
         //      let appRoute = AppRoute.route(activity:userActivity ) else {
@@ -160,13 +155,6 @@ open class TopNavViewController: UITabBarController {
     //        //    }
     //        //present(appRoute)
     //    }
-
-    //    open func loadAndShowProposal(_ proposalID:String)
-    //    {
-    ////        let dataAPI = ProjectAPI(config: viewData.apiConfig,user: "matt", delegate: self)
-    ////        dataAPI.getDataWithProposalID(proposalID)
-    //    }
-
 }
 
 extension TopNavViewController {

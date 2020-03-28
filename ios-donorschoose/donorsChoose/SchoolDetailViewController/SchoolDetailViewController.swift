@@ -118,7 +118,7 @@ open class SchoolDetailViewController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        dataAPI = SchoolDataAPI(config: apiConfig, user: "matt", delegate: self)
+        dataAPI = SchoolDataAPI(config: apiConfig, delegate: self)
         dataAPI?.getSchoolInfo(viewData.schoolID)
         
         let buttonShare : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(SchoolDetailViewController.actionShare(_:)))

@@ -90,21 +90,21 @@ class ProjectTableViewController: UITableViewController {
     }
     
     func showLocationServicesError() {
-        let notificationVC = NotificationViewController(title: "Location Error", message: "Location Services are not enabled, please enable Location services for the donorsChoose app in the system settings")
+        let notificationVC = ModalNotificationViewController(title: "Location Error", message: "Location Services are not enabled, please enable Location services for the donorsChoose app in the system settings")
         self.present(notificationVC, animated: true) {
             self.didShowNotification = true
         }
     }
     
     func showDataServicesError(_ messageTitle:String , messageString:String) {
-        let notificationVC = NotificationViewController(title: messageTitle, message: messageString)
+        let notificationVC = ModalNotificationViewController(title: messageTitle, message: messageString)
         self.present(notificationVC, animated: true) {
             self.didShowNotification = true
         }
     }
     
     func showNotification() {
-        let notificationVC = NotificationViewController(title: "Customizing Search", message: "Some Message or instructions to the user")
+        let notificationVC = ModalNotificationViewController(title: "Customizing Search", message: "Some Message or instructions to the user")
         self.present(notificationVC, animated: true) {
             self.didShowNotification = true
         }
@@ -205,15 +205,12 @@ class ProjectTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // MAS TODO custom configure based on configuration
-        // configure background
-        
         tableView.registerReusableCell(ProposalTableViewCell.self)
         tableView.estimatedRowHeight = 258
         tableView.separatorStyle = .none
         
         guard let viewData = self.viewData else { return }
-        dataAPI = ProjectAPI(config: viewData.apiConfig,user: "matt")//, delegate: self)
+        dataAPI = ProjectAPI(config: viewData.apiConfig)
         tableView.backgroundView = ProjectsEmptyBackgroundView(frame: tableView.frame, config: viewData.viewConfig)
         
         refreshControl = UIRefreshControl()
@@ -233,7 +230,6 @@ class ProjectTableViewController: UITableViewController {
         case .nearMe:
             self.locationManager.delegate = self
             self.locationManager.requestWhenInUseAuthorization()
-//            sections = [.location(fetchModel:viewData.initalSearchDataModel)]
             updateLocation()
         case .inNeed:
             sections = [.none(fetchModel:viewData.initalSearchDataModel)]
@@ -294,8 +290,6 @@ class ProjectTableViewController: UITableViewController {
             }
         }
     }
-    
-    // override func prepare(for segue: UIStoryboardSegue, sender: Any?) { }
 }
 
 extension ProjectTableViewController : CLLocationManagerDelegate  {
@@ -316,6 +310,7 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
             }
             
             if let first = placemarks?.first ,
+                // MAS TODO 'addressDictionary' was deprecated in iOS 11.0: Use @properties
                 let addressDictionary = first.addressDictionary,
                 let city = addressDictionary["City"] as? String,
                 let state = addressDictionary["State"] as? String,

@@ -5,7 +5,7 @@ import CoreLocation
 
 
 public protocol ProjectAPIProtocol {
-    init(config:APIConfig, user:String)
+    init(config:APIConfig)
     
     func getData(_ searchModel:ProjectSearchDataModel, pageIndex:Int, callback: @escaping ([ProposalModel], APIError?) -> Void)
     func getDetailData(_ proposalID:String, callback: @escaping (ProposalModel?, APIError?) -> Void)
@@ -19,7 +19,7 @@ class ProjectAPI : ProjectAPIProtocol
     
     fileprivate let queue = DispatchQueue(label: "serial queue", attributes: [])
     
-    public required init(config:APIConfig, user:String )
+    public required init( config: APIConfig )
     {
         self.apiConfig = config
     }
@@ -53,7 +53,7 @@ class ProjectAPI : ProjectAPIProtocol
             if let latitude = searchModel.latitude, let longitude = searchModel.longitude {
                 let centerLatQueryItem = URLQueryItem(name: "centerLat", value: "\(latitude)")
                 let centerLngQueryItem = URLQueryItem(name: "centerLng", value: "\(longitude)")
-                // MAS TODO support other pramters
+                // MAS TODO support other parameters
                 components.queryItems = [apiKeyQueryItem, centerLatQueryItem,centerLngQueryItem, partnerIdQueryItem ] // sortByQueryItem, maxQueryItem ,]
             } else {
                 components.queryItems = [maxQueryItem, sortByQueryItem, apiKeyQueryItem, partnerIdQueryItem]
@@ -61,8 +61,9 @@ class ProjectAPI : ProjectAPIProtocol
         case .locationInfo:
             if let locationInfo = searchModel.locationInfo {
                 let stateQueryItem = URLQueryItem(name: "state", value: locationInfo.state)
-//                let communityQueryItem = URLQueryItem(name: "community", value: "10007")
+                
                 // MAS TODO
+                // let communityQueryItem = URLQueryItem(name: "community", value: "10007")
                 // https://api.donorschoose.org/common/json_feed.html?state=NC&community=10007:3&APIKey=DONORSCHOOSE
                 components.queryItems = [apiKeyQueryItem, stateQueryItem, partnerIdQueryItem ]
             }

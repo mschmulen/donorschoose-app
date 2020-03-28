@@ -119,7 +119,7 @@ class AboutTableViewController: UITableViewController {
         records[.about] = [.header(fullVersionBuildString), .aboutInfo, .tools]
         records[.stats] = []
         
-        dataAPI = DonorPageDataAPI(config: viewData.apiConfig, user: "matt", delegate: self)
+        dataAPI = DonorPageDataAPI(config: viewData.apiConfig, delegate: self)
         dataAPI?.getStats(viewData.apiConfig.givingPageID)
     }
     

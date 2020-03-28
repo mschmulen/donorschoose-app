@@ -13,34 +13,34 @@ class StatView: UIView {
         
         func nameString() -> String {
             switch self {
-            case .studentsReached : return "STUDENTS REACHED"
+            case .studentsReached: return "STUDENTS REACHED"
             case .supporters: return "SUPPORTERS"
-            case .projectsFunded : return "PROJECTS FUNDED"
-            case .dollarsRaised : return "DOLLARS RAISED"
-            case .schoolsParticipating : return "SCHOOLS PARTICIPATING"
+            case .projectsFunded: return "PROJECTS FUNDED"
+            case .dollarsRaised: return "DOLLARS RAISED"
+            case .schoolsParticipating: return "SCHOOLS PARTICIPATING"
             }
         }
         
         func valueString() -> String {
             switch self {
-            case .studentsReached : return "18,652,905"
+            case .studentsReached: return "18,652,905"
             case .supporters: return "2,124,954"
-            case .projectsFunded : return "741,462"
-            case .dollarsRaised : return "434,702,470"
-            case .schoolsParticipating : return "68,734"
+            case .projectsFunded: return "741,462"
+            case .dollarsRaised: return "434,702,470"
+            case .schoolsParticipating: return "68,734"
             }
         }
     }
     
     //    @IBInspectable var currentStat:Stat = Stat {
-    var currentStat:Stat = Stat.supporters {
+    var currentStat: Stat = Stat.supporters {
         didSet {
             statNameLabel.text = currentStat.nameString()
             statValueLabel.text = currentStat.valueString()
         }
     }
     
-    @IBOutlet fileprivate var contentView:UIView!
+    @IBOutlet fileprivate var contentView: UIView!
     
     @IBOutlet weak var statNameLabel: UILabel! {
         didSet {

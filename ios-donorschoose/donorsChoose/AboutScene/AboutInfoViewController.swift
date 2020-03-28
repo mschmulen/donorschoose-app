@@ -3,6 +3,7 @@ import UIKit
 
 public class AboutInfoViewController: UIViewController {
     
+    // MAS TODO convert UIWebView to WKWebView
     @IBOutlet weak var webView: UIWebView!
     
     var viewData:ViewData? = ViewData()

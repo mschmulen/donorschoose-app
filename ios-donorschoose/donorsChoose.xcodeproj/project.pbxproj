@@ -50,7 +50,6 @@
 		108E305520346F7D00567895 /* ProposalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E303820346F7D00567895 /* ProposalTableViewCell.xib */; };
 		108E305720346F7D00567895 /* WatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E303B20346F7D00567895 /* WatchList.swift */; };
 		108E305820346F7D00567895 /* WatchListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E303C20346F7D00567895 /* WatchListModels.swift */; };
-		108E305920346F7D00567895 /* WatchListDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E303E20346F7D00567895 /* WatchListDebugViewController.swift */; };
 		108E305A20346F7D00567895 /* EmptyCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E304020346F7D00567895 /* EmptyCollectionReusableView.swift */; };
 		108E305B20346F7D00567895 /* DescriptionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E304120346F7D00567895 /* DescriptionViewCell.xib */; };
 		108E305C20346F7D00567895 /* ProposalDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E304220346F7D00567895 /* ProposalDetailViewController.xib */; };
@@ -96,8 +95,8 @@
 		108E30C72034715500567895 /* SchoolDetailProposalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E30BF2034715500567895 /* SchoolDetailProposalHeaderView.xib */; };
 		108E30C82034715500567895 /* ProposalViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E30C02034715500567895 /* ProposalViewCell.xib */; };
 		108E30C92034715500567895 /* SchoolDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E30C12034715500567895 /* SchoolDetailViewController.xib */; };
-		108E30CD2034717D00567895 /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E30CB2034717D00567895 /* NotificationViewController.xib */; };
-		108E30CE2034717D00567895 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E30CC2034717D00567895 /* NotificationViewController.swift */; };
+		108E30CD2034717D00567895 /* ModalNotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E30CB2034717D00567895 /* ModalNotificationViewController.xib */; };
+		108E30CE2034717D00567895 /* ModalNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E30CC2034717D00567895 /* ModalNotificationViewController.swift */; };
 		108E30D3203472DF00567895 /* StatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E30CF203472DF00567895 /* StatView.xib */; };
 		108E30D4203472DF00567895 /* LoadingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108E30D0203472DF00567895 /* LoadingCollectionViewCell.xib */; };
 		108E30D5203472DF00567895 /* LoadingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E30D1203472DF00567895 /* LoadingCollectionViewCell.swift */; };
@@ -120,11 +119,10 @@
 		10A320B820756EF2004544D8 /* favoritesTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A320B720756EF2004544D8 /* favoritesTab.swift */; };
 		10A320BD20756F46004544D8 /* inNeedTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A320BC20756F46004544D8 /* inNeedTab.swift */; };
 		76416BF5239EB81D00DBF6EC /* UserDefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76416BF4239EB81D00DBF6EC /* UserDefaultWrapper.swift */; };
-		76416BF7239EB8B900DBF6EC /* CustomUserDefaultPropertyKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76416BF6239EB8B900DBF6EC /* CustomUserDefaultPropertyKeys.swift */; };
-		76416BF9239EB8E700DBF6EC /* AppUserDefaultStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76416BF8239EB8E700DBF6EC /* AppUserDefaultStorage.swift */; };
 		76A4F8FB23AD08C900F6A8AB /* AppAnalyticsLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76A4F8FA23AD08B400F6A8AB /* AppAnalyticsLegacy.framework */; };
 		76A4F8FC23AD08C900F6A8AB /* AppAnalyticsLegacy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 76A4F8FA23AD08B400F6A8AB /* AppAnalyticsLegacy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		76A4F8FE23AD092400F6A8AB /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A4F8FD23AD092400F6A8AB /* AppEnvironment.swift */; };
+		76C24BC3242F9A3200020F25 /* TestEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C24BC2242F9A3200020F25 /* TestEnvironment.swift */; };
 		C986198120838DDE0072DAC0 /* LocationResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C986198020838DDE0072DAC0 /* LocationResultsModel.swift */; };
 		C98619842083B8CC0072DAC0 /* FundingStatusViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98619822083B8CB0072DAC0 /* FundingStatusViewCell.swift */; };
 		C98619852083B8CC0072DAC0 /* FundingStatusViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C98619832083B8CC0072DAC0 /* FundingStatusViewCell.xib */; };
@@ -291,7 +289,6 @@
 		108E303820346F7D00567895 /* ProposalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProposalTableViewCell.xib; sourceTree = "<group>"; };
 		108E303B20346F7D00567895 /* WatchList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchList.swift; sourceTree = "<group>"; };
 		108E303C20346F7D00567895 /* WatchListModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchListModels.swift; sourceTree = "<group>"; };
-		108E303E20346F7D00567895 /* WatchListDebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchListDebugViewController.swift; sourceTree = "<group>"; };
 		108E304020346F7D00567895 /* EmptyCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCollectionReusableView.swift; sourceTree = "<group>"; };
 		108E304120346F7D00567895 /* DescriptionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionViewCell.xib; sourceTree = "<group>"; };
 		108E304220346F7D00567895 /* ProposalDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProposalDetailViewController.xib; sourceTree = "<group>"; };
@@ -337,8 +334,8 @@
 		108E30BF2034715500567895 /* SchoolDetailProposalHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SchoolDetailProposalHeaderView.xib; sourceTree = "<group>"; };
 		108E30C02034715500567895 /* ProposalViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProposalViewCell.xib; sourceTree = "<group>"; };
 		108E30C12034715500567895 /* SchoolDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SchoolDetailViewController.xib; sourceTree = "<group>"; };
-		108E30CB2034717D00567895 /* NotificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
-		108E30CC2034717D00567895 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		108E30CB2034717D00567895 /* ModalNotificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModalNotificationViewController.xib; sourceTree = "<group>"; };
+		108E30CC2034717D00567895 /* ModalNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalNotificationViewController.swift; sourceTree = "<group>"; };
 		108E30CF203472DF00567895 /* StatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatView.xib; sourceTree = "<group>"; };
 		108E30D0203472DF00567895 /* LoadingCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingCollectionViewCell.xib; sourceTree = "<group>"; };
 		108E30D1203472DF00567895 /* LoadingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -357,10 +354,9 @@
 		10A320BC20756F46004544D8 /* inNeedTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inNeedTab.swift; sourceTree = "<group>"; };
 		302DD2395164DE116E2FAAC6 /* Pods_donorsChooseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_donorsChooseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76416BF4239EB81D00DBF6EC /* UserDefaultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultWrapper.swift; sourceTree = "<group>"; };
-		76416BF6239EB8B900DBF6EC /* CustomUserDefaultPropertyKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUserDefaultPropertyKeys.swift; sourceTree = "<group>"; };
-		76416BF8239EB8E700DBF6EC /* AppUserDefaultStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserDefaultStorage.swift; sourceTree = "<group>"; };
 		76A4F8E623AD08B400F6A8AB /* AppAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AppAnalytics.xcodeproj; path = "VendorCarthage/Carthage/Checkouts/appAnalytics-iOS/AppAnalytics.xcodeproj"; sourceTree = "<group>"; };
 		76A4F8FD23AD092400F6A8AB /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		76C24BC2242F9A3200020F25 /* TestEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEnvironment.swift; sourceTree = "<group>"; };
 		BFC5AA5C2A8EB2CE740961E6 /* Pods_donorsChooseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_donorsChooseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C986198020838DDE0072DAC0 /* LocationResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationResultsModel.swift; sourceTree = "<group>"; };
 		C98619822083B8CB0072DAC0 /* FundingStatusViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundingStatusViewCell.swift; sourceTree = "<group>"; };
@@ -465,17 +461,17 @@
 		108E2FF52033A77100567895 /* donorsChoose */ = {
 			isa = PBXGroup;
 			children = (
+				108E303520346F7D00567895 /* ProjectsScene */,
+				107FF54F2065B1040083F4DA /* AboutScene */,
+				108E302A20346F7C00567895 /* FavoritesScene */,
+				1056F9CD2067F20200D5D11F /* SearchScene */,
 				76416BF0239EB7BB00DBF6EC /* AppUserDefaults */,
 				108E303A20346F7D00567895 /* WatchList */,
 				106E7F102068911700B1AAC1 /* LocationDetailViewController */,
 				108E30B92034715500567895 /* SchoolDetailViewController */,
 				108E30B02034713300567895 /* TeacherDetailViewController */,
-				1056F9CD2067F20200D5D11F /* SearchScene */,
-				107FF54F2065B1040083F4DA /* AboutScene */,
-				108E303520346F7D00567895 /* ProjectsScene */,
-				108E302A20346F7C00567895 /* FavoritesScene */,
 				108E303F20346F7D00567895 /* ProjectDetailViewController */,
-				108E30CA2034717D00567895 /* NotificationViewController */,
+				108E30CA2034717D00567895 /* ModalNotificationViewController */,
 				108E30982034700A00567895 /* Views */,
 				108E308320346FDF00567895 /* Utils */,
 				108E306620346FA900567895 /* DataAccessLayer */,
@@ -511,6 +507,7 @@
 				10A320B720756EF2004544D8 /* favoritesTab.swift */,
 				108E30162033A77100567895 /* donorsChooseUITests.swift */,
 				108E30182033A77100567895 /* Info.plist */,
+				76C24BC2242F9A3200020F25 /* TestEnvironment.swift */,
 			);
 			path = donorsChooseUITests;
 			sourceTree = "<group>";
@@ -553,17 +550,8 @@
 			children = (
 				108E303B20346F7D00567895 /* WatchList.swift */,
 				108E303C20346F7D00567895 /* WatchListModels.swift */,
-				108E303D20346F7D00567895 /* WatchListDebugViewController */,
 			);
 			path = WatchList;
-			sourceTree = "<group>";
-		};
-		108E303D20346F7D00567895 /* WatchListDebugViewController */ = {
-			isa = PBXGroup;
-			children = (
-				108E303E20346F7D00567895 /* WatchListDebugViewController.swift */,
-			);
-			path = WatchListDebugViewController;
 			sourceTree = "<group>";
 		};
 		108E303F20346F7D00567895 /* ProjectDetailViewController */ = {
@@ -683,13 +671,13 @@
 			path = SchoolDetailViewController;
 			sourceTree = "<group>";
 		};
-		108E30CA2034717D00567895 /* NotificationViewController */ = {
+		108E30CA2034717D00567895 /* ModalNotificationViewController */ = {
 			isa = PBXGroup;
 			children = (
-				108E30CB2034717D00567895 /* NotificationViewController.xib */,
-				108E30CC2034717D00567895 /* NotificationViewController.swift */,
+				108E30CB2034717D00567895 /* ModalNotificationViewController.xib */,
+				108E30CC2034717D00567895 /* ModalNotificationViewController.swift */,
 			);
-			path = NotificationViewController;
+			path = ModalNotificationViewController;
 			sourceTree = "<group>";
 		};
 		108E30E320348C7900567895 /* Products */ = {
@@ -726,8 +714,6 @@
 			isa = PBXGroup;
 			children = (
 				76416BF4239EB81D00DBF6EC /* UserDefaultWrapper.swift */,
-				76416BF6239EB8B900DBF6EC /* CustomUserDefaultPropertyKeys.swift */,
-				76416BF8239EB8E700DBF6EC /* AppUserDefaultStorage.swift */,
 			);
 			path = AppUserDefaults;
 			sourceTree = "<group>";
@@ -971,7 +957,7 @@
 				10128C4E2068268700AA060E /* ProjectSearch.storyboard in Resources */,
 				107FF54E2065B0FF0083F4DA /* About.storyboard in Resources */,
 				108E305B20346F7D00567895 /* DescriptionViewCell.xib in Resources */,
-				108E30CD2034717D00567895 /* NotificationViewController.xib in Resources */,
+				108E30CD2034717D00567895 /* ModalNotificationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -998,7 +984,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76416BF9239EB8E700DBF6EC /* AppUserDefaultStorage.swift in Sources */,
 				1056F9D52068061000D5D11F /* String+URLEncoding.swift in Sources */,
 				108E309620346FDF00567895 /* Remove+Plist.swift in Sources */,
 				76416BF5239EB81D00DBF6EC /* UserDefaultWrapper.swift in Sources */,
@@ -1008,13 +993,12 @@
 				107FF55B2067BDA40083F4DA /* ProjectNetworkModel.swift in Sources */,
 				108E308F20346FDF00567895 /* UITableViewCell+getDataFromUrl.swift in Sources */,
 				108E305720346F7D00567895 /* WatchList.swift in Sources */,
-				108E305920346F7D00567895 /* WatchListDebugViewController.swift in Sources */,
 				107FF5512065B1290083F4DA /* AboutTableViewController.swift in Sources */,
 				108E304D20346F7D00567895 /* FavoriteListViewController.swift in Sources */,
 				108E30D6203472DF00567895 /* StatView.swift in Sources */,
 				108E305420346F7D00567895 /* ProposalTableViewCell.swift in Sources */,
 				108E30A32034700A00567895 /* ViewFundingStatus.swift in Sources */,
-				108E30CE2034717D00567895 /* NotificationViewController.swift in Sources */,
+				108E30CE2034717D00567895 /* ModalNotificationViewController.swift in Sources */,
 				108E307720346FA900567895 /* APIConfig.swift in Sources */,
 				106E7F1C2068911700B1AAC1 /* LocationDetailViewController.swift in Sources */,
 				108E30D5203472DF00567895 /* LoadingCollectionViewCell.swift in Sources */,
@@ -1060,7 +1044,6 @@
 				108E309120346FDF00567895 /* UIImage+FadeInOut.swift in Sources */,
 				107FF5592066EE920083F4DA /* Models+Codable.swift in Sources */,
 				108E307E20346FA900567895 /* UserModel.swift in Sources */,
-				76416BF7239EB8B900DBF6EC /* CustomUserDefaultPropertyKeys.swift in Sources */,
 				108E307B20346FA900567895 /* ProjectSearchFetchModel.swift in Sources */,
 				108E306020346F7D00567895 /* ProposalFooterView.swift in Sources */,
 				C986198120838DDE0072DAC0 /* LocationResultsModel.swift in Sources */,
@@ -1095,6 +1078,7 @@
 				C9B4E5F5207582F3007503B1 /* inspiresMeTab.swift in Sources */,
 				108E31142034933500567895 /* AppRoute.swift in Sources */,
 				C9B4E5FA20758300007503B1 /* nearMeTab.swift in Sources */,
+				76C24BC3242F9A3200020F25 /* TestEnvironment.swift in Sources */,
 				10A320B02075659B004544D8 /* moreTab.swift in Sources */,
 				10A320B820756EF2004544D8 /* favoritesTab.swift in Sources */,
 			);
