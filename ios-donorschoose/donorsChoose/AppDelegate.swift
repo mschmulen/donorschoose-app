@@ -7,7 +7,9 @@
 //
 
 import UIKit
-import AppAnalyticsLegacy
+
+// MAS TODO Analytics
+//import AppAnalyticsLegacy
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,16 +22,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        switch appNetworkEnvironment {
-        case .local:
-            AnalyticsService.start(config: AnalyticsServiceConfiguration.defaultLocalConfiguration)
-        case .stage:
-            AnalyticsService.start(config: AnalyticsServiceConfiguration.defaultStageConfiguration)
-        case .prod:
-            AnalyticsService.start(config: AnalyticsServiceConfiguration.defaultProductionConfiguration)
-        }
-        
-        _ = AnalyticsService.shared().application(application, didFinishLaunchingWithOptions: launchOptions)
+        // MAS TODO Analytics
+//        switch appNetworkEnvironment {
+//        case .local:
+//            AnalyticsService.start(config: AnalyticsServiceConfiguration.defaultLocalConfiguration)
+//        case .stage:
+//            AnalyticsService.start(config: AnalyticsServiceConfiguration.defaultStageConfiguration)
+//        case .prod:
+//            AnalyticsService.start(config: AnalyticsServiceConfiguration.defaultProductionConfiguration)
+//        }
+//
+//        _ = AnalyticsService.shared().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         if let user = userInfo {
             topNav = TopNavViewController(user: user, activity: nil)
@@ -42,23 +45,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        AnalyticsService.shared().applicationWillResignActive( application )
+//        AnalyticsService.shared().applicationWillResignActive( application )
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-       AnalyticsService.shared().applicationDidEnterBackground( application )
+//       AnalyticsService.shared().applicationDidEnterBackground( application )
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-         AnalyticsService.shared().applicationWillEnterForeground( application )
+//         AnalyticsService.shared().applicationWillEnterForeground( application )
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-         AnalyticsService.shared().applicationDidBecomeActive( application )
+//         AnalyticsService.shared().applicationDidBecomeActive( application )
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        AnalyticsService.shared().applicationWillTerminate( application )
+//        AnalyticsService.shared().applicationWillTerminate( application )
     }
 
 }

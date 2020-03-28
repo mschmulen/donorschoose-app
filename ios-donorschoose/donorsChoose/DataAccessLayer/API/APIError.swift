@@ -99,7 +99,7 @@ public enum APIError: Error {
     
     public static func generateFromNetworkError( _ networkError:Error) -> APIError
     {
-        // MAS TODO Swift 3 , broke
+        // MAS TODO Swift 3 , breaking change
         print( "** generateFromNetworkError: \(networkError.localizedDescription)")
 //         if (networkError.domain == NSURLErrorDomain) {
 //

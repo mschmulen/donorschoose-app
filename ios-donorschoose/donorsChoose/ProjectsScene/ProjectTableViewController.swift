@@ -90,21 +90,21 @@ class ProjectTableViewController: UITableViewController {
     }
     
     func showLocationServicesError() {
-        let notificationVC = NotificationViewController(title: "Location Error", message: "Location Services are not enabled, please enable Location services for the donorsChoose app in the system settings")
+        let notificationVC = ModalNotificationViewController(title: "Location Error", message: "Location Services are not enabled, please enable Location services for the donorsChoose app in the system settings")
         self.present(notificationVC, animated: true) {
             self.didShowNotification = true
         }
     }
     
     func showDataServicesError(_ messageTitle:String , messageString:String) {
-        let notificationVC = NotificationViewController(title: messageTitle, message: messageString)
+        let notificationVC = ModalNotificationViewController(title: messageTitle, message: messageString)
         self.present(notificationVC, animated: true) {
             self.didShowNotification = true
         }
     }
     
     func showNotification() {
-        let notificationVC = NotificationViewController(title: "Customizing Search", message: "Some Message or instructions to the user")
+        let notificationVC = ModalNotificationViewController(title: "Customizing Search", message: "Some Message or instructions to the user")
         self.present(notificationVC, animated: true) {
             self.didShowNotification = true
         }
