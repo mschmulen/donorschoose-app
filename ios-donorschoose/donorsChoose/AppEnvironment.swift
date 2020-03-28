@@ -44,14 +44,13 @@ var appBuildEnvironment = AppBuildEnv.debug
 var appBuildEnvironment = AppBuildEnv.release
 #endif
 
-
 enum AppTargetEnvironment {
     case device
     case simulator
 }
 
 #if targetEnvironment(simulator)
-    let appTargetEnvironment = AppTargetEnvironment.simulator    // Simulator
+    let appTargetEnvironment = AppTargetEnvironment.simulator
 #else
     let appTargetEnvironment = AppBuildEnvironment.device
 #endif

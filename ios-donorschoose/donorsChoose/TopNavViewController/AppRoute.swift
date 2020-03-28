@@ -11,9 +11,9 @@ protocol AppPath: Path {
 
 enum AppRoute {
   case Splash
-  case Teacher(id:String)
-  case Project(id:String)
-  case School(id:String)
+  case Teacher(id: String)
+  case Project(id: String)
+  case School(id: String)
 }
 
 extension AppRoute : AppPath {

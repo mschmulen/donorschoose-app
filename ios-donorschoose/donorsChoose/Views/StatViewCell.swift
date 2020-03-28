@@ -3,7 +3,7 @@
 
 import UIKit
 
-typealias StatType = (Name:String, Value:String)
+typealias StatType = (Name: String, Value: String)
 
 open class StatViewCell: UICollectionViewCell {
     
@@ -25,7 +25,7 @@ open class StatViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    public func configure( name:String, value:String) {
+    public func configure( name: String, value: String) {
         labelStatName.text = name
         labelStatValue.text = value
     }

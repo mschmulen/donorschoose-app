@@ -205,9 +205,6 @@ class ProjectTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // MAS TODO custom configure based on configuration
-        // configure background
-        
         tableView.registerReusableCell(ProposalTableViewCell.self)
         tableView.estimatedRowHeight = 258
         tableView.separatorStyle = .none
@@ -233,7 +230,6 @@ class ProjectTableViewController: UITableViewController {
         case .nearMe:
             self.locationManager.delegate = self
             self.locationManager.requestWhenInUseAuthorization()
-//            sections = [.location(fetchModel:viewData.initalSearchDataModel)]
             updateLocation()
         case .inNeed:
             sections = [.none(fetchModel:viewData.initalSearchDataModel)]
@@ -294,8 +290,6 @@ class ProjectTableViewController: UITableViewController {
             }
         }
     }
-    
-    // override func prepare(for segue: UIStoryboardSegue, sender: Any?) { }
 }
 
 extension ProjectTableViewController : CLLocationManagerDelegate  {
@@ -316,6 +310,7 @@ extension ProjectTableViewController : CLLocationManagerDelegate  {
             }
             
             if let first = placemarks?.first ,
+                // MAS TODO 'addressDictionary' was deprecated in iOS 11.0: Use @properties
                 let addressDictionary = first.addressDictionary,
                 let city = addressDictionary["City"] as? String,
                 let state = addressDictionary["State"] as? String,
