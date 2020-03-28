@@ -52,6 +52,6 @@ enum AppTargetEnvironment {
 #if targetEnvironment(simulator)
     let appTargetEnvironment = AppTargetEnvironment.simulator
 #else
-    let appTargetEnvironment = AppBuildEnvironment.device
+    let appTargetEnvironment = AppTargetEnvironment.device
 #endif
 
