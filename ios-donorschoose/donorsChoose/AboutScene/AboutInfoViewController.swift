@@ -1,40 +1,25 @@
 
 import UIKit
+import WebKit
 
 public class AboutInfoViewController: UIViewController {
     
-    // MAS TODO convert UIWebView to WKWebView
-    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var webView: WKWebView!
     
     var viewData: ViewData? = ViewData()
     
     override public func viewDidLoad() {
         
         super.viewDidLoad()
-        webView.delegate = self
-        
+
         guard let viewData = viewData else { return }
         
-        webView.loadRequest(URLRequest(url:viewData.dataURL))
+        let request = URLRequest(url:viewData.dataURL)
+        webView.load(request)
     }
     
     override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-}
-
-extension AboutInfoViewController: UIWebViewDelegate {
-    
-    public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
-        
-        if navigationType == UIWebView.NavigationType.linkClicked {
-            guard let url = request.url else {
-                return false
-            }
-            UIApplication.shared.open(url, options: [:])
-            return false
-        }
-        return true
     }
 }
 
