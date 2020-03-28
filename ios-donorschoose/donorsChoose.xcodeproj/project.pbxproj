@@ -119,8 +119,6 @@
 		10A320B820756EF2004544D8 /* favoritesTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A320B720756EF2004544D8 /* favoritesTab.swift */; };
 		10A320BD20756F46004544D8 /* inNeedTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A320BC20756F46004544D8 /* inNeedTab.swift */; };
 		76416BF5239EB81D00DBF6EC /* UserDefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76416BF4239EB81D00DBF6EC /* UserDefaultWrapper.swift */; };
-		76A4F8FB23AD08C900F6A8AB /* AppAnalyticsLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76A4F8FA23AD08B400F6A8AB /* AppAnalyticsLegacy.framework */; };
-		76A4F8FC23AD08C900F6A8AB /* AppAnalyticsLegacy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 76A4F8FA23AD08B400F6A8AB /* AppAnalyticsLegacy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		76A4F8FE23AD092400F6A8AB /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A4F8FD23AD092400F6A8AB /* AppEnvironment.swift */; };
 		76C24BC3242F9A3200020F25 /* TestEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C24BC2242F9A3200020F25 /* TestEnvironment.swift */; };
 		C986198120838DDE0072DAC0 /* LocationResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C986198020838DDE0072DAC0 /* LocationResultsModel.swift */; };
@@ -231,7 +229,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				76A4F8FC23AD08C900F6A8AB /* AppAnalyticsLegacy.framework in Embed Frameworks */,
 				108E30F220348CB200567895 /* FontAwesome.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -371,7 +368,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76A4F8FB23AD08C900F6A8AB /* AppAnalyticsLegacy.framework in Frameworks */,
 				108E30F120348CB200567895 /* FontAwesome.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

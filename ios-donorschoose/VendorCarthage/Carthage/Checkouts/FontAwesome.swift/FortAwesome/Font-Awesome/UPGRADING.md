@@ -6,6 +6,46 @@ This guide is useful to figure out what you need to do between breaking changes.
 
 As always, [submit issues](https://github.com/FortAwesome/Font-Awesome/issues/new) that you run into with this guide or with these upgrades to us.
 
+## 5.12.1 to 5.13.0
+
+There are no breaking changes in this version upgrade.
+
+---
+
+## 5.12.0 to 5.12.1
+
+There are no breaking changes in this version upgrade.
+
+---
+
+## 5.11.2 to 5.12.0
+
+The 9-pointed icon named "haykal" was renamed to "bahai" to better match the
+symbol. If you were previously using the misnamed icon rename to "bahai" when
+upgrading.
+
+---
+
+## 5.11.1 to 5.11.2
+
+The scanner-image icon was previously using the same unicode value as the scanner icon.
+
+This has now been fixed and the scanner-image icon has a unique unicode value.
+
+The film-canister icon was misspelled as "film-cannister". This has been fixed.
+
+---
+
+## 5.11.0 to 5.11.1
+
+There are no breaking changes in this version upgrade.
+
+---
+
+## 5.10.2 to 5.11.0
+
+There are no breaking changes in this version upgrade.
+
 ---
 
 ## 5.10.1 to 5.10.2

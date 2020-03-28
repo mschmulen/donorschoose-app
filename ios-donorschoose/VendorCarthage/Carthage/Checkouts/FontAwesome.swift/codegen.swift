@@ -17,7 +17,32 @@ struct SVG: Codable {
     let viewBox: [String]
     let width: UInt
     let height: UInt
+    let path: Path
+}
+
+struct Path: Codable {
     let path: String
+    let duotonePath: [String]
+
+    // Where we determine what type the value is
+    init(from decoder: Decoder) throws {
+        let container =  try decoder.singleValueContainer()
+
+        // Check for String
+        do {
+            path = try container.decode(String.self)
+            duotonePath = []
+        } catch {
+            // Check for Array
+            duotonePath = try container.decode([String].self)
+            path = ""
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try duotonePath.isEmpty ? container.encode(path) : container.encode(duotonePath)
+    }
 }
 
 extension String {
@@ -75,7 +100,7 @@ fontAwesomeEnum += """
 
 /// An enumaration of FontAwesome icon names.
 // swiftlint:disable file_length type_body_length
-public enum FontAwesome: String {
+public enum FontAwesome: String, CaseIterable {
 
 """
 
@@ -109,6 +134,34 @@ sortedKeys.forEach { key in
 
 fontAwesomeEnum += """
             default: return ""
+"""
+fontAwesomeEnum += "\n"
+
+fontAwesomeEnum += """
+        }
+    }
+"""
+
+fontAwesomeEnum += """
+
+
+    /// Supported styles of each FontAwesome font
+    public var supportedStyles: [FontAwesomeStyle] {
+        switch self {
+
+"""
+
+sortedKeys.forEach { key in
+    guard let value = icons[key] else { return }
+    let enumKeyName = key.filteredKeywords().camelCased(with: "-")
+    fontAwesomeEnum += """
+                case .\(enumKeyName): return [.\(value.styles.joined(separator: ", ."))]
+    """
+    fontAwesomeEnum += "\n"
+}
+
+fontAwesomeEnum += """
+            default: return []
 """
 fontAwesomeEnum += "\n"
 
